@@ -1,0 +1,890 @@
+{
+  "supplements": [
+    {
+      "name": "Omega-3 (EPA/DHA)",
+      "slug": "omega-3",
+      "description": "Essential fatty acids that support brain function, heart health, and reduce inflammation. EPA and DHA are the active forms found in fish oil.",
+      "dosageRange": "1000-2000mg combined EPA/DHA daily",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": true
+      },
+      "pairWith": [
+        {
+          "item": "Vitamin D3",
+          "reason": "Both are fat-soluble and absorb better together with dietary fat",
+          "evidenceLevel": "moderate",
+          "citationIds": ["omega3-vd-1"]
+        },
+        {
+          "item": "Vitamin E",
+          "reason": "Vitamin E may help prevent oxidation of omega-3 fatty acids",
+          "evidenceLevel": "moderate",
+          "citationIds": ["omega3-vite-1"]
+        }
+      ],
+      "avoidWith": [],
+      "separateFrom": [],
+      "evidenceSummary": "Strong evidence for cardiovascular benefits and cognitive support. Meta-analyses show consistent benefits for triglyceride reduction and anti-inflammatory effects.",
+      "evidenceLevel": "high",
+      "citations": [
+        {
+          "id": "omega3-1",
+          "title": "Omega-3 Fatty Acids and Cardiovascular Disease: Effects on Risk Factors, Molecular Pathways, and Clinical Events",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32562590/",
+          "year": 2020
+        },
+        {
+          "id": "omega3-2",
+          "title": "Omega-3 fatty acids and cognitive decline in the elderly",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/26890759/",
+          "year": 2016
+        },
+        {
+          "id": "omega3-vd-1",
+          "title": "Vitamin D and omega-3 fatty acid supplementation in combination",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30415637/",
+          "year": 2019
+        },
+        {
+          "id": "omega3-vite-1",
+          "title": "Vitamin E and omega-3 fatty acids: effectors of bone health",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28589566/",
+          "year": 2017
+        }
+      ],
+      "goals": ["focus", "longevity", "immunity"]
+    },
+    {
+      "name": "Vitamin D3",
+      "slug": "vitamin-d3",
+      "description": "Essential vitamin produced by sun exposure, crucial for bone health, immune function, and mood regulation. Most adults are deficient.",
+      "dosageRange": "1000-2000 IU daily (higher doses require testing)",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": true
+      },
+      "pairWith": [
+        {
+          "item": "Vitamin K2",
+          "reason": "K2 helps direct calcium mobilized by D3 to bones rather than arteries",
+          "evidenceLevel": "high",
+          "citationIds": ["vitd-k2-1", "vitd-k2-2"]
+        },
+        {
+          "item": "Magnesium",
+          "reason": "Magnesium is required for vitamin D metabolism and activation",
+          "evidenceLevel": "high",
+          "citationIds": ["vitd-mag-1"]
+        }
+      ],
+      "avoidWith": [],
+      "separateFrom": [],
+      "evidenceSummary": "Strong evidence for bone health, immune function, and deficiency-related mood improvements. Widespread deficiency makes supplementation beneficial for most adults.",
+      "evidenceLevel": "high",
+      "citations": [
+        {
+          "id": "vitd-1",
+          "title": "Vitamin D and the Immune System",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/21527855/",
+          "year": 2011
+        },
+        {
+          "id": "vitd-2",
+          "title": "Vitamin D supplementation: effect on outcomes in pregnancy",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30697095/",
+          "year": 2019
+        },
+        {
+          "id": "vitd-k2-1",
+          "title": "Vitamins D and K as pleiotropic nutrients",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27737555/",
+          "year": 2017
+        },
+        {
+          "id": "vitd-k2-2",
+          "title": "Synergy of vitamin D and K for bone and cardiovascular health",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28471485/",
+          "year": 2017
+        },
+        {
+          "id": "vitd-mag-1",
+          "title": "Magnesium status and supplementation influence vitamin D status",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29480918/",
+          "year": 2018
+        }
+      ],
+      "goals": ["immunity", "longevity", "energy"]
+    },
+    {
+      "name": "Magnesium Glycinate",
+      "slug": "magnesium-glycinate",
+      "description": "Highly bioavailable form of magnesium bound to glycine. Supports sleep, muscle relaxation, stress response, and over 300 enzymatic reactions.",
+      "dosageRange": "200-400mg elemental magnesium daily",
+      "defaultTiming": {
+        "timeOfDay": "evening",
+        "withFood": true,
+        "withFat": false
+      },
+      "pairWith": [
+        {
+          "item": "Vitamin D3",
+          "reason": "Magnesium is required for vitamin D metabolism",
+          "evidenceLevel": "high",
+          "citationIds": ["mag-vitd-1"]
+        },
+        {
+          "item": "Vitamin B6",
+          "reason": "B6 may enhance magnesium uptake into cells",
+          "evidenceLevel": "moderate",
+          "citationIds": ["mag-b6-1"]
+        }
+      ],
+      "avoidWith": [],
+      "separateFrom": [
+        {
+          "item": "Zinc",
+          "reason": "High doses of zinc can interfere with magnesium absorption",
+          "evidenceLevel": "moderate",
+          "citationIds": ["mag-zinc-1"],
+          "separationHours": 2
+        },
+        {
+          "item": "Calcium",
+          "reason": "High calcium can compete with magnesium for absorption",
+          "evidenceLevel": "moderate",
+          "citationIds": ["mag-calc-1"],
+          "separationHours": 2
+        }
+      ],
+      "evidenceSummary": "Strong evidence for sleep quality improvement and stress reduction. Glycinate form is well-tolerated and may have additional calming effects from glycine.",
+      "evidenceLevel": "high",
+      "citations": [
+        {
+          "id": "mag-1",
+          "title": "The effect of magnesium supplementation on primary insomnia in elderly",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23853635/",
+          "year": 2012
+        },
+        {
+          "id": "mag-2",
+          "title": "Magnesium in Prevention and Therapy",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/26404370/",
+          "year": 2015
+        },
+        {
+          "id": "mag-vitd-1",
+          "title": "Magnesium status and supplementation influence vitamin D status",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29480918/",
+          "year": 2018
+        },
+        {
+          "id": "mag-b6-1",
+          "title": "Magnesium and vitamin B6 supplementation for stress",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31374957/",
+          "year": 2019
+        },
+        {
+          "id": "mag-zinc-1",
+          "title": "Mineral interactions affecting nutrient absorption",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/7853859/",
+          "year": 1994
+        },
+        {
+          "id": "mag-calc-1",
+          "title": "Calcium-magnesium interaction in absorption",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/2133191/",
+          "year": 1990
+        }
+      ],
+      "goals": ["sleep", "stress", "muscle"]
+    },
+    {
+      "name": "Vitamin B12",
+      "slug": "vitamin-b12",
+      "description": "Essential vitamin for nerve function, DNA synthesis, and red blood cell formation. Deficiency is common in vegetarians, vegans, and older adults.",
+      "dosageRange": "500-1000mcg daily (methylcobalamin preferred)",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": false,
+        "withFat": false
+      },
+      "pairWith": [
+        {
+          "item": "Folate",
+          "reason": "B12 and folate work together in methylation pathways",
+          "evidenceLevel": "high",
+          "citationIds": ["b12-folate-1"]
+        }
+      ],
+      "avoidWith": [],
+      "separateFrom": [
+        {
+          "item": "Vitamin C",
+          "reason": "High-dose vitamin C may reduce B12 absorption",
+          "evidenceLevel": "low",
+          "citationIds": ["b12-vitc-1"],
+          "separationHours": 2
+        }
+      ],
+      "evidenceSummary": "Essential for vegans and vegetarians who cannot obtain adequate B12 from diet. Strong evidence for preventing deficiency-related neurological issues.",
+      "evidenceLevel": "high",
+      "citations": [
+        {
+          "id": "b12-1",
+          "title": "Vitamin B12 deficiency in vegetarians and vegans",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23356638/",
+          "year": 2013
+        },
+        {
+          "id": "b12-2",
+          "title": "Vitamin B12 status and rate of brain volume loss in older adults",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18779510/",
+          "year": 2008
+        },
+        {
+          "id": "b12-folate-1",
+          "title": "Folate and vitamin B12 metabolic interaction",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/17508906/",
+          "year": 2007
+        },
+        {
+          "id": "b12-vitc-1",
+          "title": "Effect of vitamin C on vitamin B12 absorption",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/6845279/",
+          "year": 1983
+        }
+      ],
+      "goals": ["energy", "focus", "longevity"],
+      "dietRelevance": {
+        "vegetarian": "Recommended as dietary B12 is limited without meat",
+        "vegan": "Essential as plant foods contain no reliable B12 source"
+      }
+    },
+    {
+      "name": "Vitamin C",
+      "slug": "vitamin-c",
+      "description": "Powerful antioxidant that supports immune function, collagen synthesis, and iron absorption. Water-soluble vitamin that needs regular intake.",
+      "dosageRange": "500-1000mg daily",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": false
+      },
+      "pairWith": [
+        {
+          "item": "Iron",
+          "reason": "Vitamin C significantly enhances non-heme iron absorption",
+          "evidenceLevel": "high",
+          "citationIds": ["vitc-iron-1"]
+        },
+        {
+          "item": "Vitamin E",
+          "reason": "Vitamin C regenerates vitamin E, enhancing antioxidant protection",
+          "evidenceLevel": "moderate",
+          "citationIds": ["vitc-vite-1"]
+        }
+      ],
+      "avoidWith": [],
+      "separateFrom": [
+        {
+          "item": "Vitamin B12",
+          "reason": "High doses may reduce B12 absorption",
+          "evidenceLevel": "low",
+          "citationIds": ["vitc-b12-1"],
+          "separationHours": 2
+        }
+      ],
+      "evidenceSummary": "Strong evidence for immune support and antioxidant function. Modest evidence for reducing cold duration when taken regularly.",
+      "evidenceLevel": "high",
+      "citations": [
+        {
+          "id": "vitc-1",
+          "title": "Vitamin C and Immune Function",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29099763/",
+          "year": 2017
+        },
+        {
+          "id": "vitc-2",
+          "title": "Vitamin C for preventing and treating the common cold",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23440782/",
+          "year": 2013
+        },
+        {
+          "id": "vitc-iron-1",
+          "title": "The enhancing effect of ascorbic acid on iron absorption",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/2507689/",
+          "year": 1989
+        },
+        {
+          "id": "vitc-vite-1",
+          "title": "Interaction between vitamins C and E in human erythrocytes",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/3128154/",
+          "year": 1988
+        },
+        {
+          "id": "vitc-b12-1",
+          "title": "Effect of vitamin C on vitamin B12 availability",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/6845279/",
+          "year": 1983
+        }
+      ],
+      "goals": ["immunity", "longevity"]
+    },
+    {
+      "name": "Zinc",
+      "slug": "zinc",
+      "description": "Essential mineral for immune function, wound healing, protein synthesis, and enzymatic reactions. Important for testosterone production.",
+      "dosageRange": "15-30mg daily",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": false
+      },
+      "pairWith": [],
+      "avoidWith": [],
+      "separateFrom": [
+        {
+          "item": "Iron",
+          "reason": "Zinc and iron compete for absorption when taken together",
+          "evidenceLevel": "high",
+          "citationIds": ["zinc-iron-1"]
+        },
+        {
+          "item": "Copper",
+          "reason": "High zinc intake can deplete copper over time",
+          "evidenceLevel": "high",
+          "citationIds": ["zinc-copper-1"],
+          "separationHours": 2
+        },
+        {
+          "item": "Magnesium",
+          "reason": "High doses can interfere with each other's absorption",
+          "evidenceLevel": "moderate",
+          "citationIds": ["zinc-mag-1"],
+          "separationHours": 2
+        }
+      ],
+      "evidenceSummary": "Strong evidence for immune function and modest evidence for reducing cold duration when taken early. Essential for those with inadequate dietary intake.",
+      "evidenceLevel": "high",
+      "citations": [
+        {
+          "id": "zinc-1",
+          "title": "Zinc in Human Health: Effect of Zinc on Immune Cells",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18385818/",
+          "year": 2008
+        },
+        {
+          "id": "zinc-2",
+          "title": "Zinc lozenges and the common cold: a meta-analysis",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/21769305/",
+          "year": 2011
+        },
+        {
+          "id": "zinc-iron-1",
+          "title": "Competitive inhibition of iron absorption by zinc",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/3630967/",
+          "year": 1987
+        },
+        {
+          "id": "zinc-copper-1",
+          "title": "Zinc-induced copper deficiency",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/22566526/",
+          "year": 2012
+        },
+        {
+          "id": "zinc-mag-1",
+          "title": "Mineral nutrient interactions",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/7853859/",
+          "year": 1994
+        }
+      ],
+      "goals": ["immunity", "muscle"]
+    },
+    {
+      "name": "Creatine Monohydrate",
+      "slug": "creatine",
+      "description": "One of the most researched sports supplements. Supports muscle strength, power output, and may have cognitive benefits.",
+      "dosageRange": "3-5g daily",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": false
+      },
+      "pairWith": [
+        {
+          "item": "Carbohydrates",
+          "reason": "Insulin spike from carbs may enhance creatine uptake into muscles",
+          "evidenceLevel": "moderate",
+          "citationIds": ["creatine-carb-1"]
+        }
+      ],
+      "avoidWith": [],
+      "separateFrom": [
+        {
+          "item": "Caffeine",
+          "reason": "Caffeine may reduce creatine's ergogenic benefits, though evidence is mixed",
+          "evidenceLevel": "low",
+          "citationIds": ["creatine-caff-1"]
+        }
+      ],
+      "evidenceSummary": "Extremely well-researched with strong evidence for muscle strength and power. Emerging evidence for cognitive benefits, especially during sleep deprivation.",
+      "evidenceLevel": "high",
+      "citations": [
+        {
+          "id": "creatine-1",
+          "title": "International Society of Sports Nutrition position stand: creatine supplementation",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28615996/",
+          "year": 2017
+        },
+        {
+          "id": "creatine-2",
+          "title": "Effects of creatine supplementation on cognitive function",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29704637/",
+          "year": 2018
+        },
+        {
+          "id": "creatine-carb-1",
+          "title": "Carbohydrate ingestion augments skeletal muscle creatine accumulation",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/8944667/",
+          "year": 1996
+        },
+        {
+          "id": "creatine-caff-1",
+          "title": "Caffeine and creatine interaction",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28177706/",
+          "year": 2017
+        }
+      ],
+      "goals": ["muscle", "focus", "energy"]
+    },
+    {
+      "name": "Melatonin",
+      "slug": "melatonin",
+      "description": "Natural hormone that regulates sleep-wake cycles. Useful for jet lag, shift work, and sleep onset issues. Start with lowest effective dose.",
+      "dosageRange": "0.5-3mg, 30-60 minutes before bed",
+      "defaultTiming": {
+        "timeOfDay": "evening",
+        "withFood": false,
+        "withFat": false
+      },
+      "pairWith": [
+        {
+          "item": "Magnesium",
+          "reason": "Both support relaxation and sleep quality through different mechanisms",
+          "evidenceLevel": "moderate",
+          "citationIds": ["melatonin-mag-1"]
+        }
+      ],
+      "avoidWith": [
+        {
+          "item": "Caffeine",
+          "reason": "Caffeine suppresses natural melatonin production and counteracts effects",
+          "evidenceLevel": "high",
+          "citationIds": ["melatonin-caff-1"]
+        }
+      ],
+      "separateFrom": [],
+      "evidenceSummary": "Strong evidence for jet lag and circadian rhythm disorders. Moderate evidence for general sleep onset. Lower doses (0.5-1mg) often as effective as higher doses.",
+      "evidenceLevel": "high",
+      "citations": [
+        {
+          "id": "melatonin-1",
+          "title": "Meta-analysis: melatonin for the treatment of primary sleep disorders",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23691095/",
+          "year": 2013
+        },
+        {
+          "id": "melatonin-2",
+          "title": "Melatonin for jet lag",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/12076414/",
+          "year": 2002
+        },
+        {
+          "id": "melatonin-mag-1",
+          "title": "Magnesium and melatonin in the management of sleep disorders",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31817588/",
+          "year": 2019
+        },
+        {
+          "id": "melatonin-caff-1",
+          "title": "Caffeine effects on sleep and melatonin",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/25546413/",
+          "year": 2015
+        }
+      ],
+      "goals": ["sleep"],
+      "cautionNote": "Use the lowest effective dose. Not for long-term daily use without clinical guidance. May cause morning grogginess at higher doses."
+    },
+    {
+      "name": "Iron",
+      "slug": "iron",
+      "description": "Essential mineral for oxygen transport in blood. Deficiency causes fatigue and anemia. Only supplement if deficient—excess iron is harmful.",
+      "dosageRange": "18-27mg daily (only if deficient)",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": false,
+        "withFat": false
+      },
+      "pairWith": [
+        {
+          "item": "Vitamin C",
+          "reason": "Dramatically improves non-heme iron absorption",
+          "evidenceLevel": "high",
+          "citationIds": ["iron-vitc-1"]
+        }
+      ],
+      "avoidWith": [
+        {
+          "item": "Calcium",
+          "reason": "Calcium significantly inhibits iron absorption",
+          "evidenceLevel": "high",
+          "citationIds": ["iron-calc-1"]
+        },
+        {
+          "item": "Coffee/Tea",
+          "reason": "Tannins and polyphenols reduce iron absorption by up to 60%",
+          "evidenceLevel": "high",
+          "citationIds": ["iron-tea-1"]
+        }
+      ],
+      "separateFrom": [
+        {
+          "item": "Zinc",
+          "reason": "Both minerals compete for absorption",
+          "evidenceLevel": "high",
+          "citationIds": ["iron-zinc-1"],
+          "separationHours": 2
+        }
+      ],
+      "evidenceSummary": "Only beneficial for those with documented deficiency. Unnecessary supplementation can cause oxidative stress. Women of reproductive age and vegetarians/vegans at higher risk of deficiency.",
+      "evidenceLevel": "high",
+      "citations": [
+        {
+          "id": "iron-1",
+          "title": "Iron deficiency anemia: assessment, prevention, and control",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/12880680/",
+          "year": 2001
+        },
+        {
+          "id": "iron-vitc-1",
+          "title": "Enhancing effect of ascorbic acid on iron absorption",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/2507689/",
+          "year": 1989
+        },
+        {
+          "id": "iron-calc-1",
+          "title": "Calcium inhibits iron absorption",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/1984335/",
+          "year": 1991
+        },
+        {
+          "id": "iron-tea-1",
+          "title": "Iron absorption and tea consumption",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/10999016/",
+          "year": 2000
+        },
+        {
+          "id": "iron-zinc-1",
+          "title": "Competitive inhibition of iron absorption by zinc",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/3630967/",
+          "year": 1987
+        }
+      ],
+      "goals": ["energy"],
+      "cautionNote": "Only supplement if you have confirmed iron deficiency. Excess iron causes oxidative damage. Consult a clinician and test levels before supplementing.",
+      "dietRelevance": {
+        "vegetarian": "Higher risk of deficiency; plant iron is less bioavailable",
+        "vegan": "Significantly higher risk of deficiency; consider testing levels"
+      }
+    },
+    {
+      "name": "Ashwagandha",
+      "slug": "ashwagandha",
+      "description": "Adaptogenic herb traditionally used in Ayurveda. May help reduce cortisol, support stress resilience, and improve sleep quality.",
+      "dosageRange": "300-600mg daily (standardized root extract)",
+      "defaultTiming": {
+        "timeOfDay": "evening",
+        "withFood": true,
+        "withFat": false
+      },
+      "pairWith": [],
+      "avoidWith": [],
+      "separateFrom": [],
+      "evidenceSummary": "Moderate evidence for stress and cortisol reduction. Some evidence for improved sleep and reduced anxiety. Effects may take several weeks to manifest.",
+      "evidenceLevel": "moderate",
+      "citations": [
+        {
+          "id": "ashwa-1",
+          "title": "A prospective, randomized double-blind, placebo-controlled study of safety and efficacy of ashwagandha root extract",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23439798/",
+          "year": 2012
+        },
+        {
+          "id": "ashwa-2",
+          "title": "Efficacy and safety of ashwagandha root extract in insomnia and anxiety",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31728244/",
+          "year": 2019
+        },
+        {
+          "id": "ashwa-3",
+          "title": "Effects of ashwagandha on cortisol and sleep quality",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32540634/",
+          "year": 2020
+        }
+      ],
+      "goals": ["stress", "sleep", "muscle"],
+      "cautionNote": "May interact with thyroid medications. Not recommended during pregnancy. Discontinue 2 weeks before surgery."
+    },
+    {
+      "name": "Vitamin K2 (MK-7)",
+      "slug": "vitamin-k2",
+      "description": "Fat-soluble vitamin that directs calcium to bones and teeth while preventing arterial calcification. MK-7 form has longer half-life.",
+      "dosageRange": "100-200mcg daily",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": true
+      },
+      "pairWith": [
+        {
+          "item": "Vitamin D3",
+          "reason": "K2 ensures calcium mobilized by D3 goes to bones, not arteries",
+          "evidenceLevel": "high",
+          "citationIds": ["k2-vitd-1", "k2-vitd-2"]
+        },
+        {
+          "item": "Calcium",
+          "reason": "K2 helps direct calcium to appropriate tissues",
+          "evidenceLevel": "moderate",
+          "citationIds": ["k2-calc-1"]
+        }
+      ],
+      "avoidWith": [],
+      "separateFrom": [],
+      "evidenceSummary": "Strong evidence for bone health when combined with vitamin D. Emerging evidence for cardiovascular protection through reduced arterial calcification.",
+      "evidenceLevel": "moderate",
+      "citations": [
+        {
+          "id": "k2-1",
+          "title": "Vitamin K2 and bone health",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/16801507/",
+          "year": 2006
+        },
+        {
+          "id": "k2-2",
+          "title": "High dietary menaquinone intake is associated with reduced coronary calcification",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/15514282/",
+          "year": 2004
+        },
+        {
+          "id": "k2-vitd-1",
+          "title": "Vitamins D and K as pleiotropic nutrients",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27737555/",
+          "year": 2017
+        },
+        {
+          "id": "k2-vitd-2",
+          "title": "Vitamin D and vitamin K status in combined supplementation",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28471485/",
+          "year": 2017
+        },
+        {
+          "id": "k2-calc-1",
+          "title": "Vitamin K-dependent carboxylation of osteocalcin",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/15018483/",
+          "year": 2004
+        }
+      ],
+      "goals": ["longevity"],
+      "cautionNote": "If taking blood thinners (warfarin/coumadin), consult your doctor—K2 affects clotting factors."
+    },
+    {
+      "name": "Magnesium Citrate",
+      "slug": "magnesium-citrate",
+      "description": "Well-absorbed form of magnesium. Supports muscle function, energy production, and bowel regularity. More likely to cause loose stools than glycinate.",
+      "dosageRange": "200-400mg elemental magnesium daily",
+      "defaultTiming": {
+        "timeOfDay": "evening",
+        "withFood": true,
+        "withFat": false
+      },
+      "pairWith": [
+        {
+          "item": "Vitamin D3",
+          "reason": "Magnesium is required for vitamin D metabolism",
+          "evidenceLevel": "high",
+          "citationIds": ["magcit-vitd-1"]
+        }
+      ],
+      "avoidWith": [],
+      "separateFrom": [
+        {
+          "item": "Zinc",
+          "reason": "High doses of zinc can interfere with magnesium absorption",
+          "evidenceLevel": "moderate",
+          "citationIds": ["magcit-zinc-1"],
+          "separationHours": 2
+        },
+        {
+          "item": "Calcium",
+          "reason": "High calcium can compete with magnesium for absorption",
+          "evidenceLevel": "moderate",
+          "citationIds": ["magcit-calc-1"],
+          "separationHours": 2
+        }
+      ],
+      "evidenceSummary": "Good bioavailability and well-studied. May have mild laxative effect at higher doses, which some find beneficial for regularity.",
+      "evidenceLevel": "high",
+      "citations": [
+        {
+          "id": "magcit-1",
+          "title": "Bioavailability of magnesium citrate vs oxide",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/2407766/",
+          "year": 1990
+        },
+        {
+          "id": "magcit-vitd-1",
+          "title": "Magnesium status and supplementation influence vitamin D status",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29480918/",
+          "year": 2018
+        },
+        {
+          "id": "magcit-zinc-1",
+          "title": "Mineral nutrient interactions",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/7853859/",
+          "year": 1994
+        },
+        {
+          "id": "magcit-calc-1",
+          "title": "Calcium-magnesium interaction in absorption",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/2133191/",
+          "year": 1990
+        }
+      ],
+      "goals": ["stress", "muscle", "energy"]
+    },
+    {
+      "name": "L-Theanine",
+      "slug": "l-theanine",
+      "description": "Amino acid found in tea that promotes relaxation without sedation. Often paired with caffeine for focused calm.",
+      "dosageRange": "100-200mg daily",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": false,
+        "withFat": false
+      },
+      "pairWith": [
+        {
+          "item": "Caffeine",
+          "reason": "L-theanine smooths caffeine's stimulatory effects, reducing jitters while maintaining focus",
+          "evidenceLevel": "high",
+          "citationIds": ["theanine-caff-1", "theanine-caff-2"]
+        }
+      ],
+      "avoidWith": [],
+      "separateFrom": [],
+      "evidenceSummary": "Good evidence for promoting relaxation and focus when combined with caffeine. May help with sleep quality when taken in evening.",
+      "evidenceLevel": "moderate",
+      "citations": [
+        {
+          "id": "theanine-1",
+          "title": "L-theanine, a natural constituent in tea, and its effect on mental state",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18296328/",
+          "year": 2008
+        },
+        {
+          "id": "theanine-caff-1",
+          "title": "The combined effects of L-theanine and caffeine on cognitive performance",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18681988/",
+          "year": 2008
+        },
+        {
+          "id": "theanine-caff-2",
+          "title": "L-theanine and caffeine in combination affect human cognition",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18006208/",
+          "year": 2008
+        }
+      ],
+      "goals": ["focus", "stress", "sleep"]
+    },
+    {
+      "name": "Rhodiola Rosea",
+      "slug": "rhodiola",
+      "description": "Adaptogenic herb that may help with physical and mental fatigue. Traditionally used for stress resilience and endurance.",
+      "dosageRange": "200-400mg daily (standardized to 3% rosavins)",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": false,
+        "withFat": false
+      },
+      "pairWith": [],
+      "avoidWith": [],
+      "separateFrom": [],
+      "evidenceSummary": "Moderate evidence for reducing fatigue and improving stress resilience. May be mildly stimulating, so morning use is preferred.",
+      "evidenceLevel": "moderate",
+      "citations": [
+        {
+          "id": "rhodiola-1",
+          "title": "Rhodiola rosea for physical and mental fatigue: a systematic review",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/22643043/",
+          "year": 2012
+        },
+        {
+          "id": "rhodiola-2",
+          "title": "Clinical efficacy of Rhodiola rosea extract in stress-related fatigue",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28219059/",
+          "year": 2017
+        }
+      ],
+      "goals": ["energy", "stress", "focus"],
+      "cautionNote": "May have mild stimulating effects. Avoid taking late in the day. Not recommended for those with bipolar disorder."
+    },
+    {
+      "name": "Coenzyme Q10 (CoQ10)",
+      "slug": "coq10",
+      "description": "Antioxidant naturally produced by the body that supports cellular energy production. Levels decline with age and statin use.",
+      "dosageRange": "100-200mg daily (ubiquinol form preferred)",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": true
+      },
+      "pairWith": [
+        {
+          "item": "Omega-3",
+          "reason": "Both are fat-soluble and support cardiovascular health",
+          "evidenceLevel": "moderate",
+          "citationIds": ["coq10-omega-1"]
+        }
+      ],
+      "avoidWith": [],
+      "separateFrom": [],
+      "evidenceSummary": "Good evidence for supporting mitochondrial function and reducing statin-related muscle symptoms. May support cardiovascular health.",
+      "evidenceLevel": "moderate",
+      "citations": [
+        {
+          "id": "coq10-1",
+          "title": "Coenzyme Q10 supplementation in aging and disease",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24389208/",
+          "year": 2014
+        },
+        {
+          "id": "coq10-2",
+          "title": "Effect of CoQ10 on statin-associated myopathy",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24011536/",
+          "year": 2013
+        },
+        {
+          "id": "coq10-omega-1",
+          "title": "Combined supplementation with CoQ10 and omega-3",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/26356152/",
+          "year": 2015
+        }
+      ],
+      "goals": ["energy", "longevity"]
+    }
+  ]
+}
