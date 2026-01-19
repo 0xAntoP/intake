@@ -58,7 +58,8 @@ function selectMagnesiumVariant(goals: Goal[]): string {
 function generateRationale(
   supplement: SupplementData,
   matchedGoals: Goal[],
-  diet: Diet
+  diet: Diet,
+  lifestyleNotes?: string[]
 ): string {
   const goalDescriptions: Record<Goal, string> = {
     energy: "energy levels",
@@ -91,7 +92,98 @@ function generateRationale(
     }
   }
 
+  // Add lifestyle-based context
+  if (lifestyleNotes && lifestyleNotes.length > 0) {
+    rationale += ` ${lifestyleNotes.join(" ")}`;
+  }
+
   return rationale;
+}
+
+function getLifestyleAdjustments(profile: UserProfile): {
+  additionalSupplements: string[];
+  priorityBoosts: Map<string, number>;
+  lifestyleNotes: Map<string, string[]>;
+} {
+  const additionalSupplements: string[] = [];
+  const priorityBoosts = new Map<string, number>();
+  const lifestyleNotes = new Map<string, string[]>();
+
+  // Sleep adjustments
+  if (profile.sleepHours !== undefined && profile.sleepHours < 6) {
+    priorityBoosts.set("magnesium-glycinate", (priorityBoosts.get("magnesium-glycinate") || 0) + 2);
+    priorityBoosts.set("melatonin", (priorityBoosts.get("melatonin") || 0) + 2);
+    priorityBoosts.set("ashwagandha", (priorityBoosts.get("ashwagandha") || 0) + 1);
+    const notes = lifestyleNotes.get("melatonin") || [];
+    notes.push("Your low sleep hours make this especially important.");
+    lifestyleNotes.set("melatonin", notes);
+  }
+
+  if (profile.sleepQuality === "poor" || profile.sleepQuality === "fair") {
+    priorityBoosts.set("magnesium-glycinate", (priorityBoosts.get("magnesium-glycinate") || 0) + 1);
+    priorityBoosts.set("ashwagandha", (priorityBoosts.get("ashwagandha") || 0) + 1);
+    priorityBoosts.set("l-theanine", (priorityBoosts.get("l-theanine") || 0) + 1);
+  }
+
+  // Stress adjustments
+  if (profile.stressLevel === "high") {
+    priorityBoosts.set("ashwagandha", (priorityBoosts.get("ashwagandha") || 0) + 2);
+    priorityBoosts.set("magnesium-glycinate", (priorityBoosts.get("magnesium-glycinate") || 0) + 1);
+    priorityBoosts.set("l-theanine", (priorityBoosts.get("l-theanine") || 0) + 1);
+    priorityBoosts.set("rhodiola", (priorityBoosts.get("rhodiola") || 0) + 1);
+    const notes = lifestyleNotes.get("ashwagandha") || [];
+    notes.push("High stress makes this supplement particularly beneficial.");
+    lifestyleNotes.set("ashwagandha", notes);
+  }
+
+  if (profile.jobStress === "high") {
+    priorityBoosts.set("ashwagandha", (priorityBoosts.get("ashwagandha") || 0) + 1);
+    priorityBoosts.set("l-theanine", (priorityBoosts.get("l-theanine") || 0) + 1);
+  }
+
+  // Exercise adjustments
+  if (profile.exerciseIntensity === "high" || profile.exerciseFrequency === "intense") {
+    priorityBoosts.set("creatine", (priorityBoosts.get("creatine") || 0) + 2);
+    priorityBoosts.set("magnesium-glycinate", (priorityBoosts.get("magnesium-glycinate") || 0) + 1);
+    priorityBoosts.set("zinc", (priorityBoosts.get("zinc") || 0) + 1);
+    const notes = lifestyleNotes.get("creatine") || [];
+    notes.push("Your intense exercise regimen makes this ideal for recovery.");
+    lifestyleNotes.set("creatine", notes);
+  }
+
+  // Caffeine adjustments
+  if (profile.caffeineIntake === "high") {
+    priorityBoosts.set("magnesium-glycinate", (priorityBoosts.get("magnesium-glycinate") || 0) + 2);
+    priorityBoosts.set("l-theanine", (priorityBoosts.get("l-theanine") || 0) + 2);
+    const notes = lifestyleNotes.get("l-theanine") || [];
+    notes.push("Your high caffeine intake makes L-theanine helpful for balance.");
+    lifestyleNotes.set("l-theanine", notes);
+  }
+
+  // Sun exposure adjustments
+  if (profile.sunExposure === "low") {
+    priorityBoosts.set("vitamin-d3", (priorityBoosts.get("vitamin-d3") || 0) + 2);
+    additionalSupplements.push("vitamin-d3");
+    const notes = lifestyleNotes.get("vitamin-d3") || [];
+    notes.push("Low sun exposure makes Vitamin D3 supplementation especially important.");
+    lifestyleNotes.set("vitamin-d3", notes);
+  }
+
+  // Sedentary lifestyle adjustments
+  if (profile.exerciseFrequency === "sedentary") {
+    priorityBoosts.set("vitamin-d3", (priorityBoosts.get("vitamin-d3") || 0) + 1);
+    priorityBoosts.set("omega-3", (priorityBoosts.get("omega-3") || 0) + 1);
+  }
+
+  // Digestion adjustments - filter out problematic supplements
+  if (profile.digestiveIssues && profile.digestiveIssues.length > 0 && !profile.digestiveIssues.includes("none")) {
+    // Prefer magnesium-glycinate over citrate for those with digestive issues
+    priorityBoosts.set("magnesium-glycinate", (priorityBoosts.get("magnesium-glycinate") || 0) + 1);
+  }
+
+  // Allergies - we'll filter these out later when building recommendations
+
+  return { additionalSupplements, priorityBoosts, lifestyleNotes };
 }
 
 export function generateRecommendations(
@@ -100,6 +192,9 @@ export function generateRecommendations(
   const supplements = getSupplements();
   const recommendedSlugs = new Set<string>();
   const slugToGoals = new Map<string, Goal[]>();
+
+  // Get lifestyle adjustments
+  const { additionalSupplements, priorityBoosts, lifestyleNotes } = getLifestyleAdjustments(profile);
 
   // Step 1: Collect all supplements matching user's goals
   for (const goal of profile.goals) {
@@ -119,11 +214,25 @@ export function generateRecommendations(
     recommendedSlugs.add(slug);
   }
 
-  // Step 3: Handle supplement variants (e.g., pick one magnesium type)
+  // Step 3: Add lifestyle-based supplements
+  for (const slug of additionalSupplements) {
+    recommendedSlugs.add(slug);
+  }
+
+  // Step 4: Handle supplement variants (e.g., pick one magnesium type)
   for (const [, variants] of Object.entries(supplementVariants)) {
     const matchedVariants = variants.filter((v) => recommendedSlugs.has(v));
     if (matchedVariants.length > 1) {
-      const preferred = selectMagnesiumVariant(profile.goals);
+      // Check if we should prefer glycinate based on lifestyle (digestion, sleep, stress, caffeine)
+      const preferGlycinate =
+        (profile.sleepHours !== undefined && profile.sleepHours < 7) ||
+        profile.sleepQuality === "poor" ||
+        profile.sleepQuality === "fair" ||
+        profile.stressLevel === "high" ||
+        profile.caffeineIntake === "high" ||
+        (profile.digestiveIssues && profile.digestiveIssues.length > 0 && !profile.digestiveIssues.includes("none"));
+
+      const preferred = preferGlycinate ? "magnesium-glycinate" : selectMagnesiumVariant(profile.goals);
       for (const variant of matchedVariants) {
         if (variant !== preferred) {
           recommendedSlugs.delete(variant);
@@ -132,7 +241,15 @@ export function generateRecommendations(
     }
   }
 
-  // Step 4: Build recommendation objects
+  // Step 5: Filter out supplements that conflict with allergies
+  if (profile.allergies && profile.allergies.length > 0) {
+    // Remove omega-3 if shellfish/fish allergies
+    if (profile.allergies.includes("shellfish") || profile.allergies.includes("fish")) {
+      recommendedSlugs.delete("omega-3");
+    }
+  }
+
+  // Step 6: Build recommendation objects
   const recommendations: SupplementRecommendation[] = [];
 
   for (const slug of recommendedSlugs) {
@@ -141,6 +258,7 @@ export function generateRecommendations(
 
     const matchedGoals = slugToGoals.get(slug) || [];
     const alreadyTaking = profile.currentSupplements.includes(slug);
+    const notes = lifestyleNotes.get(slug) || [];
 
     const recommendation: SupplementRecommendation = {
       name: supplement.name,
@@ -150,7 +268,7 @@ export function generateRecommendations(
       pairWith: supplement.pairWith,
       avoidWith: supplement.avoidWith,
       separateFrom: supplement.separateFrom,
-      rationale: generateRationale(supplement, matchedGoals, profile.diet),
+      rationale: generateRationale(supplement, matchedGoals, profile.diet, notes),
       evidenceLevel: supplement.evidenceLevel,
       citations: supplement.citations,
       cautionNote: supplement.cautionNote,
@@ -160,7 +278,7 @@ export function generateRecommendations(
     recommendations.push(recommendation);
   }
 
-  // Step 5: Sort by timing (morning first, then afternoon, then evening)
+  // Step 7: Sort by timing (morning first, then afternoon, then evening)
   const timeOrder: Record<TimeOfDay, number> = {
     morning: 0,
     afternoon: 1,

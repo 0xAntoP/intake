@@ -73,12 +73,37 @@ export type Goal =
   | "longevity"
   | "muscle";
 
+// Lifestyle types
+export type ExerciseFrequency = "sedentary" | "light" | "moderate" | "intense";
+export type ExerciseIntensity = "low" | "moderate" | "high";
+export type SleepQuality = "poor" | "fair" | "good" | "excellent";
+export type StressLevel = "low" | "moderate" | "high";
+export type DigestiveIssue = "none" | "bloating" | "constipation" | "diarrhea" | "ibs" | "gerd";
+export type CaffeineIntake = "low" | "moderate" | "high";
+export type SunExposure = "low" | "moderate" | "high";
+export type JobType = "desk" | "physical" | "hybrid";
+export type JobStress = "low" | "moderate" | "high";
+export type MedicalCondition = "hypertension" | "diabetes" | "pregnancy" | "thyroid" | "heart-disease" | "autoimmune" | "none";
+
 export type UserProfile = {
   age: number;
   sex: Sex;
   diet: Diet;
   goals: Goal[];
   currentSupplements: string[];
+  exerciseFrequency?: ExerciseFrequency;
+  exerciseIntensity?: ExerciseIntensity;
+  sleepHours?: number;
+  sleepQuality?: SleepQuality;
+  stressLevel?: StressLevel;
+  digestiveIssues?: DigestiveIssue[];
+  caffeineIntake?: CaffeineIntake;
+  sunExposure?: SunExposure;
+  jobType?: JobType;
+  jobStress?: JobStress;
+  medications?: string;
+  allergies?: string[];
+  medicalConditions?: MedicalCondition[];
 };
 
 // Form state for intake questionnaire
@@ -88,6 +113,19 @@ export type IntakeFormData = {
   diet: Diet | "";
   goals: Goal[];
   currentSupplements: string[];
+  exerciseFrequency: ExerciseFrequency | "";
+  exerciseIntensity: ExerciseIntensity | "";
+  sleepHours: string;
+  sleepQuality: SleepQuality | "";
+  stressLevel: StressLevel | "";
+  digestiveIssues: DigestiveIssue[];
+  caffeineIntake: CaffeineIntake | "";
+  sunExposure: SunExposure | "";
+  jobType: JobType | "";
+  jobStress: JobStress | "";
+  medications: string;
+  allergies: string[];
+  medicalConditions: MedicalCondition[];
 };
 
 // Schedule grouping for results display
