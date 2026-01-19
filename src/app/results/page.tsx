@@ -119,6 +119,42 @@ export default function ResultsPage() {
             </div>
           )}
 
+          {/* Medical Disclaimer */}
+          {profile && (
+            <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+              <div className="flex gap-3">
+                <div className="text-2xl">⚠️</div>
+                <div>
+                  <p className="text-sm font-medium text-amber-900 mb-2">
+                    Important Health Information
+                  </p>
+                  <p className="text-sm text-amber-800 mb-3">
+                    Before starting any new supplements, please consult with your healthcare provider, especially if you:
+                  </p>
+                  <ul className="text-sm text-amber-800 space-y-1 mb-3">
+                    {profile.medications && profile.medications.toLowerCase() !== "none" && (
+                      <li>• Are taking medications (potential interactions)</li>
+                    )}
+                    {profile.medicalConditions && profile.medicalConditions.length > 0 && !profile.medicalConditions.includes("none") && (
+                      <li>• Have medical conditions ({profile.medicalConditions.join(", ")})</li>
+                    )}
+                    {profile.allergies && profile.allergies.length > 0 && (
+                      <li>• Have allergies or intolerances ({profile.allergies.join(", ")})</li>
+                    )}
+                    {(!profile.medications || profile.medications.toLowerCase() === "none") &&
+                      (!profile.medicalConditions || profile.medicalConditions.length === 0 || profile.medicalConditions.includes("none")) &&
+                      (!profile.allergies || profile.allergies.length === 0) && (
+                      <li>• Have any health conditions or are taking medications</li>
+                    )}
+                  </ul>
+                  <p className="text-xs text-amber-700">
+                    This tool provides evidence-based information but is not a substitute for professional medical advice.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
           <Disclaimer variant="results" />
 
           {/* Summary stats */}
