@@ -318,27 +318,20 @@ export default function IntakePage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-200px)] bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-[#FCFCF7] py-12 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="mb-6">
-          <Link
-            href="/"
-            className="text-blue-600 hover:underline text-sm flex items-center gap-1"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to home
+          <Link href="/" className="text-xs tracking-widest uppercase text-[#9C8B78] hover:text-[#2E1B12] transition-colors">
+            ← Back
           </Link>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">
-            Build Your Supplement Plan
+        <div className="bg-white border border-[#2E1B12]/10 p-8 md:p-12">
+          <p className="text-xs tracking-widest uppercase text-[#9C8B78] mb-3">Sprout — Intake</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-[#2E1B12] mb-2">
+            Calibrate your plan
           </h1>
-          <p className="text-gray-600 mb-6">
-            Answer comprehensive questions to get personalized recommendations.
-          </p>
+          <p className="text-[#9C8B78] mb-8">Based on your data</p>
 
           <ProgressIndicator
             currentStep={currentStep}
@@ -347,8 +340,8 @@ export default function IntakePage() {
           />
 
           {errors.length > 0 && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-              <ul className="text-sm text-red-700 space-y-1">
+            <div className="mb-6 p-4 border border-[#2E1B12]/20 bg-[#FCFCF7]">
+              <ul className="text-sm text-[#2E1B12] space-y-1">
                 {errors.map((error, index) => (
                   <li key={index}>{error}</li>
                 ))}
@@ -360,7 +353,7 @@ export default function IntakePage() {
           {currentStep === 1 && (
             <div className="space-y-6">
               <div>
-                <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="age" className="block text-sm font-medium text-[#2E1B12] mb-2">
                   What is your age?
                 </label>
                 <input
@@ -370,26 +363,26 @@ export default function IntakePage() {
                   max="120"
                   value={formData.age}
                   onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg"
+                  className="w-full px-4 py-3 border border-[#2E1B12]/20 bg-white text-[#2E1B12] focus:outline-none focus:border-[#2E1B12] text-lg transition-colors"
                   placeholder="Enter your age"
                 />
-                <p className="mt-1 text-sm text-gray-500">Must be 18 or older</p>
+                <p className="mt-1 text-sm text-[#9C8B78]">Must be 18 or older</p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-[#2E1B12] mb-2">
                   What is your sex?
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   {SEXES.map((sex) => (
                     <button
                       key={sex.value}
                       type="button"
                       onClick={() => setFormData({ ...formData, sex: sex.value })}
-                      className={`px-4 py-3 rounded-lg border text-center transition-colors ${
+                      className={`px-4 py-3 border text-center text-sm transition-colors ${
                         formData.sex === sex.value
-                          ? "border-blue-500 bg-blue-50 text-blue-700"
-                          : "border-gray-300 hover:border-gray-400"
+                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
                       {sex.label}
@@ -403,28 +396,27 @@ export default function IntakePage() {
           {/* Step 2: Diet */}
           {currentStep === 2 && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-4">
+              <label className="block text-sm font-medium text-[#2E1B12] mb-4">
                 What is your diet type?
               </label>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {DIETS.map((diet) => (
                   <button
                     key={diet.value}
                     type="button"
                     onClick={() => setFormData({ ...formData, diet: diet.value })}
-                    className={`w-full px-4 py-4 rounded-lg border text-left transition-colors ${
+                    className={`w-full px-4 py-4 border text-left transition-colors ${
                       formData.diet === diet.value
-                        ? "border-blue-500 bg-blue-50 text-blue-700"
-                        : "border-gray-300 hover:border-gray-400"
+                        ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                        : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                     }`}
                   >
-                    <span className="font-medium">{diet.label}</span>
+                    <span className="font-medium text-sm">{diet.label}</span>
                   </button>
                 ))}
               </div>
-              <p className="mt-4 text-sm text-gray-500">
-                This helps us tailor recommendations based on dietary needs (e.g., B12 for
-                vegetarians/vegans).
+              <p className="mt-4 text-sm text-[#9C8B78]">
+                This helps us tailor recommendations based on dietary needs.
               </p>
             </div>
           )}
@@ -432,29 +424,25 @@ export default function IntakePage() {
           {/* Step 3: Goals */}
           {currentStep === 3 && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-4">
+              <label className="block text-sm font-medium text-[#2E1B12] mb-4">
                 What are your health goals? (Select all that apply)
               </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {GOALS.map((goal) => (
                   <button
                     key={goal.value}
                     type="button"
                     onClick={() => toggleGoal(goal.value)}
-                    className={`px-4 py-3 rounded-lg border text-left transition-colors ${
+                    className={`px-4 py-3 border text-left transition-colors ${
                       formData.goals.includes(goal.value)
-                        ? "border-blue-500 bg-blue-50"
-                        : "border-gray-300 hover:border-gray-400"
+                        ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                        : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                     }`}
                   >
-                    <span
-                      className={`font-medium ${
-                        formData.goals.includes(goal.value) ? "text-blue-700" : "text-gray-900"
-                      }`}
-                    >
-                      {goal.label}
-                    </span>
-                    <p className="text-sm text-gray-500 mt-0.5">{goal.description}</p>
+                    <span className="font-medium text-sm block">{goal.label}</span>
+                    <p className={`text-xs mt-0.5 ${formData.goals.includes(goal.value) ? "text-white/70" : "text-[#9C8B78]"}`}>
+                      {goal.description}
+                    </p>
                   </button>
                 ))}
               </div>
@@ -464,11 +452,11 @@ export default function IntakePage() {
           {/* Step 4: Current Supplements */}
           {currentStep === 4 && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-[#2E1B12] mb-2">
                 Are you currently taking any supplements? (Optional)
               </label>
-              <p className="text-sm text-gray-500 mb-4">
-                Select any supplements you&apos;re already taking. We&apos;ll note these in your plan.
+              <p className="text-sm text-[#9C8B78] mb-4">
+                Select any you&apos;re already taking. We&apos;ll note these in your plan.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-80 overflow-y-auto pr-2">
                 {supplements.map((supplement) => (
@@ -476,10 +464,10 @@ export default function IntakePage() {
                     key={supplement.slug}
                     type="button"
                     onClick={() => toggleSupplement(supplement.slug)}
-                    className={`px-3 py-2 rounded-lg border text-left text-sm transition-colors ${
+                    className={`px-3 py-2 border text-left text-sm transition-colors ${
                       formData.currentSupplements.includes(supplement.slug)
-                        ? "border-blue-500 bg-blue-50 text-blue-700"
-                        : "border-gray-200 hover:border-gray-300"
+                        ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                        : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                     }`}
                   >
                     {supplement.name}
@@ -493,7 +481,7 @@ export default function IntakePage() {
           {currentStep === 5 && (
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
+                <label className="block text-sm font-medium text-[#2E1B12] mb-3">
                   How often do you exercise?
                 </label>
                 <div className="space-y-2">
@@ -501,23 +489,21 @@ export default function IntakePage() {
                     <button
                       key={freq.value}
                       type="button"
-                      onClick={() =>
-                        setFormData({ ...formData, exerciseFrequency: freq.value })
-                      }
-                      className={`w-full px-4 py-3 rounded-lg border text-left transition-colors ${
+                      onClick={() => setFormData({ ...formData, exerciseFrequency: freq.value })}
+                      className={`w-full px-4 py-3 border text-left transition-colors ${
                         formData.exerciseFrequency === freq.value
-                          ? "border-blue-500 bg-blue-50 text-blue-700"
-                          : "border-gray-300 hover:border-gray-400"
+                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium">{freq.label}</span>
+                      <span className="font-medium text-sm">{freq.label}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
+                <label className="block text-sm font-medium text-[#2E1B12] mb-3">
                   What is your typical exercise intensity?
                 </label>
                 <div className="space-y-2">
@@ -525,16 +511,14 @@ export default function IntakePage() {
                     <button
                       key={intensity.value}
                       type="button"
-                      onClick={() =>
-                        setFormData({ ...formData, exerciseIntensity: intensity.value })
-                      }
-                      className={`w-full px-4 py-3 rounded-lg border text-left transition-colors ${
+                      onClick={() => setFormData({ ...formData, exerciseIntensity: intensity.value })}
+                      className={`w-full px-4 py-3 border text-left transition-colors ${
                         formData.exerciseIntensity === intensity.value
-                          ? "border-blue-500 bg-blue-50 text-blue-700"
-                          : "border-gray-300 hover:border-gray-400"
+                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium">{intensity.label}</span>
+                      <span className="font-medium text-sm">{intensity.label}</span>
                     </button>
                   ))}
                 </div>
@@ -546,27 +530,30 @@ export default function IntakePage() {
           {currentStep === 6 && (
             <div className="space-y-6">
               <div>
-                <label htmlFor="sleep" className="block text-sm font-medium text-gray-700 mb-2">
-                  How many hours do you sleep per night? (Average)
-                </label>
-                <div className="flex items-center gap-4">
-                  <input
-                    type="range"
-                    id="sleep"
-                    min="3"
-                    max="12"
-                    value={formData.sleepHours}
-                    onChange={(e) => setFormData({ ...formData, sleepHours: e.target.value })}
-                    className="flex-1"
-                  />
-                  <span className="text-2xl font-bold text-blue-600 w-12">
+                <div className="flex justify-between items-center mb-3">
+                  <label htmlFor="sleep" className="text-sm font-medium text-[#2E1B12]">
+                    Hours of sleep per night
+                  </label>
+                  <span className="text-lg font-bold text-[#FFB326]">
                     {formData.sleepHours || "—"}h
                   </span>
+                </div>
+                <input
+                  type="range"
+                  id="sleep"
+                  min="3"
+                  max="12"
+                  value={formData.sleepHours}
+                  onChange={(e) => setFormData({ ...formData, sleepHours: e.target.value })}
+                  className="w-full accent-[#FFB326]"
+                />
+                <div className="flex justify-between text-xs text-[#9C8B78] mt-1">
+                  <span>3h</span><span>12h</span>
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
+                <label className="block text-sm font-medium text-[#2E1B12] mb-3">
                   How would you rate your sleep quality?
                 </label>
                 <div className="space-y-2">
@@ -574,23 +561,21 @@ export default function IntakePage() {
                     <button
                       key={quality.value}
                       type="button"
-                      onClick={() =>
-                        setFormData({ ...formData, sleepQuality: quality.value })
-                      }
-                      className={`w-full px-4 py-3 rounded-lg border text-left transition-colors ${
+                      onClick={() => setFormData({ ...formData, sleepQuality: quality.value })}
+                      className={`w-full px-4 py-3 border text-left transition-colors ${
                         formData.sleepQuality === quality.value
-                          ? "border-blue-500 bg-blue-50 text-blue-700"
-                          : "border-gray-300 hover:border-gray-400"
+                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium">{quality.label}</span>
+                      <span className="font-medium text-sm">{quality.label}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
+                <label className="block text-sm font-medium text-[#2E1B12] mb-3">
                   What is your overall stress level?
                 </label>
                 <div className="space-y-2">
@@ -599,13 +584,13 @@ export default function IntakePage() {
                       key={stress.value}
                       type="button"
                       onClick={() => setFormData({ ...formData, stressLevel: stress.value })}
-                      className={`w-full px-4 py-3 rounded-lg border text-left transition-colors ${
+                      className={`w-full px-4 py-3 border text-left transition-colors ${
                         formData.stressLevel === stress.value
-                          ? "border-blue-500 bg-blue-50 text-blue-700"
-                          : "border-gray-300 hover:border-gray-400"
+                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium">{stress.label}</span>
+                      <span className="font-medium text-sm">{stress.label}</span>
                     </button>
                   ))}
                 </div>
@@ -617,7 +602,7 @@ export default function IntakePage() {
           {currentStep === 7 && (
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
+                <label className="block text-sm font-medium text-[#2E1B12] mb-3">
                   Do you experience any digestive issues? (Select all that apply)
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -626,10 +611,10 @@ export default function IntakePage() {
                       key={issue.value}
                       type="button"
                       onClick={() => toggleDigestiveIssue(issue.value)}
-                      className={`px-4 py-3 rounded-lg border text-left transition-colors ${
+                      className={`px-4 py-3 border text-left transition-colors ${
                         formData.digestiveIssues.includes(issue.value)
-                          ? "border-blue-500 bg-blue-50 text-blue-700"
-                          : "border-gray-300 hover:border-gray-400"
+                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
                       <span className="font-medium text-sm">{issue.label}</span>
@@ -639,7 +624,7 @@ export default function IntakePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
+                <label className="block text-sm font-medium text-[#2E1B12] mb-3">
                   What is your daily caffeine intake?
                 </label>
                 <div className="space-y-2">
@@ -647,16 +632,14 @@ export default function IntakePage() {
                     <button
                       key={caffeine.value}
                       type="button"
-                      onClick={() =>
-                        setFormData({ ...formData, caffeineIntake: caffeine.value })
-                      }
-                      className={`w-full px-4 py-3 rounded-lg border text-left transition-colors ${
+                      onClick={() => setFormData({ ...formData, caffeineIntake: caffeine.value })}
+                      className={`w-full px-4 py-3 border text-left transition-colors ${
                         formData.caffeineIntake === caffeine.value
-                          ? "border-blue-500 bg-blue-50 text-blue-700"
-                          : "border-gray-300 hover:border-gray-400"
+                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium">{caffeine.label}</span>
+                      <span className="font-medium text-sm">{caffeine.label}</span>
                     </button>
                   ))}
                 </div>
@@ -668,7 +651,7 @@ export default function IntakePage() {
           {currentStep === 8 && (
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
+                <label className="block text-sm font-medium text-[#2E1B12] mb-3">
                   How much sun exposure do you get?
                 </label>
                 <div className="space-y-2">
@@ -677,20 +660,20 @@ export default function IntakePage() {
                       key={sun.value}
                       type="button"
                       onClick={() => setFormData({ ...formData, sunExposure: sun.value })}
-                      className={`w-full px-4 py-3 rounded-lg border text-left transition-colors ${
+                      className={`w-full px-4 py-3 border text-left transition-colors ${
                         formData.sunExposure === sun.value
-                          ? "border-blue-500 bg-blue-50 text-blue-700"
-                          : "border-gray-300 hover:border-gray-400"
+                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium">{sun.label}</span>
+                      <span className="font-medium text-sm">{sun.label}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
+                <label className="block text-sm font-medium text-[#2E1B12] mb-3">
                   What type of work environment do you have?
                 </label>
                 <div className="space-y-2">
@@ -699,20 +682,20 @@ export default function IntakePage() {
                       key={job.value}
                       type="button"
                       onClick={() => setFormData({ ...formData, jobType: job.value })}
-                      className={`w-full px-4 py-3 rounded-lg border text-left transition-colors ${
+                      className={`w-full px-4 py-3 border text-left transition-colors ${
                         formData.jobType === job.value
-                          ? "border-blue-500 bg-blue-50 text-blue-700"
-                          : "border-gray-300 hover:border-gray-400"
+                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium">{job.label}</span>
+                      <span className="font-medium text-sm">{job.label}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
+                <label className="block text-sm font-medium text-[#2E1B12] mb-3">
                   How much work-related stress do you experience?
                 </label>
                 <div className="space-y-2">
@@ -720,16 +703,14 @@ export default function IntakePage() {
                     <button
                       key={jobStress.value}
                       type="button"
-                      onClick={() =>
-                        setFormData({ ...formData, jobStress: jobStress.value })
-                      }
-                      className={`w-full px-4 py-3 rounded-lg border text-left transition-colors ${
+                      onClick={() => setFormData({ ...formData, jobStress: jobStress.value })}
+                      className={`w-full px-4 py-3 border text-left transition-colors ${
                         formData.jobStress === jobStress.value
-                          ? "border-blue-500 bg-blue-50 text-blue-700"
-                          : "border-gray-300 hover:border-gray-400"
+                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium">{jobStress.label}</span>
+                      <span className="font-medium text-sm">{jobStress.label}</span>
                     </button>
                   ))}
                 </div>
@@ -741,24 +722,24 @@ export default function IntakePage() {
           {currentStep === 9 && (
             <div className="space-y-6">
               <div>
-                <label htmlFor="medications" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="medications" className="block text-sm font-medium text-[#2E1B12] mb-2">
                   What medications are you currently taking? (if any)
                 </label>
                 <textarea
                   id="medications"
                   value={formData.medications}
                   onChange={(e) => setFormData({ ...formData, medications: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-3 border border-[#2E1B12]/20 bg-white text-[#2E1B12] focus:outline-none focus:border-[#2E1B12] transition-colors"
                   placeholder="e.g., Metformin, Lisinopril, or 'None'"
                   rows={3}
                 />
-                <p className="mt-1 text-sm text-gray-500">
-                  This helps us identify potential interactions. You can list them separated by commas.
+                <p className="mt-1 text-sm text-[#9C8B78]">
+                  This helps us identify potential interactions.
                 </p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
+                <label className="block text-sm font-medium text-[#2E1B12] mb-3">
                   Do you have any allergies or intolerances? (Select all that apply)
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -767,10 +748,10 @@ export default function IntakePage() {
                       key={allergy.value}
                       type="button"
                       onClick={() => toggleAllergy(allergy.value)}
-                      className={`px-4 py-3 rounded-lg border text-left transition-colors ${
+                      className={`px-4 py-3 border text-left transition-colors ${
                         formData.allergies.includes(allergy.value)
-                          ? "border-blue-500 bg-blue-50 text-blue-700"
-                          : "border-gray-300 hover:border-gray-400"
+                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
                       <span className="font-medium text-sm">{allergy.label}</span>
@@ -780,7 +761,7 @@ export default function IntakePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
+                <label className="block text-sm font-medium text-[#2E1B12] mb-3">
                   Do you have any medical conditions? (Select all that apply)
                 </label>
                 <div className="space-y-2">
@@ -789,13 +770,13 @@ export default function IntakePage() {
                       key={condition.value}
                       type="button"
                       onClick={() => toggleMedicalCondition(condition.value)}
-                      className={`w-full px-4 py-3 rounded-lg border text-left transition-colors ${
+                      className={`w-full px-4 py-3 border text-left transition-colors ${
                         formData.medicalConditions.includes(condition.value)
-                          ? "border-blue-500 bg-blue-50 text-blue-700"
-                          : "border-gray-300 hover:border-gray-400"
+                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium">{condition.label}</span>
+                      <span className="font-medium text-sm">{condition.label}</span>
                     </button>
                   ))}
                 </div>
@@ -803,36 +784,34 @@ export default function IntakePage() {
             </div>
           )}
 
-          {/* Navigation Buttons */}
-          <div className="flex justify-between mt-8 pt-6 border-t border-gray-100">
-            <button
-              type="button"
-              onClick={handleBack}
-              disabled={currentStep === 1}
-              className={`px-6 py-2 rounded-lg font-medium transition-colors ${
-                currentStep === 1
-                  ? "text-gray-400 cursor-not-allowed"
-                  : "text-gray-700 hover:bg-gray-100"
-              }`}
-            >
-              Back
-            </button>
-
+          {/* Navigation */}
+          <div className="mt-8 pt-6 border-t border-[#2E1B12]/10">
             {currentStep < TOTAL_STEPS ? (
               <button
                 type="button"
                 onClick={handleNext}
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                className="w-full flex items-center justify-between px-8 py-4 bg-[#FFB326] text-[#2E1B12] rounded-full font-medium hover:bg-[#e6a020] transition-colors"
               >
-                Continue
+                <span>Continue</span>
+                <span>→</span>
               </button>
             ) : (
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                className="w-full flex items-center justify-between px-8 py-4 bg-[#FFB326] text-[#2E1B12] rounded-full font-medium hover:bg-[#e6a020] transition-colors"
               >
-                Get My Plan
+                <span>Get My Plan</span>
+                <span>→</span>
+              </button>
+            )}
+            {currentStep > 1 && (
+              <button
+                type="button"
+                onClick={handleBack}
+                className="w-full mt-3 py-2 text-sm text-[#9C8B78] hover:text-[#2E1B12] transition-colors text-center"
+              >
+                ← Back
               </button>
             )}
           </div>
