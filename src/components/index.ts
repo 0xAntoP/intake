@@ -4,3 +4,4 @@ export { SupplementCard } from "./SupplementCard";
 export { ScheduleView } from "./ScheduleView";
 export { Disclaimer } from "./Disclaimer";
 export { ProgressIndicator } from "./ProgressIndicator";
+export { IframeResizer } from "./IframeResizer";
