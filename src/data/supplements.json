@@ -31,27 +31,39 @@
       "citations": [
         {
           "id": "omega3-1",
-          "title": "Omega-3 Fatty Acids and Cardiovascular Disease: Effects on Risk Factors, Molecular Pathways, and Clinical Events",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/32562590/",
+          "title": "Omega-3 fatty acids for the primary and secondary prevention of cardiovascular disease.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32114706/",
           "year": 2020
         },
         {
           "id": "omega3-2",
-          "title": "Omega-3 fatty acids and cognitive decline in the elderly",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/26890759/",
-          "year": 2016
-        },
-        {
-          "id": "omega3-vd-1",
-          "title": "Vitamin D and omega-3 fatty acid supplementation in combination",
+          "title": "Marine n-3 Fatty Acids and Prevention of Cardiovascular Disease and Cancer",
           "url": "https://pubmed.ncbi.nlm.nih.gov/30415637/",
           "year": 2019
         },
         {
-          "id": "omega3-vite-1",
-          "title": "Vitamin E and omega-3 fatty acids: effectors of bone health",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/28589566/",
+          "id": "omega3-3",
+          "title": "Docosahexaenoic acid supplementation in age-related cognitive decline: a systematic review and meta-analysis.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32060571/",
+          "year": 2020
+        },
+        {
+          "id": "omega3-4",
+          "title": "Omega-3 fatty acids and inflammatory processes: from molecules to man.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28900017/",
           "year": 2017
+        },
+        {
+          "id": "omega3-5",
+          "title": "FADS1 and FADS2 Gene Polymorphisms Modulate the Relationship of Omega-3 and Omega-6 Fatty Acid Plasma Concentrations in Gestational Weight Gain",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35268031/",
+          "year": 2022
+        },
+        {
+          "id": "omega3-6",
+          "title": "Omega-3 supplementation lowers inflammation and anxiety in medical students: a randomized controlled trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/21784145/",
+          "year": 2011
         }
       ],
       "goals": ["focus", "longevity", "immunity"]
@@ -87,119 +99,42 @@
       "citations": [
         {
           "id": "vitd-1",
-          "title": "Vitamin D and the Immune System",
+          "title": "Vitamin D and the immune system.",
           "url": "https://pubmed.ncbi.nlm.nih.gov/21527855/",
           "year": 2011
         },
         {
           "id": "vitd-2",
-          "title": "Vitamin D supplementation: effect on outcomes in pregnancy",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/30697095/",
+          "title": "Global vitamin D status and determinants of hypovitaminosis D",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/19543765/",
+          "year": 2009
+        },
+        {
+          "id": "vitd-3",
+          "title": "Role of Magnesium in Vitamin D Activation and Function.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29480918/",
+          "year": 2018
+        },
+        {
+          "id": "vitd-4",
+          "title": "The Synergistic Interplay between Vitamins D and K for Bone and Cardiovascular Health: A Narrative Review",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29138634/",
+          "year": 2017
+        },
+        {
+          "id": "vitd-5",
+          "title": "Vitamin D Supplements and Prevention of Cancer and Cardiovascular Disease",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30415629/",
           "year": 2019
         },
         {
-          "id": "vitd-k2-1",
-          "title": "Vitamins D and K as pleiotropic nutrients",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/27737555/",
-          "year": 2017
-        },
-        {
-          "id": "vitd-k2-2",
-          "title": "Synergy of vitamin D and K for bone and cardiovascular health",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/28471485/",
-          "year": 2017
-        },
-        {
-          "id": "vitd-mag-1",
-          "title": "Magnesium status and supplementation influence vitamin D status",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/29480918/",
-          "year": 2018
+          "id": "vitd-6",
+          "title": "Vitamin D receptor BsmI polymorphism and osteoporosis risk: a meta-analysis from 26 studies.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23134477/",
+          "year": 2013
         }
       ],
       "goals": ["immunity", "longevity", "energy"]
-    },
-    {
-      "name": "Magnesium Glycinate",
-      "slug": "magnesium-glycinate",
-      "description": "Highly bioavailable form of magnesium bound to glycine. Supports sleep, muscle relaxation, stress response, and over 300 enzymatic reactions.",
-      "dosageRange": "200-400mg elemental magnesium daily",
-      "defaultTiming": {
-        "timeOfDay": "evening",
-        "withFood": true,
-        "withFat": false
-      },
-      "pairWith": [
-        {
-          "item": "Vitamin D3",
-          "reason": "Magnesium is required for vitamin D metabolism",
-          "evidenceLevel": "high",
-          "citationIds": ["mag-vitd-1"]
-        },
-        {
-          "item": "Vitamin B6",
-          "reason": "B6 may enhance magnesium uptake into cells",
-          "evidenceLevel": "moderate",
-          "citationIds": ["mag-b6-1"]
-        }
-      ],
-      "avoidWith": [],
-      "separateFrom": [
-        {
-          "item": "Zinc",
-          "reason": "High doses of zinc can interfere with magnesium absorption",
-          "evidenceLevel": "moderate",
-          "citationIds": ["mag-zinc-1"],
-          "separationHours": 2
-        },
-        {
-          "item": "Calcium",
-          "reason": "High calcium can compete with magnesium for absorption",
-          "evidenceLevel": "moderate",
-          "citationIds": ["mag-calc-1"],
-          "separationHours": 2
-        }
-      ],
-      "evidenceSummary": "Strong evidence for sleep quality improvement and stress reduction. Glycinate form is well-tolerated and may have additional calming effects from glycine.",
-      "evidenceLevel": "high",
-      "citations": [
-        {
-          "id": "mag-1",
-          "title": "The effect of magnesium supplementation on primary insomnia in elderly",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/23853635/",
-          "year": 2012
-        },
-        {
-          "id": "mag-2",
-          "title": "Magnesium in Prevention and Therapy",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/26404370/",
-          "year": 2015
-        },
-        {
-          "id": "mag-vitd-1",
-          "title": "Magnesium status and supplementation influence vitamin D status",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/29480918/",
-          "year": 2018
-        },
-        {
-          "id": "mag-b6-1",
-          "title": "Magnesium and vitamin B6 supplementation for stress",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/31374957/",
-          "year": 2019
-        },
-        {
-          "id": "mag-zinc-1",
-          "title": "Mineral interactions affecting nutrient absorption",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/7853859/",
-          "year": 1994
-        },
-        {
-          "id": "mag-calc-1",
-          "title": "Calcium-magnesium interaction in absorption",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/2133191/",
-          "year": 1990
-        }
-      ],
-      "goals": ["sleep", "stress", "muscle"]
     },
     {
       "name": "Vitamin B12",
@@ -234,27 +169,39 @@
       "citations": [
         {
           "id": "b12-1",
-          "title": "Vitamin B12 deficiency in vegetarians and vegans",
+          "title": "How prevalent is vitamin B(12) deficiency among vegetarians?",
           "url": "https://pubmed.ncbi.nlm.nih.gov/23356638/",
           "year": 2013
         },
         {
           "id": "b12-2",
-          "title": "Vitamin B12 status and rate of brain volume loss in older adults",
+          "title": "Vitamin B12 status and rate of brain volume loss in community-dwelling elderly",
           "url": "https://pubmed.ncbi.nlm.nih.gov/18779510/",
           "year": 2008
         },
         {
-          "id": "b12-folate-1",
-          "title": "Folate and vitamin B12 metabolic interaction",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/17508906/",
-          "year": 2007
+          "id": "b12-3",
+          "title": "Vitamin B12 deficiency - A 21st century perspective",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/25824066/",
+          "year": 2015
         },
         {
-          "id": "b12-vitc-1",
-          "title": "Effect of vitamin C on vitamin B12 absorption",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/6845279/",
-          "year": 1983
+          "id": "b12-4",
+          "title": "Vitamin B(12) deficiency",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28660890/",
+          "year": 2017
+        },
+        {
+          "id": "b12-5",
+          "title": "Homocysteine, B-vitamins and CVD.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18412997/",
+          "year": 2008
+        },
+        {
+          "id": "b12-6",
+          "title": "New Insights into Folate-Vitamin B(12) Interactions",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40315282/",
+          "year": 2024
         }
       ],
       "goals": ["energy", "focus", "longevity"],
@@ -302,33 +249,39 @@
       "citations": [
         {
           "id": "vitc-1",
+          "title": "Vitamin C and Infections",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28353648/",
+          "year": 2017
+        },
+        {
+          "id": "vitc-2",
           "title": "Vitamin C and Immune Function",
           "url": "https://pubmed.ncbi.nlm.nih.gov/29099763/",
           "year": 2017
         },
         {
-          "id": "vitc-2",
-          "title": "Vitamin C for preventing and treating the common cold",
+          "id": "vitc-3",
+          "title": "Vitamin C for preventing and treating the common cold.",
           "url": "https://pubmed.ncbi.nlm.nih.gov/23440782/",
           "year": 2013
         },
         {
-          "id": "vitc-iron-1",
-          "title": "The enhancing effect of ascorbic acid on iron absorption",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/2507689/",
-          "year": 1989
+          "id": "vitc-4",
+          "title": "Iron bioavailability and dietary reference values.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/20200263/",
+          "year": 2010
         },
         {
-          "id": "vitc-vite-1",
-          "title": "Interaction between vitamins C and E in human erythrocytes",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/3128154/",
-          "year": 1988
+          "id": "vitc-5",
+          "title": "Association between a SLC23A2 gene variation, plasma vitamin C levels, and risk of glaucoma in a Mediterranean population",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/22171153/",
+          "year": 2012
         },
         {
-          "id": "vitc-b12-1",
-          "title": "Effect of vitamin C on vitamin B12 availability",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/6845279/",
-          "year": 1983
+          "id": "vitc-6",
+          "title": "The Roles of Vitamin C in Skin Health.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28805671/",
+          "year": 2017
         }
       ],
       "goals": ["immunity", "longevity"]
@@ -372,33 +325,39 @@
       "citations": [
         {
           "id": "zinc-1",
-          "title": "Zinc in Human Health: Effect of Zinc on Immune Cells",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/18385818/",
-          "year": 2008
+          "title": "Zinc in Infection and Inflammation.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28629136/",
+          "year": 2017
         },
         {
           "id": "zinc-2",
-          "title": "Zinc lozenges and the common cold: a meta-analysis",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/21769305/",
-          "year": 2011
+          "title": "Zinc status and serum testosterone levels of healthy adults.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/8875519/",
+          "year": 1996
         },
         {
-          "id": "zinc-iron-1",
-          "title": "Competitive inhibition of iron absorption by zinc",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/3630967/",
-          "year": 1987
+          "id": "zinc-3",
+          "title": "Zinc supplementation for the prevention of acute lower respiratory infection in children in developing countries: meta-analysis and meta-regression of randomized trials.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/20156999/",
+          "year": 2010
         },
         {
-          "id": "zinc-copper-1",
-          "title": "Zinc-induced copper deficiency",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/22566526/",
-          "year": 2012
+          "id": "zinc-4",
+          "title": "Zinc supplementation for the prevention of pneumonia in children aged 2 months to 59 months.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27915460/",
+          "year": 2016
         },
         {
-          "id": "zinc-mag-1",
-          "title": "Mineral nutrient interactions",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/7853859/",
-          "year": 1994
+          "id": "zinc-5",
+          "title": "Zinc supplementation improves glycemic control for diabetes prevention and management: a systematic review and meta-analysis of randomized controlled trials",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31161192/",
+          "year": 2019
+        },
+        {
+          "id": "zinc-6",
+          "title": "Topical azelaic acid, salicylic acid, nicotinamide, sulphur, zinc and fruit acid (alpha-hydroxy acid) for acne",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32356369/",
+          "year": 2020
         }
       ],
       "goals": ["immunity", "muscle"]
@@ -435,27 +394,39 @@
       "citations": [
         {
           "id": "creatine-1",
-          "title": "International Society of Sports Nutrition position stand: creatine supplementation",
+          "title": "International Society of Sports Nutrition position stand: safety and efficacy of creatine supplementation in exercise, sport, and medicine",
           "url": "https://pubmed.ncbi.nlm.nih.gov/28615996/",
           "year": 2017
         },
         {
           "id": "creatine-2",
-          "title": "Effects of creatine supplementation on cognitive function",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/29704637/",
-          "year": 2018
+          "title": "Meta-Analysis Examining the Importance of Creatine Ingestion Strategies on Lean Tissue Mass and Strength in Older Adults",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34199420/",
+          "year": 2021
         },
         {
-          "id": "creatine-carb-1",
-          "title": "Carbohydrate ingestion augments skeletal muscle creatine accumulation",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/8944667/",
-          "year": 1996
+          "id": "creatine-3",
+          "title": "Dose-Response of Creatine Supplementation on Cognitive Function in Healthy Young Adults",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37759877/",
+          "year": 2023
         },
         {
-          "id": "creatine-caff-1",
-          "title": "Caffeine and creatine interaction",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/28177706/",
-          "year": 2017
+          "id": "creatine-4",
+          "title": "Creatine Supplementation and Upper Limb Strength Performance: A Systematic Review and Meta-Analysis",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27328852/",
+          "year": 2016
+        },
+        {
+          "id": "creatine-5",
+          "title": "Common questions and misconceptions about creatine supplementation: what does the scientific evidence really show?",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33557850/",
+          "year": 2021
+        },
+        {
+          "id": "creatine-6",
+          "title": "Creatine Supplementation in Children and Adolescents.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33670822/",
+          "year": 2021
         }
       ],
       "goals": ["muscle", "focus", "energy"]
@@ -492,27 +463,39 @@
       "citations": [
         {
           "id": "melatonin-1",
+          "title": "Melatonin for the prevention and treatment of jet lag",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/12076414/",
+          "year": 2002
+        },
+        {
+          "id": "melatonin-2",
           "title": "Meta-analysis: melatonin for the treatment of primary sleep disorders",
           "url": "https://pubmed.ncbi.nlm.nih.gov/23691095/",
           "year": 2013
         },
         {
-          "id": "melatonin-2",
-          "title": "Melatonin for jet lag",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/12076414/",
-          "year": 2002
+          "id": "melatonin-3",
+          "title": "New perspectives on the role of melatonin in human sleep, circadian rhythms and their regulation",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29318587/",
+          "year": 2018
         },
         {
-          "id": "melatonin-mag-1",
-          "title": "Magnesium and melatonin in the management of sleep disorders",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/31817588/",
+          "id": "melatonin-4",
+          "title": "Melatonin as an antioxidant: under promises but over delivers",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27500468/",
+          "year": 2016
+        },
+        {
+          "id": "melatonin-5",
+          "title": "Melatonin pharmacokinetics following two different oral surge-sustained release doses in older adults",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/22348451/",
+          "year": 2012
+        },
+        {
+          "id": "melatonin-6",
+          "title": "Nicotinamide Mononucleotide and Melatonin Alleviate Aging-induced Cognitive Impairment via Modulation of Mitochondrial Function and Apoptosis in the Prefrontal Cortex and Hippocampus",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31678348/",
           "year": 2019
-        },
-        {
-          "id": "melatonin-caff-1",
-          "title": "Caffeine effects on sleep and melatonin",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/25546413/",
-          "year": 2015
         }
       ],
       "goals": ["sleep"],
@@ -564,33 +547,39 @@
       "citations": [
         {
           "id": "iron-1",
-          "title": "Iron deficiency anemia: assessment, prevention, and control",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/12880680/",
-          "year": 2001
+          "title": "Iron deficiency",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33285139/",
+          "year": 2021
         },
         {
-          "id": "iron-vitc-1",
-          "title": "Enhancing effect of ascorbic acid on iron absorption",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/2507689/",
-          "year": 1989
+          "id": "iron-2",
+          "title": "Daily iron supplementation for improving anaemia, iron status and health in menstruating women",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27087396/",
+          "year": 2016
         },
         {
-          "id": "iron-calc-1",
-          "title": "Calcium inhibits iron absorption",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/1984335/",
-          "year": 1991
+          "id": "iron-3",
+          "title": "Midlife iron status is inversely associated with subsequent cognitive performance, particularly in perimenopausal women",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24089418/",
+          "year": 2013
         },
         {
-          "id": "iron-tea-1",
-          "title": "Iron absorption and tea consumption",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/10999016/",
-          "year": 2000
+          "id": "iron-4",
+          "title": "Haemochromatosis",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29620054/",
+          "year": 2018
         },
         {
-          "id": "iron-zinc-1",
-          "title": "Competitive inhibition of iron absorption by zinc",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/3630967/",
-          "year": 1987
+          "id": "iron-5",
+          "title": "Iron metabolism and iron disorders revisited in the hepcidin era",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31949017/",
+          "year": 2020
+        },
+        {
+          "id": "iron-6",
+          "title": "Iron Absorption: Factors, Limitations, and Improvement Methods",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35755397/",
+          "year": 2022
         }
       ],
       "goals": ["energy"],
@@ -617,22 +606,40 @@
       "evidenceLevel": "moderate",
       "citations": [
         {
-          "id": "ashwa-1",
-          "title": "A prospective, randomized double-blind, placebo-controlled study of safety and efficacy of ashwagandha root extract",
+          "id": "ashwagandha-1",
+          "title": "A prospective, randomized double-blind, placebo-controlled study of safety and efficacy of a high-concentration full-spectrum extract of ashwagandha root in reducing stress and anxiety in adults.",
           "url": "https://pubmed.ncbi.nlm.nih.gov/23439798/",
           "year": 2012
         },
         {
-          "id": "ashwa-2",
-          "title": "Efficacy and safety of ashwagandha root extract in insomnia and anxiety",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/31728244/",
+          "id": "ashwagandha-2",
+          "title": "An investigation into the stress-relieving and pharmacological actions of an ashwagandha (Withania somnifera) extract: A randomized, double-blind, placebo-controlled study.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31517876/",
           "year": 2019
         },
         {
-          "id": "ashwa-3",
-          "title": "Effects of ashwagandha on cortisol and sleep quality",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/32540634/",
-          "year": 2020
+          "id": "ashwagandha-3",
+          "title": "Effects of Withania somnifera (Ashwagandha) on Stress and the Stress-Related Neuropsychiatric Disorders Anxiety, Depression, and Insomnia",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34254920/",
+          "year": 2021
+        },
+        {
+          "id": "ashwagandha-4",
+          "title": "Safety and efficacy of Withania somnifera for anxiety and insomnia: Systematic review and meta-analysis",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39083548/",
+          "year": 2024
+        },
+        {
+          "id": "ashwagandha-5",
+          "title": "An alternative treatment for anxiety: a systematic review of human trial results reported for the Ayurvedic herb ashwagandha (Withania somnifera)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/25405876/",
+          "year": 2014
+        },
+        {
+          "id": "ashwagandha-6",
+          "title": "Withania somnifera improves semen quality by regulating reproductive hormone levels and oxidative stress in seminal plasma of infertile males",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/19501822/",
+          "year": 2010
         }
       ],
       "goals": ["stress", "sleep", "muscle"],
@@ -668,103 +675,44 @@
       "evidenceLevel": "moderate",
       "citations": [
         {
-          "id": "k2-1",
-          "title": "Vitamin K2 and bone health",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/16801507/",
-          "year": 2006
+          "id": "vitk2-1",
+          "title": "Menaquinone-7 supplementation improves arterial stiffness in healthy postmenopausal women. A double-blind randomised clinical trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/25694037/",
+          "year": 2015
         },
         {
-          "id": "k2-2",
-          "title": "High dietary menaquinone intake is associated with reduced coronary calcification",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/15514282/",
-          "year": 2004
+          "id": "vitk2-2",
+          "title": "The combination effect of vitamin K and vitamin D on human bone quality: a meta-analysis of randomized controlled trials",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32219282/",
+          "year": 2020
         },
         {
-          "id": "k2-vitd-1",
-          "title": "Vitamins D and K as pleiotropic nutrients",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/27737555/",
+          "id": "vitk2-3",
+          "title": "Matrix Gla-protein: the calcification inhibitor in need of vitamin K",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18841280/",
+          "year": 2008
+        },
+        {
+          "id": "vitk2-4",
+          "title": "Warfarin and vitamin K intake in the era of pharmacogenetics",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/20653669/",
+          "year": 2010
+        },
+        {
+          "id": "vitk2-5",
+          "title": "Efficacy of vitamin K2 in the prevention and treatment of postmenopausal osteoporosis: A systematic review and meta-analysis of randomized controlled trials",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36033779/",
+          "year": 2022
+        },
+        {
+          "id": "vitk2-6",
+          "title": "The Synergistic Interplay between Vitamins D and K for Bone and Cardiovascular Health: A Narrative Review",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29138634/",
           "year": 2017
-        },
-        {
-          "id": "k2-vitd-2",
-          "title": "Vitamin D and vitamin K status in combined supplementation",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/28471485/",
-          "year": 2017
-        },
-        {
-          "id": "k2-calc-1",
-          "title": "Vitamin K-dependent carboxylation of osteocalcin",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/15018483/",
-          "year": 2004
         }
       ],
       "goals": ["longevity"],
       "cautionNote": "If taking blood thinners (warfarin/coumadin), consult your doctor—K2 affects clotting factors."
-    },
-    {
-      "name": "Magnesium Citrate",
-      "slug": "magnesium-citrate",
-      "description": "Well-absorbed form of magnesium. Supports muscle function, energy production, and bowel regularity. More likely to cause loose stools than glycinate.",
-      "dosageRange": "200-400mg elemental magnesium daily",
-      "defaultTiming": {
-        "timeOfDay": "evening",
-        "withFood": true,
-        "withFat": false
-      },
-      "pairWith": [
-        {
-          "item": "Vitamin D3",
-          "reason": "Magnesium is required for vitamin D metabolism",
-          "evidenceLevel": "high",
-          "citationIds": ["magcit-vitd-1"]
-        }
-      ],
-      "avoidWith": [],
-      "separateFrom": [
-        {
-          "item": "Zinc",
-          "reason": "High doses of zinc can interfere with magnesium absorption",
-          "evidenceLevel": "moderate",
-          "citationIds": ["magcit-zinc-1"],
-          "separationHours": 2
-        },
-        {
-          "item": "Calcium",
-          "reason": "High calcium can compete with magnesium for absorption",
-          "evidenceLevel": "moderate",
-          "citationIds": ["magcit-calc-1"],
-          "separationHours": 2
-        }
-      ],
-      "evidenceSummary": "Good bioavailability and well-studied. May have mild laxative effect at higher doses, which some find beneficial for regularity.",
-      "evidenceLevel": "high",
-      "citations": [
-        {
-          "id": "magcit-1",
-          "title": "Bioavailability of magnesium citrate vs oxide",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/2407766/",
-          "year": 1990
-        },
-        {
-          "id": "magcit-vitd-1",
-          "title": "Magnesium status and supplementation influence vitamin D status",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/29480918/",
-          "year": 2018
-        },
-        {
-          "id": "magcit-zinc-1",
-          "title": "Mineral nutrient interactions",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/7853859/",
-          "year": 1994
-        },
-        {
-          "id": "magcit-calc-1",
-          "title": "Calcium-magnesium interaction in absorption",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/2133191/",
-          "year": 1990
-        }
-      ],
-      "goals": ["stress", "muscle", "energy"]
     },
     {
       "name": "L-Theanine",
@@ -790,22 +738,40 @@
       "evidenceLevel": "moderate",
       "citations": [
         {
-          "id": "theanine-1",
+          "id": "ltheanine-1",
+          "title": "The combined effects of L-theanine and caffeine on cognitive performance and mood.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18681988/",
+          "year": 2008
+        },
+        {
+          "id": "ltheanine-2",
+          "title": "L-theanine and caffeine improve task switching but not intersensory attention or subjective alertness.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/20079786/",
+          "year": 2010
+        },
+        {
+          "id": "ltheanine-3",
+          "title": "A combination of green tea extract and l-theanine improves memory and attention in subjects with mild cognitive impairment: a double-blind placebo-controlled study.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/21303262/",
+          "year": 2011
+        },
+        {
+          "id": "ltheanine-4",
+          "title": "L-Theanine reduces psychological and physiological stress responses",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/16930802/",
+          "year": 2007
+        },
+        {
+          "id": "ltheanine-5",
           "title": "L-theanine, a natural constituent in tea, and its effect on mental state",
           "url": "https://pubmed.ncbi.nlm.nih.gov/18296328/",
           "year": 2008
         },
         {
-          "id": "theanine-caff-1",
-          "title": "The combined effects of L-theanine and caffeine on cognitive performance",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/18681988/",
-          "year": 2008
-        },
-        {
-          "id": "theanine-caff-2",
-          "title": "L-theanine and caffeine in combination affect human cognition",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/18006208/",
-          "year": 2008
+          "id": "ltheanine-6",
+          "title": "The effects of L-theanine (Suntheanine®) on objective sleep quality in boys with attention deficit hyperactivity disorder (ADHD): a randomized, double-blind, placebo-controlled clinical trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/22214254/",
+          "year": 2011
         }
       ],
       "goals": ["focus", "stress", "sleep"]
@@ -834,9 +800,33 @@
         },
         {
           "id": "rhodiola-2",
-          "title": "Clinical efficacy of Rhodiola rosea extract in stress-related fatigue",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/28219059/",
-          "year": 2017
+          "title": "Rhodiola rosea versus sertraline for major depressive disorder: A randomized placebo-controlled trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/25837277/",
+          "year": 2015
+        },
+        {
+          "id": "rhodiola-3",
+          "title": "Clinical trial of Rhodiola rosea L. extract SHR-5 in the treatment of mild to moderate depression",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/17990195/",
+          "year": 2007
+        },
+        {
+          "id": "rhodiola-4",
+          "title": "Rhodiola rosea as an adaptogen to enhance exercise performance: a review of the literature",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37641937/",
+          "year": 2023
+        },
+        {
+          "id": "rhodiola-5",
+          "title": "Pharmacological effects of salidroside on central nervous system diseases",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36228376/",
+          "year": 2022
+        },
+        {
+          "id": "rhodiola-6",
+          "title": "Does Rhodiola rosea possess ergogenic properties?",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/16948486/",
+          "year": 2006
         }
       ],
       "goals": ["energy", "stress", "focus"],
@@ -867,24 +857,1060 @@
       "citations": [
         {
           "id": "coq10-1",
-          "title": "Coenzyme Q10 supplementation in aging and disease",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/24389208/",
-          "year": 2014
+          "title": "Coenzyme Q10 in the treatment of hypertension: a meta-analysis of the clinical trials",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/17287847/",
+          "year": 2007
         },
         {
           "id": "coq10-2",
-          "title": "Effect of CoQ10 on statin-associated myopathy",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/24011536/",
-          "year": 2013
+          "title": "The effect of coenzyme Q10 on morbidity and mortality in chronic heart failure: results from Q-SYMBIO: a randomized double-blind trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/25282031/",
+          "year": 2014
         },
         {
-          "id": "coq10-omega-1",
-          "title": "Combined supplementation with CoQ10 and omega-3",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/26356152/",
-          "year": 2015
+          "id": "coq10-3",
+          "title": "Effects of Coenzyme Q10 on Statin-Induced Myopathy: An Updated Meta-Analysis of Randomized Controlled Trials",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30371340/",
+          "year": 2018
+        },
+        {
+          "id": "coq10-4",
+          "title": "Coenzyme Q10 supplementation - In ageing and disease",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34129891/",
+          "year": 2021
+        },
+        {
+          "id": "coq10-5",
+          "title": "Primary Coenzyme Q10 Deficiency Overview",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28125198/",
+          "year": 2017
+        },
+        {
+          "id": "coq10-6",
+          "title": "Bioenergetic approaches for neuroprotection in Parkinson's disease",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/12666097/",
+          "year": 2003
         }
       ],
       "goals": ["energy", "longevity"]
+    },
+    {
+      "name": "Vitamin A",
+      "slug": "vitamin-a",
+      "description": "Fat-soluble vitamin essential for vision, immune function, and skin cell turnover.",
+      "dosageRange": "700-900mcg RAE daily",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": true
+      },
+      "pairWith": [
+        {
+          "item": "Zinc",
+          "reason": "Zinc is required for Vitamin A metabolism and transport",
+          "evidenceLevel": "moderate",
+          "citationIds": []
+        }
+      ],
+      "avoidWith": [],
+      "separateFrom": [],
+      "evidenceSummary": "Essential nutrient with strong evidence for immune support and skin health. Deficiency is common in low-fat diets.",
+      "evidenceLevel": "high",
+      "citations": [
+        {
+          "id": "vita-1",
+          "title": "Two common single nucleotide polymorphisms in the gene encoding beta-carotene 15,15'-monoxygenase alter beta-carotene metabolism in female volunteers",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/19103647/",
+          "year": 2009
+        },
+        {
+          "id": "vita-2",
+          "title": "Role of Vitamin A in the Immune System.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30200565/",
+          "year": 2018
+        },
+        {
+          "id": "vita-3",
+          "title": "Retinoids: a journey from the molecular structures and mechanisms of action to clinical uses in dermatology and adverse effects",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28318351/",
+          "year": 2017
+        },
+        {
+          "id": "vita-4",
+          "title": "Vitamin A supplementation for preventing morbidity and mortality in children from six months to five years of age",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35294044/",
+          "year": 2022
+        },
+        {
+          "id": "vita-5",
+          "title": "Hepatic toxicity of vitamin A and synthetic retinoids",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/2103414/",
+          "year": 1990
+        },
+        {
+          "id": "vita-6",
+          "title": "Mechanisms of vitamin A metabolism and deficiency in the mammalian and fly visual system",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33774009/",
+          "year": 2021
+        }
+      ],
+      "goals": ["immunity", "skin"]
+    },
+    {
+      "name": "Vitamin E",
+      "slug": "vitamin-e",
+      "description": "Powerful fat-soluble antioxidant that protects cells from oxidative stress and supports skin health.",
+      "dosageRange": "15mg (22 IU) daily",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": true
+      },
+      "pairWith": [
+        {
+          "item": "Vitamin C",
+          "reason": "Vitamin C regenerates Vitamin E after it neutralises free radicals",
+          "evidenceLevel": "moderate",
+          "citationIds": []
+        }
+      ],
+      "avoidWith": [],
+      "separateFrom": [],
+      "evidenceSummary": "Strong antioxidant with evidence for skin protection and immune support.",
+      "evidenceLevel": "moderate",
+      "citations": [
+        {
+          "id": "vite-1",
+          "title": "Meta-analysis: high-dosage vitamin E supplementation may increase all-cause mortality",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/15537682/",
+          "year": 2005
+        },
+        {
+          "id": "vite-2",
+          "title": "Vitamin E supplementation and in vivo immune response in healthy elderly subjects. A randomized controlled trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/9134944/",
+          "year": 1997
+        },
+        {
+          "id": "vite-3",
+          "title": "Effect of antioxidant vitamin supplementation on cardiovascular outcomes: a meta-analysis of randomized controlled trials",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23437244/",
+          "year": 2013
+        },
+        {
+          "id": "vite-4",
+          "title": "Ataxia with isolated vitamin E deficiency: neurological phenotype, clinical follow-up and novel mutations in TTPA gene in Italian families",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/15300460/",
+          "year": 2004
+        },
+        {
+          "id": "vite-5",
+          "title": "Chemical reactivities and physical effects in comparison between tocopherols and tocotrienols: physiological significance and prospects as antioxidants",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18215628/",
+          "year": 2008
+        },
+        {
+          "id": "vite-6",
+          "title": "The effects of topical vitamin E on the cosmetic appearance of scars",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/10417589/",
+          "year": 1999
+        }
+      ],
+      "goals": ["skin", "immunity", "longevity"]
+    },
+    {
+      "name": "Biotin (B7)",
+      "slug": "biotin",
+      "description": "B-vitamin that supports keratin production, essential for hair, skin, and nail strength.",
+      "dosageRange": "2.5-5mg daily",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": false,
+        "withFat": false
+      },
+      "pairWith": [],
+      "avoidWith": [],
+      "separateFrom": [],
+      "evidenceSummary": "Moderate evidence for improving hair and nail strength. Most effective in deficient individuals.",
+      "evidenceLevel": "moderate",
+      "citations": [
+        {
+          "id": "biotin-1",
+          "title": "Biotin for the treatment of nail disease: what is the evidence?",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29057689/",
+          "year": 2018
+        },
+        {
+          "id": "biotin-2",
+          "title": "A Review of the Use of Biotin for Hair Loss",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28879195/",
+          "year": 2017
+        },
+        {
+          "id": "biotin-3",
+          "title": "Biotin regulation of pancreatic glucokinase and insulin in primary cultured rat islets and in biotin-deficient rats",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/10499515/",
+          "year": 1999
+        },
+        {
+          "id": "biotin-4",
+          "title": "Biotinidase deficiency",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/1927696/",
+          "year": 1991
+        },
+        {
+          "id": "biotin-5",
+          "title": "Comprehensive assessment of biotin interference in immunoassays",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30296442/",
+          "year": 2018
+        },
+        {
+          "id": "biotin-6",
+          "title": "Epigenetic regulation of chromatin structure and gene function by biotin: are biotin requirements being met?",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18673490/",
+          "year": 2008
+        }
+      ],
+      "goals": ["skin"]
+    },
+    {
+      "name": "Probiotics",
+      "slug": "probiotics",
+      "description": "Live beneficial bacteria that support gut microbiome balance, digestion, and immune function.",
+      "dosageRange": "10-50 billion CFU daily (multi-strain)",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": false,
+        "withFat": false
+      },
+      "pairWith": [],
+      "avoidWith": [],
+      "separateFrom": [
+        {
+          "item": "Antibiotics",
+          "reason": "Antibiotics kill probiotic bacteria — separate by at least 2 hours",
+          "evidenceLevel": "high",
+          "citationIds": [],
+          "separationHours": 2
+        }
+      ],
+      "evidenceSummary": "Strong evidence for improving gut health, IBS symptoms, and immune modulation.",
+      "evidenceLevel": "high",
+      "citations": [
+        {
+          "id": "probiotics-1",
+          "title": "The Gut Microbiome in Depression and Potential Benefit of Prebiotics, Probiotics and Synbiotics: A Systematic Review of Clinical Trials and Observational Studies.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35562885/",
+          "year": 2022
+        },
+        {
+          "id": "probiotics-2",
+          "title": "Probiotics for the prevention and treatment of antibiotic-associated diarrhea: a systematic review and meta-analysis.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/22570464/",
+          "year": 2012
+        },
+        {
+          "id": "probiotics-3",
+          "title": "Probiotics in dermatologic practice.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/26707956/",
+          "year": 2016
+        },
+        {
+          "id": "probiotics-4",
+          "title": "Gut microbiome and health: mechanistic insights.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35105664/",
+          "year": 2022
+        },
+        {
+          "id": "probiotics-5",
+          "title": "The effect of heritability and host genetics on the gut microbiota and metabolic syndrome.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27053630/",
+          "year": 2016
+        },
+        {
+          "id": "probiotics-6",
+          "title": "Efficacy of Probiotics in Irritable Bowel Syndrome: Systematic Review and Meta-analysis.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37541528/",
+          "year": 2023
+        }
+      ],
+      "goals": ["immunity", "stress"]
+    },
+    {
+      "name": "Collagen Peptides",
+      "slug": "collagen",
+      "description": "Hydrolysed collagen that supports skin elasticity, joint health, and connective tissue repair.",
+      "dosageRange": "10-15g daily",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": false,
+        "withFat": false
+      },
+      "pairWith": [
+        {
+          "item": "Vitamin C",
+          "reason": "Vitamin C is essential for collagen synthesis",
+          "evidenceLevel": "high",
+          "citationIds": []
+        }
+      ],
+      "avoidWith": [],
+      "separateFrom": [],
+      "evidenceSummary": "Growing evidence for skin hydration, elasticity improvements, and joint pain reduction.",
+      "evidenceLevel": "moderate",
+      "citations": [
+        {
+          "id": "collagen-1",
+          "title": "Vitamin C-enriched gelatin supplementation before intermittent activity augments collagen synthesis",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27852613/",
+          "year": 2017
+        },
+        {
+          "id": "collagen-2",
+          "title": "A Collagen Supplement Improves Skin Hydration, Elasticity, Roughness, and Density: Results of a Randomized, Placebo-Controlled, Blind Study.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31627309/",
+          "year": 2019
+        },
+        {
+          "id": "collagen-3",
+          "title": "Oral Intake of Low-Molecular-Weight Collagen Peptide Improves Hydration, Elasticity, and Wrinkling in Human Skin: A Randomized, Double-Blind, Placebo-Controlled Study.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29949889/",
+          "year": 2019
+        },
+        {
+          "id": "collagen-4",
+          "title": "24-Week study on the use of collagen hydrolysate as a dietary supplement in athletes with activity-related joint pain",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18416885/",
+          "year": 2008
+        },
+        {
+          "id": "collagen-5",
+          "title": "Dietary supplements for treating osteoarthritis: a systematic review and meta-analysis",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29018060/",
+          "year": 2018
+        },
+        {
+          "id": "collagen-6",
+          "title": "Effects of hydrolyzed collagen supplementation on skin aging: a systematic review and meta-analysis",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33742704/",
+          "year": 2021
+        }
+      ],
+      "goals": ["skin", "muscle"]
+    },
+    {
+      "name": "Turmeric (Curcumin)",
+      "slug": "turmeric",
+      "description": "Potent anti-inflammatory compound from turmeric root. Best absorbed with black pepper (piperine).",
+      "dosageRange": "500-1000mg curcumin daily with piperine",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": true
+      },
+      "pairWith": [
+        {
+          "item": "Omega-3 (EPA/DHA)",
+          "reason": "Both have complementary anti-inflammatory mechanisms",
+          "evidenceLevel": "moderate",
+          "citationIds": []
+        }
+      ],
+      "avoidWith": [],
+      "separateFrom": [],
+      "evidenceSummary": "Strong anti-inflammatory evidence. Bioavailability greatly enhanced by piperine co-administration.",
+      "evidenceLevel": "moderate",
+      "citations": [
+        {
+          "id": "turmeric-1",
+          "title": "Influence of piperine on the pharmacokinetics of curcumin in animals and human volunteers.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/9619120/",
+          "year": 1998
+        },
+        {
+          "id": "turmeric-2",
+          "title": "Antioxidant and anti-inflammatory properties of curcumin",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/17569207/",
+          "year": 2007
+        },
+        {
+          "id": "turmeric-3",
+          "title": "Curcumin, an active component of turmeric (Curcuma longa), and its effects on health.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/26528921/",
+          "year": 2015
+        },
+        {
+          "id": "turmeric-4",
+          "title": "Efficacy and Safety of Curcumin and Curcuma longa Extract in the Treatment of Arthritis: A Systematic Review and Meta-Analysis of Randomized Controlled Trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35935936/",
+          "year": 2022
+        },
+        {
+          "id": "turmeric-5",
+          "title": "Curcumin and Curcuma longa Extract in the Treatment of 10 Types of Autoimmune Diseases: A Systematic Review and Meta-Analysis of 31 Randomized Controlled Trials.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35979355/",
+          "year": 2022
+        },
+        {
+          "id": "turmeric-6",
+          "title": "Effects of curcumin/turmeric supplementation on liver function in adults: A GRADE-assessed systematic review and dose-response meta-analysis of randomized controlled trials",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37178581/",
+          "year": 2023
+        }
+      ],
+      "goals": ["immunity", "longevity", "stress"]
+    },
+    {
+      "name": "NAC (N-Acetyl Cysteine)",
+      "slug": "nac",
+      "description": "Precursor to glutathione — the body's master antioxidant. Supports liver detox and respiratory health.",
+      "dosageRange": "600-1200mg daily",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": false,
+        "withFat": false
+      },
+      "pairWith": [],
+      "avoidWith": [],
+      "separateFrom": [],
+      "evidenceSummary": "Well-established for liver protection and glutathione replenishment. Emerging evidence for mood and cognitive support.",
+      "evidenceLevel": "moderate",
+      "citations": [
+        {
+          "id": "nac-1",
+          "title": "N-Acetylcysteine: A Review of Clinical Usefulness (an Old Drug with New Tricks).",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34221501/",
+          "year": 2021
+        },
+        {
+          "id": "nac-2",
+          "title": "The Multifaceted Therapeutic Role of N-Acetylcysteine (NAC) in Disorders Characterized by Oxidative Stress",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33380301/",
+          "year": 2021
+        },
+        {
+          "id": "nac-3",
+          "title": "The effect of N-acetylcysteine (NAC) on human cognition - A systematic review",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28438466/",
+          "year": 2017
+        },
+        {
+          "id": "nac-4",
+          "title": "Effect of high/low dose N-acetylcysteine on chronic obstructive pulmonary disease: a systematic review and meta-analysis",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24378052/",
+          "year": 2014
+        },
+        {
+          "id": "nac-5",
+          "title": "Paracetamol (acetaminophen) overdose and hepatotoxicity: mechanism, treatment, prevention measures, and estimates of burden of disease.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37436926/",
+          "year": 2024
+        },
+        {
+          "id": "nac-6",
+          "title": "N-acetylcysteine supplementation increases exercise performance and reduces oxidative stress only in individuals with low levels of glutathione.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29233792/",
+          "year": 2018
+        }
+      ],
+      "goals": ["longevity", "stress", "energy"]
+    },
+    {
+      "name": "Lion's Mane Mushroom",
+      "slug": "lions-mane",
+      "description": "Medicinal mushroom that stimulates nerve growth factor (NGF), supporting cognitive function and neuroplasticity.",
+      "dosageRange": "500-1000mg daily (fruiting body extract)",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": false
+      },
+      "pairWith": [],
+      "avoidWith": [],
+      "separateFrom": [],
+      "evidenceSummary": "Promising evidence for cognitive function, memory, and mild anxiety reduction.",
+      "evidenceLevel": "moderate",
+      "citations": [
+        {
+          "id": "lionsmane-1",
+          "title": "Improving effects of the mushroom Yamabushitake (Hericium erinaceus) on mild cognitive impairment: a double-blind placebo-controlled clinical trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18844328/",
+          "year": 2009
+        },
+        {
+          "id": "lionsmane-2",
+          "title": "Improvement of cognitive functions by oral intake of Hericium erinaceus",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31413233/",
+          "year": 2019
+        },
+        {
+          "id": "lionsmane-3",
+          "title": "Neurotrophic properties of the Lion's mane medicinal mushroom, Hericium erinaceus (Higher Basidiomycetes) from Malaysia",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24266378/",
+          "year": 2013
+        },
+        {
+          "id": "lionsmane-4",
+          "title": "Reduction of depression and anxiety by 4 weeks Hericium erinaceus intake",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/20834180/",
+          "year": 2010
+        },
+        {
+          "id": "lionsmane-5",
+          "title": "Systemic Screening of Strains of the Lion's Mane Medicinal Mushroom Hericium erinaceus (Higher Basidiomycetes) and Its Protective Effects on Aβ-Triggered Neurotoxicity in PC12 Cells",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/25954906/",
+          "year": 2015
+        },
+        {
+          "id": "lionsmane-6",
+          "title": "The Acute and Chronic Effects of Lion's Mane Mushroom Supplementation on Cognitive Function, Stress and Mood in Young Adults: A Double-Blind, Parallel Groups, Pilot Study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38004235/",
+          "year": 2023
+        }
+      ],
+      "goals": ["focus", "stress", "longevity"]
+    },
+    {
+      "name": "Spirulina",
+      "slug": "spirulina",
+      "description": "Blue-green algae rich in protein, iron, B vitamins, and antioxidants. Popular plant-based superfood.",
+      "dosageRange": "3-10g daily",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": false
+      },
+      "pairWith": [],
+      "avoidWith": [],
+      "separateFrom": [],
+      "evidenceSummary": "Moderate evidence for immune support, antioxidant activity, and cholesterol reduction.",
+      "evidenceLevel": "moderate",
+      "citations": [
+        {
+          "id": "spirulina-1",
+          "title": "The effect of Arthrospira platensis capsules on CD4 T-cells and antioxidative capacity in a randomized pilot study of adult women infected with human immunodeficiency virus not under HAART in Yaoundé, Cameroon",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/25057105/",
+          "year": 2014
+        },
+        {
+          "id": "spirulina-2",
+          "title": "Spirulina in clinical practice: evidence-based human applications",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18955364/",
+          "year": 2011
+        },
+        {
+          "id": "spirulina-3",
+          "title": "Antioxidant, anti-inflammatory and immunomodulatory effects of spirulina in exercise and sport: A systematic review",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36590230/",
+          "year": 2022
+        },
+        {
+          "id": "spirulina-4",
+          "title": "Quantifying the effects of spirulina supplementation on plasma lipid and glucose concentrations, body weight, and blood pressure",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30532573/",
+          "year": 2019
+        },
+        {
+          "id": "spirulina-5",
+          "title": "C-phycocyanin: a biliprotein with antioxidant, anti-inflammatory and neuroprotective effects",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/12769719/",
+          "year": 2003
+        },
+        {
+          "id": "spirulina-6",
+          "title": "A randomized, double-blind placebo-controlled add-on trial to assess the efficacy, safety, and anti-atherogenic effect of spirulina platensis in patients with inadequately controlled type 2 diabetes mellitus",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36598187/",
+          "year": 2023
+        }
+      ],
+      "goals": ["energy", "immunity"],
+      "dietRelevance": {
+        "vegan": "Excellent plant-based source of complete protein and B vitamins",
+        "vegetarian": "Good plant-based protein and iron source"
+      }
+    },
+    {
+      "name": "Maca Root",
+      "slug": "maca",
+      "description": "Adaptogenic root from Peru that supports energy, hormonal balance, and sexual health.",
+      "dosageRange": "1.5-3g daily",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": false
+      },
+      "pairWith": [],
+      "avoidWith": [],
+      "separateFrom": [],
+      "evidenceSummary": "Moderate evidence for improving energy, libido, and mood. Well-tolerated adaptogen.",
+      "evidenceLevel": "moderate",
+      "citations": [
+        {
+          "id": "maca-1",
+          "title": "[Maca (Lepidium meyenii Walp), a review of its biological properties]",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24718534/",
+          "year": 2014
+        },
+        {
+          "id": "maca-2",
+          "title": "Maca (L. meyenii) for improving sexual function: a systematic review",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/20691074/",
+          "year": 2010
+        },
+        {
+          "id": "maca-3",
+          "title": "A double-blind, randomized, pilot dose-finding study of maca root (L. meyenii) for the management of SSRI-induced sexual dysfunction",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18801111/",
+          "year": 2008
+        },
+        {
+          "id": "maca-4",
+          "title": "Subjective effects of Lepidium meyenii (Maca) extract on well-being and sexual performances in patients with mild erectile dysfunction: a randomised, double-blind clinical trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/19260845/",
+          "year": 2009
+        },
+        {
+          "id": "maca-5",
+          "title": "Effect of Lepidium meyenii (Maca), a root with aphrodisiac and fertility-enhancing properties, on serum reproductive hormone levels in adult healthy men",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/12525260/",
+          "year": 2003
+        },
+        {
+          "id": "maca-6",
+          "title": "Efficacy and Safety of Maca (Lepidium meyenii) in Patients with Symptoms of Late-Onset Hypogonadism: A Randomized, Double-Blind, Placebo-Controlled Clinical Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36593713/",
+          "year": 2023
+        }
+      ],
+      "goals": ["energy", "stress"]
+    },
+    {
+      "name": "Magnesium",
+      "slug": "magnesium",
+      "description": "Essential mineral involved in over 300 enzymatic reactions. Supports muscle relaxation, sleep, energy production, and stress response.",
+      "dosageRange": "300-400mg daily (glycinate or citrate form preferred)",
+      "defaultTiming": {
+        "timeOfDay": "evening",
+        "withFood": true,
+        "withFat": false
+      },
+      "pairWith": [
+        {
+          "item": "Vitamin D3",
+          "reason": "Magnesium is required to activate Vitamin D3",
+          "evidenceLevel": "high",
+          "citationIds": []
+        }
+      ],
+      "avoidWith": [],
+      "separateFrom": [
+        {
+          "item": "Zinc",
+          "reason": "High doses of zinc can interfere with magnesium absorption",
+          "evidenceLevel": "moderate",
+          "citationIds": [],
+          "separationHours": 2
+        }
+      ],
+      "evidenceSummary": "High evidence for sleep quality, muscle recovery, and stress reduction. One of the most common deficiencies in Western diets.",
+      "evidenceLevel": "high",
+      "citations": [
+        {
+          "id": "mag-1",
+          "title": "The effect of magnesium supplementation on primary insomnia in elderly: A double-blind placebo-controlled clinical trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23853635/",
+          "year": 2012
+        },
+        {
+          "id": "mag-2",
+          "title": "Effects of Magnesium Supplementation on Blood Pressure: A Meta-Analysis of Randomized Double-Blind Placebo-Controlled Trials",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27402922/",
+          "year": 2016
+        },
+        {
+          "id": "mag-3",
+          "title": "Role of magnesium supplementation in the treatment of depression: A randomized clinical trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28654669/",
+          "year": 2017
+        },
+        {
+          "id": "mag-4",
+          "title": "TRPM6 and TRPM7--Gatekeepers of human magnesium metabolism",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/17481860/",
+          "year": 2007
+        },
+        {
+          "id": "mag-5",
+          "title": "Magnesium and type 2 diabetes",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/26322160/",
+          "year": 2015
+        },
+        {
+          "id": "mag-6",
+          "title": "Effect of Magnesium Supplementation on Inflammatory Parameters: A Meta-Analysis of Randomized Controlled Trials",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35277037/",
+          "year": 2022
+        }
+      ],
+      "goals": ["sleep", "stress", "muscle", "energy"]
+    },
+    {
+      "slug": "cordyceps",
+      "name": "Cordyceps",
+      "description": "A medicinal fungus used in traditional Chinese medicine to boost energy, endurance, and oxygen utilisation. Cordyceps militaris and sinensis are the most studied species for athletic and metabolic support.",
+      "goals": ["energy", "muscle"],
+      "evidenceLevel": "moderate",
+      "dosageRange": "1000–3000mg daily",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": false
+      },
+      "evidenceSummary": "Clinical trials show improvements in VO2 max and time-to-exhaustion in both older and active adults. Evidence is moderate with consistent findings across multiple small RCTs.",
+      "cautionNote": null,
+      "pairWith": [
+        {
+          "item": "Rhodiola Rosea",
+          "reason": "Complementary adaptogens — both support endurance and reduce exercise fatigue",
+          "evidenceLevel": "moderate",
+          "citationIds": []
+        }
+      ],
+      "separateFrom": [],
+      "avoidWith": [],
+      "dietRelevance": {
+        "vegan": "Cordyceps militaris is cultivated on plant substrates and is suitable for vegans.",
+        "vegetarian": "Cordyceps militaris is suitable for vegetarians."
+      },
+      "citations": [
+        {
+          "id": "cordyceps-1",
+          "title": "Cordyceps militaris Improves Tolerance to High-Intensity Exercise After Acute and Chronic Supplementation",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27408987/",
+          "year": 2017
+        },
+        {
+          "id": "cordyceps-2",
+          "title": "Effect of Cs-4 (Cordyceps sinensis) on exercise performance in healthy older subjects: a double-blind, placebo-controlled trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/20804368/",
+          "year": 2010
+        },
+        {
+          "id": "cordyceps-3",
+          "title": "Pharmacological and therapeutic potential of Cordyceps with special reference to Cordycepin",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28324458/",
+          "year": 2014
+        },
+        {
+          "id": "cordyceps-4",
+          "title": "Isolation and purification of a polysaccharide from the caterpillar medicinal mushroom Cordyceps militaris (Ascomycetes) fruit bodies and its immunomodulation of RAW 264.7 macrophages",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24941166/",
+          "year": 2014
+        },
+        {
+          "id": "cordyceps-5",
+          "title": "Cordyceps spp.: A Review on Its Immune-Stimulatory and Other Biological Potentials",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33628175/",
+          "year": 2021
+        },
+        {
+          "id": "cordyceps-6",
+          "title": "Molecular mechanisms of cordycepin emphasizing its potential against neuroinflammation: An update",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34297967/",
+          "year": 2021
+        }
+      ]
+    },
+    {
+      "slug": "reishi",
+      "name": "Reishi",
+      "description": "Ganoderma lucidum, known as the 'mushroom of immortality', is one of the most studied medicinal mushrooms. It supports immune regulation, sleep quality, and stress resilience.",
+      "goals": ["immunity", "sleep", "stress", "longevity"],
+      "evidenceLevel": "moderate",
+      "dosageRange": "1000–3000mg extract daily",
+      "defaultTiming": {
+        "timeOfDay": "evening",
+        "withFood": true,
+        "withFat": false
+      },
+      "evidenceSummary": "Randomised trials show improvements in immune cell populations, cancer-related fatigue, and sleep duration. Beta-glucans and triterpenes are the primary active compounds.",
+      "cautionNote": "May interact with blood-thinning medications and immunosuppressants. Consult a physician if taking warfarin or immunotherapy.",
+      "pairWith": [
+        {
+          "item": "Lion's Mane",
+          "reason": "Complementary mushrooms — reishi modulates immunity while Lion's Mane supports neurological function",
+          "evidenceLevel": "low",
+          "citationIds": []
+        }
+      ],
+      "separateFrom": [],
+      "avoidWith": [
+        {
+          "item": "Anticoagulants (e.g. warfarin)",
+          "reason": "Reishi may have mild antiplatelet effects that could enhance bleeding risk"
+        }
+      ],
+      "dietRelevance": {
+        "vegan": "Reishi mushroom extract is suitable for vegans.",
+        "vegetarian": "Reishi mushroom extract is suitable for vegetarians."
+      },
+      "citations": [
+        {
+          "id": "reishi-1",
+          "title": "Ganoderma lucidum promotes sleep through a gut microbiota-dependent and serotonin-involved pathway in mice",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34211003/",
+          "year": 2021
+        },
+        {
+          "id": "reishi-2",
+          "title": "Spore Powder of Ganoderma lucidum Improves Cancer-Related Fatigue in Breast Cancer Patients Undergoing Endocrine Therapy: A Pilot Clinical Trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/22203880/",
+          "year": 2012
+        },
+        {
+          "id": "reishi-3",
+          "title": "Cellular and molecular mechanisms of immuno-modulation by Ganoderma lucidum",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/16230843/",
+          "year": 2005
+        },
+        {
+          "id": "reishi-4",
+          "title": "Evaluation of Immune Modulation by β-1,3; 1,6 D-Glucan Derived from Ganoderma lucidum in Healthy Adult Volunteers, A Randomized Controlled Trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36766186/",
+          "year": 2023
+        },
+        {
+          "id": "reishi-5",
+          "title": "The anti-fatigue and sleep-aiding effects vary significantly among different recipes containing Ganoderma lucidum extracts",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38770283/",
+          "year": 2024
+        },
+        {
+          "id": "reishi-6",
+          "title": "Antiinflammatory triterpenoids and steroids from Ganoderma lucidum and G. tsugae",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/17655889/",
+          "year": 2008
+        }
+      ]
+    },
+    {
+      "slug": "tremella",
+      "name": "Tremella",
+      "description": "Tremella fuciformis, the snow mushroom, is rich in bioactive polysaccharides that mimic hyaluronic acid. It is used for skin hydration, anti-aging, and immune support.",
+      "goals": ["skin", "longevity"],
+      "evidenceLevel": "low",
+      "dosageRange": "500–1500mg extract daily",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": false
+      },
+      "evidenceSummary": "Preclinical evidence shows Tremella polysaccharides promote hyaluronic acid production, improve skin moisture, and exert anti-inflammatory effects. Human clinical trial data is limited.",
+      "cautionNote": null,
+      "pairWith": [
+        {
+          "item": "Collagen Peptides",
+          "reason": "Collagen and Tremella polysaccharides act via different but complementary skin hydration mechanisms",
+          "evidenceLevel": "low",
+          "citationIds": []
+        },
+        {
+          "item": "Vitamin C",
+          "reason": "Vitamin C supports collagen synthesis and enhances the antioxidant effects of Tremella polysaccharides",
+          "evidenceLevel": "low",
+          "citationIds": []
+        }
+      ],
+      "separateFrom": [],
+      "avoidWith": [],
+      "dietRelevance": {
+        "vegan": "Tremella mushroom extract is suitable for vegans.",
+        "vegetarian": "Tremella mushroom extract is suitable for vegetarians."
+      },
+      "citations": [
+        {
+          "id": "tremella-1",
+          "title": "Tremella fuciformis polysaccharides alleviate induced atopic dermatitis in mice by regulating immune response and gut microbiota",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36091780/",
+          "year": 2022
+        },
+        {
+          "id": "tremella-2",
+          "title": "Structure, bioactivities and applications of the polysaccharides from Tremella fuciformis mushroom: A review",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30342120/",
+          "year": 2019
+        },
+        {
+          "id": "tremella-3",
+          "title": "Tremella fuciformis Polysaccharides Attenuate Oxidative Stress and Inflammation in Macrophages through miR-155",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29854576/",
+          "year": 2018
+        },
+        {
+          "id": "tremella-4",
+          "title": "Tremella fuciformis enhances the neurite outgrowth of PC12 cells and restores trimethyltin-induced impairment of memory in rats via activation of CREB transcription and cholinergic systems",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/22185695/",
+          "year": 2012
+        },
+        {
+          "id": "tremella-5",
+          "title": "Antioxidant and anti-inflammatory activities of methanol extracts of Tremella fuciformis and its major phenolic acids",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24547933/",
+          "year": 2014
+        },
+        {
+          "id": "tremella-6",
+          "title": "Tremella fuciformis polysaccharides alleviates UV-provoked skin cell damage via regulation of thioredoxin interacting protein and thioredoxin reductase 2",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37458972/",
+          "year": 2023
+        }
+      ]
+    },
+    {
+      "slug": "astaxanthin",
+      "name": "Astaxanthin",
+      "description": "A powerful carotenoid antioxidant produced by microalgae. It is one of the most potent antioxidants known, with particular benefits for skin photoprotection, inflammation reduction, and exercise recovery.",
+      "goals": ["skin", "immunity", "longevity"],
+      "evidenceLevel": "moderate",
+      "dosageRange": "4–12mg daily",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": true
+      },
+      "evidenceSummary": "Double-blind RCTs show astaxanthin reduces UV-induced skin damage, improves skin moisture and elasticity, and reduces oxidative stress markers. Must be taken with fat for optimal absorption.",
+      "cautionNote": "Best absorbed with a fat-containing meal. May cause skin yellowing at very high doses.",
+      "pairWith": [
+        {
+          "item": "Omega-3 (EPA/DHA)",
+          "reason": "Both are fat-soluble and absorb well together with a meal; complementary anti-inflammatory effects",
+          "evidenceLevel": "moderate",
+          "citationIds": []
+        },
+        {
+          "item": "Vitamin E",
+          "reason": "Synergistic antioxidant activity — astaxanthin and vitamin E protect lipid membranes from oxidation",
+          "evidenceLevel": "moderate",
+          "citationIds": []
+        }
+      ],
+      "separateFrom": [],
+      "avoidWith": [],
+      "dietRelevance": {
+        "vegan": "Look for algae-derived astaxanthin (e.g. from Haematococcus pluvialis) to ensure vegan sourcing.",
+        "vegetarian": "Algae-derived astaxanthin is suitable for vegetarians."
+      },
+      "citations": [
+        {
+          "id": "astaxanthin-1",
+          "title": "The Protective Role of Astaxanthin for UV-Induced Skin Deterioration in Healthy People-A Randomized, Double-Blind, Placebo-Controlled Trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29941810/",
+          "year": 2018
+        },
+        {
+          "id": "astaxanthin-2",
+          "title": "Protective effects of astaxanthin on skin deterioration",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28751807/",
+          "year": 2017
+        },
+        {
+          "id": "astaxanthin-3",
+          "title": "Systematic Review and Meta-Analysis on the Effects of Astaxanthin on Human Skin Ageing",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34578794/",
+          "year": 2021
+        },
+        {
+          "id": "astaxanthin-4",
+          "title": "Astaxanthin alleviates oxidative stress insults-related derangements in human vascular endothelial cells exposed to glucose fluctuations",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/26924495/",
+          "year": 2016
+        },
+        {
+          "id": "astaxanthin-5",
+          "title": "Dietary astaxanthin inhibits colitis and colitis-associated colon carcinogenesis in mice via modulation of the inflammatory cytokines",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/21621527/",
+          "year": 2011
+        },
+        {
+          "id": "astaxanthin-6",
+          "title": "Astaxanthin exerts anti-inflammatory and antioxidant effects in macrophages in NRF2-dependent and independent manners",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30308382/",
+          "year": 2018
+        }
+      ]
+    },
+    {
+      "slug": "vitamin-b6",
+      "name": "Vitamin B6",
+      "description": "Pyridoxine is essential for amino acid metabolism, neurotransmitter synthesis (serotonin, dopamine, GABA), and immune function. Commonly deficient in people under chronic stress.",
+      "goals": ["energy", "focus", "stress"],
+      "evidenceLevel": "high",
+      "dosageRange": "1.3–50mg daily (RDA: 1.3–1.7mg; therapeutic: 10–50mg)",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": false
+      },
+      "evidenceSummary": "Well-established role in energy metabolism and neurotransmitter synthesis. RCTs show high-dose B6 significantly reduces anxiety and depression. Deficiency is common in stressed, elderly, and alcohol-consuming populations.",
+      "cautionNote": "Long-term doses above 100mg/day may cause peripheral neuropathy. Stay within recommended therapeutic ranges.",
+      "pairWith": [
+        {
+          "item": "Magnesium",
+          "reason": "Magnesium and B6 work synergistically to reduce stress and anxiety; combined supplementation outperforms either alone",
+          "evidenceLevel": "high",
+          "citationIds": []
+        },
+        {
+          "item": "Vitamin B12",
+          "reason": "B vitamins work together in methylation and energy metabolism; co-supplementation is common practice",
+          "evidenceLevel": "high",
+          "citationIds": []
+        }
+      ],
+      "separateFrom": [],
+      "avoidWith": [],
+      "dietRelevance": {
+        "vegan": "Vegans may be at higher risk of B6 depletion; plant sources include nutritional yeast and chickpeas.",
+        "vegetarian": "B6 is available from plant sources but supplementation may be beneficial."
+      },
+      "citations": [
+        {
+          "id": "vitb6-1",
+          "title": "Vitamin B6: A new approach to lowering anxiety, and depression?",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36268413/",
+          "year": 2022
+        },
+        {
+          "id": "vitb6-2",
+          "title": "Higher vitamin B6 intake is associated with lower depression and anxiety risk in women but not in men: A large cross-sectional study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31188081/",
+          "year": 2019
+        },
+        {
+          "id": "vitb6-3",
+          "title": "The effect of vitamin B6 on cognition",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/14584010/",
+          "year": 2003
+        },
+        {
+          "id": "vitb6-4",
+          "title": "Superiority of magnesium and vitamin B6 over magnesium alone on severe stress in healthy adults with low magnesemia: A randomized, single-blind clinical trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30562392/",
+          "year": 2018
+        },
+        {
+          "id": "vitb6-5",
+          "title": "The Role of Vitamin B6 in Peripheral Neuropathy: A Systematic Review",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37447150/",
+          "year": 2023
+        },
+        {
+          "id": "vitb6-6",
+          "title": "Pyridoxine supplementation: effect on lymphocyte responses in elderly persons",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/3499066/",
+          "year": 1987
+        }
+      ]
     }
   ]
 }

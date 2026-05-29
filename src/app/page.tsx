@@ -7,8 +7,8 @@ export default function Home() {
         className="flex-1 flex items-center justify-center px-6 py-32 relative min-h-[560px]"
         style={{
           backgroundImage: "url('/hero-bg.jpg')",
-          backgroundSize: "130%",       // zoom: increase % to zoom in, decrease to zoom out
-          backgroundPosition: "44% 52%", // position: first = left/right (lower = more left), second = up/down
+          backgroundSize: "120%",
+          backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
       >
@@ -17,7 +17,7 @@ export default function Home() {
           <p className="text-xs tracking-widest uppercase text-white/70 mb-6">
             Sprout — Supplement Planner
           </p>
-          <h1 className="text-4xl md:text-6xl font-normal text-white mb-6 leading-tight uppercase">
+          <h1 className="text-4xl md:text-6xl font-normal text-white mb-6 leading-tight uppercase" style={{ letterSpacing: "-0.04em" }}>
             Your Personal<br />Supplement Plan
           </h1>
           <p className="text-lg text-white/80 mb-10 max-w-xl mx-auto leading-relaxed">

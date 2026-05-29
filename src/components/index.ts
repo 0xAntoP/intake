@@ -5,3 +5,4 @@ export { ScheduleView } from "./ScheduleView";
 export { Disclaimer } from "./Disclaimer";
 export { ProgressIndicator } from "./ProgressIndicator";
 export { IframeResizer } from "./IframeResizer";
+export { BenefitRadarChart } from "./BenefitRadarChart";

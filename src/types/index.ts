@@ -63,7 +63,7 @@ export type SupplementData = {
 
 // User profile types
 export type Sex = "male" | "female" | "other";
-export type Diet = "omnivore" | "vegetarian" | "vegan";
+export type Diet = "omnivore" | "vegetarian" | "vegan" | "carnivore" | "pescatarian" | "keto" | "paleo" | "mediterranean" | "gluten-free";
 export type Goal =
   | "energy"
   | "sleep"
@@ -71,19 +71,21 @@ export type Goal =
   | "immunity"
   | "stress"
   | "longevity"
-  | "muscle";
+  | "muscle"
+  | "skin";
 
 // Lifestyle types
 export type ExerciseFrequency = "sedentary" | "light" | "moderate" | "intense";
-export type ExerciseIntensity = "low" | "moderate" | "high";
+export type ExerciseIntensity = "cardio" | "strength" | "mobility";
 export type SleepQuality = "poor" | "fair" | "good" | "excellent";
 export type StressLevel = "low" | "moderate" | "high";
-export type DigestiveIssue = "none" | "bloating" | "constipation" | "diarrhea" | "ibs" | "gerd";
+export type DigestiveIssue = "none" | "bloating" | "constipation" | "diarrhea" | "ibs" | "gerd" | "nausea" | "stomach-cramps" | "lactose-intolerance" | "gluten-sensitivity" | "ibd" | "poor-absorption";
 export type CaffeineIntake = "low" | "moderate" | "high";
 export type SunExposure = "low" | "moderate" | "high";
+export type SkinType = "normal" | "dry" | "oily" | "mixed" | "sensitive" | "aged";
 export type JobType = "desk" | "physical" | "hybrid";
 export type JobStress = "low" | "moderate" | "high";
-export type MedicalCondition = "hypertension" | "diabetes" | "pregnancy" | "thyroid" | "heart-disease" | "autoimmune" | "none";
+export type MedicalCondition = "hypertension" | "diabetes" | "pregnancy" | "thyroid" | "heart-disease" | "autoimmune" | "osteoporosis" | "anxiety-depression" | "anaemia" | "pcos" | "insomnia" | "kidney-disease" | "ibd-crohns" | "none";
 
 export type UserProfile = {
   age: number;
@@ -92,13 +94,14 @@ export type UserProfile = {
   goals: Goal[];
   currentSupplements: string[];
   exerciseFrequency?: ExerciseFrequency;
-  exerciseIntensity?: ExerciseIntensity;
+  exerciseIntensity?: ExerciseIntensity[];
   sleepHours?: number;
   sleepQuality?: SleepQuality;
   stressLevel?: StressLevel;
   digestiveIssues?: DigestiveIssue[];
   caffeineIntake?: CaffeineIntake;
   sunExposure?: SunExposure;
+  skinType?: SkinType;
   jobType?: JobType;
   jobStress?: JobStress;
   medications?: string;
@@ -114,13 +117,14 @@ export type IntakeFormData = {
   goals: Goal[];
   currentSupplements: string[];
   exerciseFrequency: ExerciseFrequency | "";
-  exerciseIntensity: ExerciseIntensity | "";
+  exerciseIntensity: ExerciseIntensity[];
   sleepHours: string;
   sleepQuality: SleepQuality | "";
   stressLevel: StressLevel | "";
   digestiveIssues: DigestiveIssue[];
   caffeineIntake: CaffeineIntake | "";
   sunExposure: SunExposure | "";
+  skinType: SkinType | "";
   jobType: JobType | "";
   jobStress: JobStress | "";
   medications: string;
