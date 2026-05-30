@@ -183,24 +183,47 @@ export default async function SupplementPage({ params }: PageProps) {
           <div className="p-8 md:p-12">
             <p className="text-xs tracking-widest uppercase text-[#9C8B78] mb-6">Research Citations</p>
             <div className="space-y-4">
-              {supplement.citations.map((citation, i) => (
-                <div key={citation.id} className="flex items-baseline gap-4">
-                  <span className="text-sm text-[#9C8B78] flex-shrink-0">{i + 1}</span>
-                  <div>
-                    <a
-                      href={citation.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-[#2E1B12] hover:text-[#FFB326] transition-colors leading-snug"
-                    >
-                      {citation.title}
-                    </a>
-                    {citation.year && (
-                      <span className="text-xs text-[#9C8B78] ml-2">({citation.year})</span>
-                    )}
+              {supplement.citations.map((citation, i) => {
+                const isTmgl = citation.url.includes("search.tmgl.org");
+                const pmidMatch = isTmgl ? citation.url.match(/mdl-(\d+)/) : null;
+                const pubmedFallback = pmidMatch ? `https://pubmed.ncbi.nlm.nih.gov/${pmidMatch[1]}/` : null;
+                return (
+                  <div key={citation.id} className="flex items-baseline gap-4">
+                    <span className="text-sm text-[#9C8B78] flex-shrink-0">{i + 1}</span>
+                    <div>
+                      <a
+                        href={citation.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-[#2E1B12] hover:text-[#FFB326] transition-colors leading-snug"
+                      >
+                        {citation.title}
+                      </a>
+                      {citation.year && (
+                        <span className="text-xs text-[#9C8B78] ml-2">({citation.year})</span>
+                      )}
+                      {isTmgl && (
+                        <span className="ml-2 inline-flex items-center gap-1">
+                          <span className="text-xs text-[#4A7C59] font-medium">WHO TMGL</span>
+                          {pubmedFallback && (
+                            <>
+                              <span className="text-[#9C8B78] text-xs">·</span>
+                              <a
+                                href={pubmedFallback}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs text-[#9C8B78] hover:text-[#FFB326] transition-colors"
+                              >
+                                PubMed ↗
+                              </a>
+                            </>
+                          )}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 

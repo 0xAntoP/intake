@@ -640,6 +640,24 @@
           "title": "Withania somnifera improves semen quality by regulating reproductive hormone levels and oxidative stress in seminal plasma of infertile males",
           "url": "https://pubmed.ncbi.nlm.nih.gov/19501822/",
           "year": 2010
+        },
+        {
+          "id": "ashwagandha-tmgl-1",
+          "title": "An overview on ashwagandha: a Rasayana (rejuvenator) of Ayurveda",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-22754076",
+          "year": 2012
+        },
+        {
+          "id": "ashwagandha-tmgl-2",
+          "title": "Adaptogenic activity of Withania somnifera: an experimental study using a rat model of chronic stress",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-12895672",
+          "year": 2003
+        },
+        {
+          "id": "ashwagandha-tmgl-3",
+          "title": "Enhancing healthspan with Ashwagandha (Withania somnifera): a comprehensive review of its multifaceted geroprotective benefits",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-40921883",
+          "year": 2025
         }
       ],
       "goals": ["stress", "sleep", "muscle"],
@@ -827,6 +845,24 @@
           "title": "Does Rhodiola rosea possess ergogenic properties?",
           "url": "https://pubmed.ncbi.nlm.nih.gov/16948486/",
           "year": 2006
+        },
+        {
+          "id": "rhodiola-tmgl-1",
+          "title": "Rosenroot (Rhodiola rosea): traditional use, chemical composition, pharmacology and clinical efficacy",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-20378318",
+          "year": 2010
+        },
+        {
+          "id": "rhodiola-tmgl-2",
+          "title": "Rhodiola rosea: A Versatile Adaptogen",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-33430554",
+          "year": 2021
+        },
+        {
+          "id": "rhodiola-tmgl-3",
+          "title": "Rhodiola rosea: a possible plant adaptogen",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-11410073",
+          "year": 2001
         }
       ],
       "goals": ["energy", "stress", "focus"],
@@ -1366,6 +1402,18 @@
           "title": "The Acute and Chronic Effects of Lion's Mane Mushroom Supplementation on Cognitive Function, Stress and Mood in Young Adults: A Double-Blind, Parallel Groups, Pilot Study",
           "url": "https://pubmed.ncbi.nlm.nih.gov/38004235/",
           "year": 2023
+        },
+        {
+          "id": "lionsmane-tmgl-1",
+          "title": "Neurohealth Properties of Hericium erinaceus Mycelia Enriched with Erinacines",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-29520173",
+          "year": 2018
+        },
+        {
+          "id": "lionsmane-tmgl-2",
+          "title": "Neurotrophic and Neuroprotective Effects of Hericium erinaceus",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-37958943",
+          "year": 2023
         }
       ],
       "goals": ["focus", "stress", "longevity"]
@@ -1480,6 +1528,24 @@
           "title": "Efficacy and Safety of Maca (Lepidium meyenii) in Patients with Symptoms of Late-Onset Hypogonadism: A Randomized, Double-Blind, Placebo-Controlled Clinical Trial.",
           "url": "https://pubmed.ncbi.nlm.nih.gov/36593713/",
           "year": 2023
+        },
+        {
+          "id": "maca-tmgl-1",
+          "title": "Ethnobiology and Ethnopharmacology of Lepidium meyenii (Maca), a Plant from the Peruvian Highlands",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-21977053",
+          "year": 2012
+        },
+        {
+          "id": "maca-tmgl-2",
+          "title": "Maca (Lepidium meyenii) for treatment of menopausal symptoms: A systematic review",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-21840656",
+          "year": 2011
+        },
+        {
+          "id": "maca-tmgl-3",
+          "title": "Not All Maca Is Created Equal: A Review of Colors, Nutrition, Phytochemicals, and Clinical Uses",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-38398854",
+          "year": 2024
         }
       ],
       "goals": ["energy", "stress"]
@@ -1618,6 +1684,24 @@
           "title": "Molecular mechanisms of cordycepin emphasizing its potential against neuroinflammation: An update",
           "url": "https://pubmed.ncbi.nlm.nih.gov/34297967/",
           "year": 2021
+        },
+        {
+          "id": "cordyceps-tmgl-1",
+          "title": "Beneficial Effect of Cordyceps militaris on Exercise Performance via Promoting Cellular Energy Production",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-33312018",
+          "year": 2021
+        },
+        {
+          "id": "cordyceps-tmgl-2",
+          "title": "A randomized controlled clinical trial examining the effects of Cordyceps militaris beverage on the immune response in healthy adults",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-38580687",
+          "year": 2024
+        },
+        {
+          "id": "cordyceps-tmgl-3",
+          "title": "NAD-Driven Sirtuin Activation by Cordyceps sinensis Extract: Exploring the Adaptogenic Potential to Promote Skin Longevity",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-38673866",
+          "year": 2024
         }
       ]
     },
@@ -1690,6 +1774,24 @@
           "title": "Antiinflammatory triterpenoids and steroids from Ganoderma lucidum and G. tsugae",
           "url": "https://pubmed.ncbi.nlm.nih.gov/17655889/",
           "year": 2008
+        },
+        {
+          "id": "reishi-tmgl-1",
+          "title": "Ganoderma lucidum: a potent pharmacological macrofungus",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-19939212",
+          "year": 2010
+        },
+        {
+          "id": "reishi-tmgl-2",
+          "title": "Chemical, biochemical, preclinical and clinical studies of Ganoderma lucidum polysaccharide as an approved drug for treating myopathy and other diseases in China",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-29691994",
+          "year": 2018
+        },
+        {
+          "id": "reishi-tmgl-3",
+          "title": "Ganoderma lucidum polysaccharide used for treating physical frailty in China",
+          "url": "https://search.tmgl.org/tmgl/resource/en/mdl-31030748",
+          "year": 2019
         }
       ]
     },
