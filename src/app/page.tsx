@@ -34,6 +34,9 @@ export default function Home() {
           <p className="mt-5 text-sm text-white/60">
             Free · No account required · Takes 3 minutes
           </p>
+          <p className="mt-3 text-xs text-white/40 max-w-sm mx-auto leading-relaxed">
+            Your responses help us tailor your supplement plan in real time. Your data is not stored and is used only for this session.
+          </p>
         </div>
       </section>
 

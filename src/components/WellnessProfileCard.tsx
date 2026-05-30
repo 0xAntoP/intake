@@ -219,6 +219,7 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
   const [progress, setProgress] = useState(0);
   const [shareState, setShareState] = useState<"idle" | "generating" | "done">("idle");
   const cardRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
 
   const scores = computeWellnessScores(profile);
   const archetype = getArchetype(profile);
@@ -240,18 +241,47 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
     if (!cardRef.current || shareState === "generating") return;
     setShareState("generating");
     try {
-      const blob = await toBlob(cardRef.current, {
-        pixelRatio: 3,
+      // Hide footer (button) so it doesn't appear in the capture
+      if (footerRef.current) footerRef.current.style.display = "none";
+
+      const cardBlob = await toBlob(cardRef.current, {
+        pixelRatio: 2,
         backgroundColor: "#2E1B12",
       });
-      if (!blob) throw new Error("capture failed");
 
-      const file = new File([blob], "sprout-wellness-profile.png", { type: "image/png" });
+      if (footerRef.current) footerRef.current.style.display = "";
+      if (!cardBlob) throw new Error("capture failed");
+
+      // Place card on a 1080×1920 (9:16) canvas for Instagram Stories
+      const img = new Image();
+      const cardUrl = URL.createObjectURL(cardBlob);
+      await new Promise<void>((resolve) => { img.onload = () => resolve(); img.src = cardUrl; });
+
+      const W = 1080, H = 1920;
+      const canvas = document.createElement("canvas");
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext("2d")!;
+      ctx.fillStyle = "#2E1B12";
+      ctx.fillRect(0, 0, W, H);
+
+      const padding = 60;
+      const scale = (W - padding * 2) / img.width;
+      const dw = img.width * scale;
+      const dh = img.height * scale;
+      ctx.drawImage(img, (W - dw) / 2, (H - dh) / 2, dw, dh);
+      URL.revokeObjectURL(cardUrl);
+
+      const storyBlob = await new Promise<Blob>((resolve, reject) =>
+        canvas.toBlob((b) => b ? resolve(b) : reject(new Error("canvas failed")), "image/png")
+      );
+
+      const file = new File([storyBlob], "sprout-wellness-profile.png", { type: "image/png" });
 
       if (typeof navigator !== "undefined" && navigator.canShare?.({ files: [file] })) {
         await navigator.share({ files: [file], title: archetype.name });
       } else {
-        const url = URL.createObjectURL(blob);
+        const url = URL.createObjectURL(storyBlob);
         const a = document.createElement("a");
         a.href = url;
         a.download = "sprout-wellness-profile.png";
@@ -261,6 +291,7 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
       setShareState("done");
       setTimeout(() => setShareState("idle"), 2500);
     } catch {
+      if (footerRef.current) footerRef.current.style.display = "";
       setShareState("idle");
     }
   };
@@ -352,7 +383,7 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
         </div>
 
         {/* Footer */}
-        <div className="mt-4 md:mt-8 flex items-center justify-between gap-4 flex-wrap">
+        <div ref={footerRef} className="mt-4 md:mt-8 flex items-center justify-between gap-4 flex-wrap">
           <p className="text-[10px] tracking-[0.22em] uppercase text-white/25">sproutlab.it</p>
           <button
             onClick={handleShare}
