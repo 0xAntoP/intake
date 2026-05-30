@@ -74,6 +74,8 @@ export default function ResultsPage() {
   const [recommendations, setRecommendations] = useState<SupplementRecommendation[]>([]);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [email, setEmail] = useState("");
+  const [emailState, setEmailState] = useState<"idle" | "sending" | "sent">("idle");
 
   useEffect(() => {
     const storedProfile = sessionStorage.getItem("intakeProfile");
@@ -107,6 +109,15 @@ export default function ResultsPage() {
   };
 
   const highEvidence = recommendations.filter((r) => r.evidenceLevel === "high").length;
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || emailState !== "idle") return;
+    setEmailState("sending");
+    // TODO: wire up to your email service (Resend, Mailchimp, etc.)
+    await new Promise((r) => setTimeout(r, 800));
+    setEmailState("sent");
+  };
 
   const recommendedSlugs = recommendations.map((r) => r.slug);
   const matchedProducts = SPROUTLAB_PRODUCTS.map((product) => {
@@ -152,6 +163,40 @@ export default function ResultsPage() {
               ))}
             </div>
           )}
+
+          {/* Email CTA */}
+          <div className="mt-8 pt-8 border-t border-[#2E1B12]/10">
+            {emailState === "sent" ? (
+              <div className="flex items-center gap-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FFB326] flex-shrink-0" />
+                <p className="text-sm text-[#2E1B12]">
+                  Plan sent to <span className="font-medium">{email}</span> — check your inbox.
+                </p>
+              </div>
+            ) : (
+              <>
+                <p className="text-sm text-[#2E1B12] mb-1">Receive your plan by email</p>
+                <p className="text-xs text-[#9C8B78] mb-4">We'll send your full supplement schedule so you can reference it anytime.</p>
+                <form onSubmit={handleEmailSubmit} className="flex gap-2 flex-wrap">
+                  <input
+                    type="email"
+                    required
+                    placeholder="your@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="flex-1 min-w-0 border border-[#2E1B12]/20 bg-transparent px-4 py-2.5 text-sm text-[#2E1B12] placeholder:text-[#9C8B78] outline-none focus:border-[#2E1B12]/60 transition-colors"
+                  />
+                  <button
+                    type="submit"
+                    disabled={emailState === "sending"}
+                    className="px-6 py-2.5 bg-[#FFB326] text-[#2E1B12] text-sm font-medium hover:bg-[#e6a020] transition-colors disabled:opacity-60 whitespace-nowrap"
+                  >
+                    {emailState === "sending" ? "Sending…" : "Send my plan →"}
+                  </button>
+                </form>
+              </>
+            )}
+          </div>
         </div>
 
         {/* Stats bar */}

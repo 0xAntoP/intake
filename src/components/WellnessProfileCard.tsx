@@ -246,7 +246,6 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
 
       const cardBlob = await toBlob(cardRef.current, {
         pixelRatio: 2,
-        backgroundColor: "#2E1B12",
       });
 
       if (footerRef.current) footerRef.current.style.display = "";
@@ -262,7 +261,7 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
       canvas.width = W;
       canvas.height = H;
       const ctx = canvas.getContext("2d")!;
-      ctx.fillStyle = "#2E1B12";
+      ctx.fillStyle = "#14060a";
       ctx.fillRect(0, 0, W, H);
 
       const padding = 60;
@@ -306,26 +305,35 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
   ].filter(Boolean) as string[];
 
   return (
-    <div ref={cardRef} className="bg-[#2E1B12] overflow-hidden" style={{ borderTop: "2px solid #FFB326" }}>
+    <div
+      ref={cardRef}
+      className="overflow-hidden relative"
+      style={{
+        borderTop: "2px solid #FFB326",
+        backgroundImage: "linear-gradient(rgba(20,12,6,0.82), rgba(20,12,6,0.82)), url('/wellness-bg.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       {/* Top bar */}
-      <div className="border-b border-white/[0.07] px-4 md:px-8 py-3 flex items-center justify-between">
-        <p className="text-[10px] tracking-[0.22em] uppercase text-[#FFB326]/70">Sprout · Wellness Profile</p>
-        <p className="text-[10px] tracking-widest text-white/30">2026</p>
+      <div className="border-b border-white/[0.08] px-4 md:px-8 py-3 flex items-center justify-between">
+        <p className="text-[10px] tracking-[0.22em] uppercase text-[#FFB326]/80">Sprout · Wellness Profile</p>
+        <p className="text-[10px] tracking-widest text-white/40">2026</p>
       </div>
 
       <div className="p-4 md:p-12">
         {/* Header: archetype + radar — always side by side */}
         <div className="grid grid-cols-[1fr_auto] gap-4 md:gap-10 items-center mb-4 md:mb-10">
           <div>
-            <p className="text-[9px] tracking-[0.2em] uppercase text-[#FFB326]/60 mb-1.5 md:mb-3">Your archetype</p>
+            <p className="text-[9px] tracking-[0.2em] uppercase text-[#FFB326]/90 mb-1.5 md:mb-3">Your archetype</p>
             <h2 className="text-lg md:text-[38px] font-normal text-[#FFB326] leading-tight mb-1.5 md:mb-3 tracking-tight">
               {archetype.name}
             </h2>
-            <p className="text-xs md:text-sm text-white/65 mb-3 md:mb-7 leading-relaxed">{archetype.tagline}</p>
+            <p className="text-xs md:text-sm text-white/85 mb-3 md:mb-7 leading-relaxed">{archetype.tagline}</p>
 
             <div className="flex flex-wrap gap-1.5">
               {chips.map((chip) => (
-                <span key={chip} className="text-[9px] tracking-[0.1em] uppercase text-white/60 border border-white/20 px-2 py-1">
+                <span key={chip} className="text-[9px] tracking-[0.1em] uppercase text-white/80 border border-white/30 px-2 py-1">
                   {chip}
                 </span>
               ))}
@@ -347,13 +355,13 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
         </div>
 
         {/* Score grid — 3 × 2 metric tiles */}
-        <div className="grid grid-cols-3 gap-px bg-white/[0.07] mb-4 md:mb-10">
+        <div className="grid grid-cols-3 gap-px bg-white/[0.1] mb-4 md:mb-10">
           {DIMENSIONS.map((dim) => (
-            <div key={dim} className="bg-[#2E1B12] px-3 py-3 md:px-5 md:py-5">
+            <div key={dim} className="px-3 py-3 md:px-5 md:py-5" style={{ backgroundColor: "rgba(20,12,6,0.55)" }}>
               <p className="text-xl md:text-[30px] font-light text-white tabular-nums leading-none mb-1">
                 {Math.round(scores[dim] * progress)}
               </p>
-              <p className="text-[8px] md:text-[9px] tracking-[0.18em] uppercase text-white/45 mb-2">
+              <p className="text-[8px] md:text-[9px] tracking-[0.18em] uppercase text-white/60 mb-2">
                 {DIM_LABELS[dim]}
               </p>
               <div className="h-[2px] bg-white/10 overflow-hidden rounded-full">
@@ -371,12 +379,12 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
 
         {/* Insights */}
         <div className="border-t border-white/[0.07] pt-4 md:pt-8">
-          <p className="text-[9px] tracking-[0.22em] uppercase text-white/35 mb-3 md:mb-5">Key signals</p>
+          <p className="text-[9px] tracking-[0.22em] uppercase text-white/55 mb-3 md:mb-5">Key signals</p>
           <div className="space-y-2 md:space-y-4">
             {insights.map((insight, i) => (
               <div key={i} className="flex items-start gap-2 md:gap-3">
                 <span className="w-1 h-1 rounded-full bg-[#FFB326] flex-shrink-0 mt-[6px]" />
-                <p className="text-xs md:text-sm text-white/65 leading-relaxed">{insight}</p>
+                <p className="text-xs md:text-sm text-white/85 leading-relaxed">{insight}</p>
               </div>
             ))}
           </div>
@@ -384,7 +392,7 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
 
         {/* Footer */}
         <div ref={footerRef} className="mt-4 md:mt-8 flex items-center justify-between gap-4 flex-wrap">
-          <p className="text-[10px] tracking-[0.22em] uppercase text-white/25">sproutlab.it</p>
+          <p className="text-[10px] tracking-[0.22em] uppercase text-white/40">sproutlab.it</p>
           <button
             onClick={handleShare}
             disabled={shareState === "generating"}
