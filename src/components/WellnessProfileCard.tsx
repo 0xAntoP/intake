@@ -218,6 +218,7 @@ interface WellnessProfileCardProps {
 export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
   const [progress, setProgress] = useState(0);
   const [shareState, setShareState] = useState<"idle" | "generating" | "done">("idle");
+  const [bgDataUrl, setBgDataUrl] = useState<string>("/wellness-bg.jpg");
   const cardRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
 
@@ -235,6 +236,18 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
       if (p < 1) requestAnimationFrame(step);
     });
     return () => cancelAnimationFrame(raf);
+  }, []);
+
+  // Pre-load background as base64 so html-to-image can embed it in the capture
+  useEffect(() => {
+    fetch("/wellness-bg.jpg")
+      .then((r) => r.blob())
+      .then((blob) => {
+        const reader = new FileReader();
+        reader.onload = () => setBgDataUrl(reader.result as string);
+        reader.readAsDataURL(blob);
+      })
+      .catch(() => {});
   }, []);
 
   const handleShare = async () => {
@@ -310,7 +323,7 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
       className="overflow-hidden relative"
       style={{
         borderTop: "2px solid #FFB326",
-        backgroundImage: "linear-gradient(rgba(20,12,6,0.82), rgba(20,12,6,0.82)), url('/wellness-bg.jpg')",
+        backgroundImage: `linear-gradient(rgba(20,12,6,0.82), rgba(20,12,6,0.82)), url('${bgDataUrl}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
