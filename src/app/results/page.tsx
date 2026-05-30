@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ScheduleView } from "@/components";
+import { ScheduleView, WellnessProfileCard } from "@/components";
 import { generateRecommendations, groupBySchedule } from "@/lib/recommendation-engine";
 import { UserProfile, ScheduleGroup, SupplementRecommendation } from "@/types";
 
@@ -170,8 +170,15 @@ export default function ResultsPage() {
           </div>
         </div>
 
+        {/* Wellness Profile Card */}
+        {profile && (
+          <div className="mt-4">
+            <WellnessProfileCard profile={profile} />
+          </div>
+        )}
+
         {/* Disclaimer */}
-        <div className="bg-white border border-[#2E1B12]/10 px-6 py-4 mb-4 flex items-start gap-3">
+        <div className="bg-white border border-[#2E1B12]/10 px-6 py-4 mb-4 flex items-start gap-3 mt-4">
           <span className="w-1.5 h-1.5 rounded-full bg-[#FFB326] flex-shrink-0 mt-1.5" />
           <p className="text-xs text-[#9C8B78] leading-relaxed">
             <strong className="text-[#2E1B12] font-medium">For educational purposes only.</strong>{" "}
@@ -254,7 +261,7 @@ export default function ResultsPage() {
               <span className="text-xs text-[#9C8B78] flex-shrink-0">via Amazon</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-px bg-[#2E1B12]/10">
+            <div className={`grid gap-px bg-[#2E1B12]/10 ${amazonSuggestions.length === 1 ? "grid-cols-1" : amazonSuggestions.length === 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3"}`}>
               {amazonSuggestions.map((rec) => {
                 const product = AMAZON_PRODUCTS[rec.slug];
                 return (

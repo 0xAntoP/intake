@@ -41,8 +41,12 @@ export function SupplementCard({ supplement, showDetails = true }: SupplementCar
       {/* Meta row */}
       <div className="flex items-center gap-3 mb-3">
         <span className="text-xs text-[#2E1B12] font-medium">{supplement.dosage}</span>
-        <span className="text-[#2E1B12]/20">·</span>
-        <span className="text-xs text-[#9C8B78]">{foodNote}</span>
+        {showDetails && (
+          <>
+            <span className="text-[#2E1B12]/20">·</span>
+            <span className="text-xs text-[#9C8B78]">{foodNote}</span>
+          </>
+        )}
         {supplement.alreadyTaking && (
           <>
             <span className="text-[#2E1B12]/20">·</span>
@@ -57,7 +61,7 @@ export function SupplementCard({ supplement, showDetails = true }: SupplementCar
       )}
 
       {/* Caution */}
-      {supplement.cautionNote && (
+      {showDetails && supplement.cautionNote && (
         <div className="mb-3 px-3 py-2 border-l-2 border-[#FFB326] bg-[#FCFCF7]">
           <p className="text-xs text-[#9C8B78]">
             <span className="font-medium text-[#2E1B12]">Note: </span>
@@ -76,16 +80,16 @@ export function SupplementCard({ supplement, showDetails = true }: SupplementCar
       )}
 
       {/* Footer */}
-      {supplement.citations.length > 0 && (
-        <div className="mt-3 pt-3 border-t border-[#2E1B12]/10 flex items-center justify-between">
+      <div className="mt-3 pt-3 border-t border-[#2E1B12]/10 flex items-center justify-between">
+        {showDetails && supplement.citations.length > 0 ? (
           <span className="text-xs text-[#9C8B78]">
             {supplement.citations.length} citation{supplement.citations.length !== 1 ? "s" : ""}
           </span>
-          <Link href={`/supplement/${supplement.slug}`} className="text-xs text-[#FFB326] hover:underline">
-            View details →
-          </Link>
-        </div>
-      )}
+        ) : <span />}
+        <Link href={`/supplement/${supplement.slug}`} className="text-xs text-[#FFB326] hover:underline">
+          View details →
+        </Link>
+      </div>
     </div>
   );
 }

@@ -36,7 +36,7 @@ export function ScheduleView({ schedule }: ScheduleViewProps) {
           </div>
           <div className="grid gap-3 md:grid-cols-2">
             {group.supplements.map((supplement) => (
-              <SupplementCard key={supplement.slug} supplement={supplement} />
+              <SupplementCard key={supplement.slug} supplement={supplement} showDetails={false} />
             ))}
           </div>
         </section>

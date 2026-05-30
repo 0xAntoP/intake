@@ -9,20 +9,20 @@ interface DisclaimerProps {
 export function Disclaimer({ variant = "inline" }: DisclaimerProps) {
   if (variant === "footer") {
     return (
-      <footer className="mt-auto border-t border-[#2E1B12]/10 bg-[#FCFCF7] py-8">
+      <footer className="mt-auto bg-[#2E1B12] py-8">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <p className="text-sm text-[#9C8B78] mb-1">
+          <p className="text-sm text-white/60 mb-1">
             For educational purposes only. Not medical advice.
           </p>
-          <p className="text-sm text-[#9C8B78]">
+          <p className="text-sm text-white/60">
             Always consult a qualified healthcare provider before starting any supplement regimen.
           </p>
           <div className="mt-4 flex items-center justify-center gap-4 text-sm">
             <Link href="/methodology" className="text-[#FFB326] hover:underline">
               Methodology
             </Link>
-            <span className="text-[#2E1B12]/20">|</span>
-            <span className="text-[#9C8B78]">Evidence-based recommendations</span>
+            <span className="text-white/20">|</span>
+            <span className="text-white/60">Evidence-based recommendations</span>
           </div>
         </div>
       </footer>

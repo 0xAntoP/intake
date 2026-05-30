@@ -292,7 +292,7 @@
       "description": "Essential mineral for immune function, wound healing, protein synthesis, and enzymatic reactions. Important for testosterone production.",
       "dosageRange": "15-30mg daily",
       "defaultTiming": {
-        "timeOfDay": "morning",
+        "timeOfDay": "evening",
         "withFood": true,
         "withFat": false
       },
@@ -368,7 +368,7 @@
       "description": "One of the most researched sports supplements. Supports muscle strength, power output, and may have cognitive benefits.",
       "dosageRange": "3-5g daily",
       "defaultTiming": {
-        "timeOfDay": "morning",
+        "timeOfDay": "afternoon",
         "withFood": true,
         "withFat": false
       },
@@ -651,7 +651,7 @@
       "description": "Fat-soluble vitamin that directs calcium to bones and teeth while preventing arterial calcification. MK-7 form has longer half-life.",
       "dosageRange": "100-200mcg daily",
       "defaultTiming": {
-        "timeOfDay": "morning",
+        "timeOfDay": "afternoon",
         "withFood": true,
         "withFat": true
       },
@@ -720,7 +720,7 @@
       "description": "Amino acid found in tea that promotes relaxation without sedation. Often paired with caffeine for focused calm.",
       "dosageRange": "100-200mg daily",
       "defaultTiming": {
-        "timeOfDay": "morning",
+        "timeOfDay": "afternoon",
         "withFood": false,
         "withFat": false
       },
@@ -838,7 +838,7 @@
       "description": "Antioxidant naturally produced by the body that supports cellular energy production. Levels decline with age and statin use.",
       "dosageRange": "100-200mg daily (ubiquinol form preferred)",
       "defaultTiming": {
-        "timeOfDay": "morning",
+        "timeOfDay": "afternoon",
         "withFood": true,
         "withFat": true
       },
@@ -1079,7 +1079,7 @@
       "description": "Live beneficial bacteria that support gut microbiome balance, digestion, and immune function.",
       "dosageRange": "10-50 billion CFU daily (multi-strain)",
       "defaultTiming": {
-        "timeOfDay": "morning",
+        "timeOfDay": "evening",
         "withFood": false,
         "withFat": false
       },
@@ -1142,7 +1142,7 @@
       "description": "Hydrolysed collagen that supports skin elasticity, joint health, and connective tissue repair.",
       "dosageRange": "10-15g daily",
       "defaultTiming": {
-        "timeOfDay": "morning",
+        "timeOfDay": "afternoon",
         "withFood": false,
         "withFat": false
       },
@@ -1204,7 +1204,7 @@
       "description": "Potent anti-inflammatory compound from turmeric root. Best absorbed with black pepper (piperine).",
       "dosageRange": "500-1000mg curcumin daily with piperine",
       "defaultTiming": {
-        "timeOfDay": "morning",
+        "timeOfDay": "afternoon",
         "withFood": true,
         "withFat": true
       },

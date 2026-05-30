@@ -1,0 +1,359 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { UserProfile } from "@/types";
+
+type WellnessScores = {
+  energy: number;
+  recovery: number;
+  resilience: number;
+  focus: number;
+  vitality: number;
+  longevity: number;
+};
+
+const DIMENSIONS: (keyof WellnessScores)[] = [
+  "energy", "recovery", "resilience", "focus", "vitality", "longevity",
+];
+
+const DIM_LABELS: Record<keyof WellnessScores, string> = {
+  energy: "Energy",
+  recovery: "Recovery",
+  resilience: "Resilience",
+  focus: "Focus",
+  vitality: "Vitality",
+  longevity: "Longevity",
+};
+
+function computeWellnessScores(profile: UserProfile): WellnessScores {
+  const clamp = (v: number) => Math.min(95, Math.max(20, Math.round(v)));
+  let energy = 50, recovery = 50, resilience = 50, focus = 50, vitality = 50, longevity = 50;
+
+  if (profile.sleepHours !== undefined) {
+    const d = profile.sleepHours >= 8 ? 15 : profile.sleepHours >= 7 ? 8 : profile.sleepHours < 6 ? -20 : -8;
+    energy += d; recovery += d * 0.8;
+  }
+  if (profile.sleepQuality === "excellent") { energy += 12; recovery += 25; focus += 15; resilience += 8; }
+  else if (profile.sleepQuality === "good")  { energy += 6;  recovery += 12; focus += 8;  resilience += 8; }
+  else if (profile.sleepQuality === "fair")  { energy -= 5;  recovery -= 5;  focus -= 5; }
+  else if (profile.sleepQuality === "poor")  { energy -= 15; recovery -= 20; focus -= 15; resilience -= 8; }
+
+  if (profile.exerciseFrequency === "intense")     { energy += 10; recovery += 5;  resilience += 10; focus += 8;  longevity += 18; }
+  else if (profile.exerciseFrequency === "moderate") { energy += 8; recovery += 8; resilience += 10; focus += 8; longevity += 22; }
+  else if (profile.exerciseFrequency === "light")    { longevity += 10; }
+  else if (profile.exerciseFrequency === "sedentary") { energy -= 12; longevity -= 18; }
+
+  if (profile.stressLevel === "high")     { energy -= 10; recovery -= 18; resilience -= 25; focus -= 15; longevity -= 12; }
+  else if (profile.stressLevel === "low") { energy += 8;  recovery += 12; resilience += 25; focus += 10; longevity += 10; }
+
+  if (profile.jobStress === "high") resilience -= 15;
+  else if (profile.jobStress === "low") resilience += 12;
+
+  if (profile.caffeineIntake === "moderate") { energy += 5;  focus += 10; }
+  else if (profile.caffeineIntake === "high") { energy -= 8; focus += 2; }
+  else if (profile.caffeineIntake === "low")  { focus -= 5; }
+
+  if (profile.jobType === "desk") focus += 3;
+
+  const dietVitality: Record<string, number> = {
+    mediterranean: 22, vegan: 15, vegetarian: 12, paleo: 8,
+    omnivore: 5, keto: 5, pescatarian: 7, "gluten-free": 3, carnivore: -5,
+  };
+  const dietLongevity: Record<string, number> = {
+    mediterranean: 20, vegan: 15, vegetarian: 10, pescatarian: 8,
+    paleo: 5, omnivore: 3, keto: 2, "gluten-free": 0, carnivore: -8,
+  };
+  vitality += dietVitality[profile.diet] || 0;
+  longevity += dietLongevity[profile.diet] || 0;
+
+  if (profile.sunExposure === "moderate") { vitality += 12; longevity += 5; }
+  else if (profile.sunExposure === "high") vitality += 8;
+  else if (profile.sunExposure === "low")  vitality -= 10;
+
+  if (profile.digestiveIssues?.includes("none")) vitality += 10;
+  else if (profile.digestiveIssues && profile.digestiveIssues.length > 0 && !profile.digestiveIssues.includes("none")) vitality -= 10;
+
+  if (profile.medicalConditions && !profile.medicalConditions.includes("none") && profile.medicalConditions.length > 0) vitality -= 8;
+
+  if (profile.sleepHours !== undefined) {
+    if (profile.sleepHours >= 7) longevity += 8;
+    else if (profile.sleepHours < 6) longevity -= 12;
+  }
+
+  return {
+    energy: clamp(energy),
+    recovery: clamp(recovery),
+    resilience: clamp(resilience),
+    focus: clamp(focus),
+    vitality: clamp(vitality),
+    longevity: clamp(longevity),
+  };
+}
+
+function getArchetype(profile: UserProfile): { name: string; tagline: string } {
+  const goals = new Set(profile.goals);
+  const isHighStress = profile.stressLevel === "high" || profile.jobStress === "high";
+  const isAthlete = profile.exerciseFrequency === "intense" || profile.exerciseIntensity?.includes("strength");
+
+  if (goals.has("muscle") && isAthlete)
+    return { name: "THE IRON PROTOCOL", tagline: "Built for performance. Engineered to recover." };
+  if (goals.has("focus") && profile.caffeineIntake === "high")
+    return { name: "THE WIRED OPTIMIZER", tagline: "Caffeine runs the engine. Now let's tune it." };
+  if (goals.has("sleep") && (profile.sleepQuality === "poor" || (profile.sleepHours !== undefined && profile.sleepHours < 6)))
+    return { name: "THE SLEEP DEBT PROJECT", tagline: "Recovery is where the real gains happen." };
+  if (goals.has("longevity") && !isHighStress)
+    return { name: "THE LONGEVITY PLAY", tagline: "Not just living longer — living better." };
+  if (isHighStress || goals.has("stress"))
+    return { name: "THE BURNOUT ANTIDOTE", tagline: "High pressure meets high resilience." };
+  if (goals.has("skin"))
+    return { name: "THE GLOW PROTOCOL", tagline: "Inside-out radiance. Evidence-backed." };
+  if (goals.has("immunity"))
+    return { name: "THE DEFENSE SYSTEM", tagline: "Your body's first line of defense, optimized." };
+  if (goals.has("energy"))
+    return { name: "THE ENERGY BLUEPRINT", tagline: "Sustainable fuel. No crash required." };
+  return { name: "THE COMPLETE PROTOCOL", tagline: "Whole-system optimization. Nothing left behind." };
+}
+
+function generateInsights(profile: UserProfile, scores: WellnessScores): string[] {
+  const out: string[] = [];
+
+  if (profile.caffeineIntake === "high" && (profile.sleepQuality === "poor" || profile.sleepQuality === "fair"))
+    out.push("High caffeine is likely disrupting your sleep — a cycle your stack helps break");
+  if (profile.stressLevel === "high" && profile.sleepQuality !== "excellent" && profile.sleepQuality !== "good")
+    out.push("Your stress load is outpacing your recovery window");
+  if (profile.sunExposure === "low")
+    out.push("Low sun exposure makes D3 critical — most indoor-living people are quietly deficient");
+  if (profile.diet === "vegan" || profile.diet === "vegetarian")
+    out.push("Plant-based diet means B12 depletes silently — supplementing is non-negotiable");
+  if (profile.exerciseFrequency === "sedentary")
+    out.push("20 min of daily movement would shift your longevity score more than any supplement");
+  if (profile.sleepHours !== undefined && profile.sleepHours < 6)
+    out.push("Under 6h sleep accelerates cognitive decline — your stack prioritizes this gap");
+
+  const sorted = (Object.entries(scores) as [keyof WellnessScores, number][]).sort((a, b) => b[1] - a[1]);
+  const [strongest] = sorted;
+  const weakest = sorted[sorted.length - 1];
+
+  if (out.length < 2)
+    out.push(`Strongest pillar: ${DIM_LABELS[strongest[0]]} (${strongest[1]}) — your plan reinforces this`);
+  if (out.length < 3)
+    out.push(`Biggest lever: ${DIM_LABELS[weakest[0]]} (${weakest[1]}) — targeted support in your stack`);
+
+  return out.slice(0, 3);
+}
+
+function WellnessRadarChart({ scores, progress }: { scores: WellnessScores; progress: number }) {
+  const size = 240;
+  const cx = size / 2;
+  const cy = size / 2;
+  const maxR = 78;
+  const labelR = 106;
+  const n = DIMENSIONS.length;
+
+  const angle = (i: number) => (i * 2 * Math.PI) / n - Math.PI / 2;
+
+  const axisPoint = (i: number, scale: number) => ({
+    x: cx + maxR * scale * Math.cos(angle(i)),
+    y: cy + maxR * scale * Math.sin(angle(i)),
+  });
+
+  const labelPoint = (i: number) => ({
+    x: cx + labelR * Math.cos(angle(i)),
+    y: cy + labelR * Math.sin(angle(i)),
+  });
+
+  const textAnchor = (i: number): "start" | "end" | "middle" => {
+    const cos = Math.cos(angle(i));
+    return cos > 0.3 ? "start" : cos < -0.3 ? "end" : "middle";
+  };
+
+  const dominantBaseline = (i: number): "hanging" | "auto" | "middle" => {
+    const sin = Math.sin(angle(i));
+    return sin > 0.3 ? "hanging" : sin < -0.3 ? "auto" : "middle";
+  };
+
+  const pts = DIMENSIONS.map((dim, i) => axisPoint(i, Math.max((scores[dim] / 100) * progress, 0.02)));
+  const dataPath = pts.map((p, i) => `${i === 0 ? "M" : "L"}${p.x.toFixed(2)},${p.y.toFixed(2)}`).join(" ") + " Z";
+  const gridPath = (level: number) =>
+    DIMENSIONS.map((_, i) => {
+      const p = axisPoint(i, level);
+      return `${i === 0 ? "M" : "L"}${p.x.toFixed(2)},${p.y.toFixed(2)}`;
+    }).join(" ") + " Z";
+
+  return (
+    <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size} className="overflow-visible">
+      {[0.25, 0.5, 0.75, 1.0].map((lvl, i) => (
+        <path key={i} d={gridPath(lvl)} fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth={1} />
+      ))}
+      {DIMENSIONS.map((_, i) => {
+        const outer = axisPoint(i, 1);
+        return (
+          <line key={i} x1={cx} y1={cy} x2={outer.x.toFixed(2)} y2={outer.y.toFixed(2)}
+            stroke="rgba(255,255,255,0.1)" strokeWidth={1} />
+        );
+      })}
+      <path d={dataPath} fill="rgba(255,179,38,0.15)" stroke="#FFB326" strokeWidth={2} strokeLinejoin="round" />
+      {pts.map((p, i) => (
+        <circle key={i} cx={p.x.toFixed(2)} cy={p.y.toFixed(2)} r={4} fill="#FFB326" />
+      ))}
+      {DIMENSIONS.map((dim, i) => {
+        const lp = labelPoint(i);
+        return (
+          <text key={dim} x={lp.x.toFixed(2)} y={lp.y.toFixed(2)}
+            textAnchor={textAnchor(i)} dominantBaseline={dominantBaseline(i)}
+            fontSize={8} letterSpacing="0.1em" fill="rgba(252,252,247,0.55)"
+            fontFamily="ABCMonumentGrotesk, Arial, sans-serif">
+            {DIM_LABELS[dim].toUpperCase()}
+          </text>
+        );
+      })}
+    </svg>
+  );
+}
+
+interface WellnessProfileCardProps {
+  profile: UserProfile;
+}
+
+export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
+  const [progress, setProgress] = useState(0);
+  const [copied, setCopied] = useState(false);
+
+  const scores = computeWellnessScores(profile);
+  const archetype = getArchetype(profile);
+  const insights = generateInsights(profile, scores);
+  const overall = Math.round(Object.values(scores).reduce((a, b) => a + b, 0) / DIMENSIONS.length);
+
+  useEffect(() => {
+    let start: number | null = null;
+    const raf = requestAnimationFrame(function step(ts) {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / 900, 1);
+      setProgress(1 - Math.pow(1 - p, 3));
+      if (p < 1) requestAnimationFrame(step);
+    });
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  const handleShare = async () => {
+    const bar = (n: number) => "█".repeat(Math.round(n / 10)) + "░".repeat(10 - Math.round(n / 10));
+    const text = [
+      archetype.name,
+      `"${archetype.tagline}"`,
+      "",
+      `Energy       ${bar(scores.energy)} ${scores.energy}`,
+      `Recovery     ${bar(scores.recovery)} ${scores.recovery}`,
+      `Resilience   ${bar(scores.resilience)} ${scores.resilience}`,
+      `Focus        ${bar(scores.focus)} ${scores.focus}`,
+      `Vitality     ${bar(scores.vitality)} ${scores.vitality}`,
+      `Longevity    ${bar(scores.longevity)} ${scores.longevity}`,
+      "",
+      "Get your plan → sproutlab.it",
+    ].join("\n");
+
+    if (typeof navigator !== "undefined" && navigator.share) {
+      try { await navigator.share({ title: archetype.name, text }); return; } catch { /* cancelled */ }
+    }
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2200);
+  };
+
+  const chips = [
+    `${profile.age}y`,
+    profile.diet,
+    profile.exerciseFrequency
+      ? ({ sedentary: "sedentary", light: "light activity", moderate: "active", intense: "athlete" })[profile.exerciseFrequency]
+      : null,
+    profile.sleepHours ? `${profile.sleepHours}h sleep` : null,
+  ].filter(Boolean) as string[];
+
+  return (
+    <div className="bg-[#2E1B12] overflow-hidden" style={{ borderTop: "2px solid #FFB326" }}>
+      {/* Top bar */}
+      <div className="border-b border-white/[0.07] px-8 py-4 flex items-center justify-between">
+        <p className="text-[10px] tracking-[0.22em] uppercase text-[#FFB326]/70">Sprout · Wellness Profile</p>
+        <p className="text-[10px] tracking-widest text-white/30">2026</p>
+      </div>
+
+      <div className="p-8 md:p-12">
+        {/* Header: archetype + radar */}
+        <div className="grid md:grid-cols-[1fr_auto] gap-10 items-center mb-10">
+          <div>
+            <p className="text-[10px] tracking-[0.2em] uppercase text-[#FFB326]/60 mb-3">Your archetype</p>
+            <h2 className="text-[30px] md:text-[38px] font-normal text-[#FFB326] leading-none mb-3 tracking-tight">
+              {archetype.name}
+            </h2>
+            <p className="text-sm text-white/65 mb-7 leading-relaxed">{archetype.tagline}</p>
+
+            <div className="flex flex-wrap gap-2">
+              {chips.map((chip) => (
+                <span key={chip} className="text-[10px] tracking-[0.12em] uppercase text-white/60 border border-white/20 px-3 py-1.5">
+                  {chip}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Radar + overall score */}
+          <div className="flex flex-col items-center gap-2">
+            <WellnessRadarChart scores={scores} progress={progress} />
+            <div className="text-center">
+              <p className="text-[46px] font-light text-white leading-none tabular-nums">
+                {Math.round(overall * progress)}
+              </p>
+              <p className="text-[9px] tracking-[0.24em] uppercase text-white/40 mt-1.5">Overall</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Score grid — 3 × 2 metric tiles */}
+        <div className="grid grid-cols-3 gap-px bg-white/[0.07] mb-10">
+          {DIMENSIONS.map((dim) => (
+            <div key={dim} className="bg-[#2E1B12] px-5 py-5">
+              <p className="text-[30px] font-light text-white tabular-nums leading-none mb-1.5">
+                {Math.round(scores[dim] * progress)}
+              </p>
+              <p className="text-[9px] tracking-[0.18em] uppercase text-white/45 mb-3">
+                {DIM_LABELS[dim]}
+              </p>
+              <div className="h-[2px] bg-white/10 overflow-hidden rounded-full">
+                <div
+                  className="h-full bg-[#FFB326] rounded-full"
+                  style={{
+                    width: `${scores[dim] * progress}%`,
+                    transition: "width 1s cubic-bezier(0.16, 1, 0.3, 1)",
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Insights */}
+        <div className="border-t border-white/[0.07] pt-8">
+          <p className="text-[9px] tracking-[0.22em] uppercase text-white/35 mb-5">Key signals from your profile</p>
+          <div className="space-y-4">
+            {insights.map((insight, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <span className="w-1 h-1 rounded-full bg-[#FFB326] flex-shrink-0 mt-[7px]" />
+                <p className="text-sm text-white/65 leading-relaxed">{insight}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="mt-8 flex items-center justify-between gap-4 flex-wrap">
+          <p className="text-[10px] tracking-[0.22em] uppercase text-white/25">sproutlab.it</p>
+          <button
+            onClick={handleShare}
+            className="text-[10px] tracking-[0.16em] uppercase border border-[#FFB326]/40 text-[#FFB326]/70 px-5 py-2.5 hover:border-[#FFB326] hover:text-[#FFB326] transition-colors"
+          >
+            {copied ? "Copied to clipboard ✓" : "Share your profile ↗"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

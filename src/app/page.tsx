@@ -32,7 +32,7 @@ export default function Home() {
             <span>→</span>
           </Link>
           <p className="mt-5 text-sm text-white/60">
-            Free · No account required · Takes 2 minutes
+            Free · No account required · Takes 3 minutes
           </p>
         </div>
       </section>
@@ -58,7 +58,7 @@ export default function Home() {
 
       <section className="py-16 px-6 border-t border-[#2E1B12]/10">
         <div className="max-w-2xl mx-auto">
-          <p className="text-xs tracking-widest uppercase text-[#9C8B78] mb-8">How it works</p>
+          <h2 className="text-4xl md:text-6xl font-normal text-[#2E1B12] mb-10 uppercase" style={{ letterSpacing: "-0.03em" }}>How it works</h2>
           <div className="space-y-0 divide-y divide-[#2E1B12]/10">
             <StepItem number={1} title="Tell us about yourself" description="Share your age, diet, and health goals." />
             <StepItem number={2} title="Get your personalized plan" description="Our algorithm matches your profile to evidence-based recommendations." />
@@ -67,7 +67,7 @@ export default function Home() {
           <div className="mt-10">
             <Link
               href="/intake"
-              className="inline-flex items-center justify-between gap-8 px-8 py-4 bg-[#2E1B12] text-white rounded-full font-medium hover:bg-[#2E1B12]/80 transition-colors"
+              className="inline-flex items-center justify-between gap-8 px-8 py-4 bg-[#FFB326] text-[#2E1B12] rounded-full font-medium hover:bg-[#e6a020] transition-colors"
             >
               <span>Start now</span>
               <span>→</span>
@@ -93,19 +93,19 @@ export default function Home() {
 function FeatureItem({ label, description }: { label: string; description: string }) {
   return (
     <div className="py-8 md:py-0 md:px-8 first:pl-0 last:pr-0">
-      <h3 className="text-sm font-medium text-[#2E1B12] mb-2">{label}</h3>
-      <p className="text-sm text-[#9C8B78] leading-relaxed">{description}</p>
+      <h3 className="text-lg font-medium text-[#2E1B12] mb-3">{label}</h3>
+      <p className="text-base text-[#9C8B78] leading-relaxed">{description}</p>
     </div>
   );
 }
 
 function StepItem({ number, title, description }: { number: number; title: string; description: string }) {
   return (
-    <div className="flex items-start gap-6 py-6">
-      <span className="text-xs text-[#9C8B78] w-4 flex-shrink-0 mt-0.5">{number}</span>
+    <div className="flex items-start gap-6 py-8">
+      <span className="text-sm text-[#9C8B78] w-5 flex-shrink-0 mt-1">{number}</span>
       <div>
-        <h3 className="font-medium text-[#2E1B12] mb-1">{title}</h3>
-        <p className="text-sm text-[#9C8B78]">{description}</p>
+        <h3 className="text-xl font-medium text-[#2E1B12] mb-2">{title}</h3>
+        <p className="text-base text-[#9C8B78] leading-relaxed">{description}</p>
       </div>
     </div>
   );
