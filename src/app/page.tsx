@@ -7,7 +7,7 @@ export default function Home() {
         className="flex-1 flex items-center justify-center px-6 py-32 relative min-h-[560px]"
         style={{
           backgroundImage: "url('/hero-bg.jpg')",
-          backgroundSize: "120%",
+          backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}

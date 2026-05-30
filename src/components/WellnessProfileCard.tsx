@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { toBlob } from "html-to-image";
 import { UserProfile } from "@/types";
 
 type WellnessScores = {
@@ -142,12 +143,11 @@ function generateInsights(profile: UserProfile, scores: WellnessScores): string[
   return out.slice(0, 3);
 }
 
-function WellnessRadarChart({ scores, progress }: { scores: WellnessScores; progress: number }) {
-  const size = 240;
+function WellnessRadarChart({ scores, progress, size = 240 }: { scores: WellnessScores; progress: number; size?: number }) {
   const cx = size / 2;
   const cy = size / 2;
-  const maxR = 78;
-  const labelR = 106;
+  const maxR = size * 0.325;
+  const labelR = size * 0.442;
   const n = DIMENSIONS.length;
 
   const angle = (i: number) => (i * 2 * Math.PI) / n - Math.PI / 2;
@@ -181,7 +181,7 @@ function WellnessRadarChart({ scores, progress }: { scores: WellnessScores; prog
     }).join(" ") + " Z";
 
   return (
-    <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size} className="overflow-visible">
+    <svg viewBox={`0 0 ${size} ${size}`} width="100%" height="100%" className="overflow-visible">
       {[0.25, 0.5, 0.75, 1.0].map((lvl, i) => (
         <path key={i} d={gridPath(lvl)} fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth={1} />
       ))}
@@ -217,7 +217,8 @@ interface WellnessProfileCardProps {
 
 export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
   const [progress, setProgress] = useState(0);
-  const [copied, setCopied] = useState(false);
+  const [shareState, setShareState] = useState<"idle" | "generating" | "done">("idle");
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const scores = computeWellnessScores(profile);
   const archetype = getArchetype(profile);
@@ -236,27 +237,32 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
   }, []);
 
   const handleShare = async () => {
-    const bar = (n: number) => "█".repeat(Math.round(n / 10)) + "░".repeat(10 - Math.round(n / 10));
-    const text = [
-      archetype.name,
-      `"${archetype.tagline}"`,
-      "",
-      `Energy       ${bar(scores.energy)} ${scores.energy}`,
-      `Recovery     ${bar(scores.recovery)} ${scores.recovery}`,
-      `Resilience   ${bar(scores.resilience)} ${scores.resilience}`,
-      `Focus        ${bar(scores.focus)} ${scores.focus}`,
-      `Vitality     ${bar(scores.vitality)} ${scores.vitality}`,
-      `Longevity    ${bar(scores.longevity)} ${scores.longevity}`,
-      "",
-      "Get your plan → sproutlab.it",
-    ].join("\n");
+    if (!cardRef.current || shareState === "generating") return;
+    setShareState("generating");
+    try {
+      const blob = await toBlob(cardRef.current, {
+        pixelRatio: 3,
+        backgroundColor: "#2E1B12",
+      });
+      if (!blob) throw new Error("capture failed");
 
-    if (typeof navigator !== "undefined" && navigator.share) {
-      try { await navigator.share({ title: archetype.name, text }); return; } catch { /* cancelled */ }
+      const file = new File([blob], "sprout-wellness-profile.png", { type: "image/png" });
+
+      if (typeof navigator !== "undefined" && navigator.canShare?.({ files: [file] })) {
+        await navigator.share({ files: [file], title: archetype.name });
+      } else {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "sprout-wellness-profile.png";
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+      setShareState("done");
+      setTimeout(() => setShareState("idle"), 2500);
+    } catch {
+      setShareState("idle");
     }
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2200);
   };
 
   const chips = [
@@ -269,26 +275,26 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
   ].filter(Boolean) as string[];
 
   return (
-    <div className="bg-[#2E1B12] overflow-hidden" style={{ borderTop: "2px solid #FFB326" }}>
+    <div ref={cardRef} className="bg-[#2E1B12] overflow-hidden" style={{ borderTop: "2px solid #FFB326" }}>
       {/* Top bar */}
-      <div className="border-b border-white/[0.07] px-8 py-4 flex items-center justify-between">
+      <div className="border-b border-white/[0.07] px-4 md:px-8 py-3 flex items-center justify-between">
         <p className="text-[10px] tracking-[0.22em] uppercase text-[#FFB326]/70">Sprout · Wellness Profile</p>
         <p className="text-[10px] tracking-widest text-white/30">2026</p>
       </div>
 
-      <div className="p-8 md:p-12">
-        {/* Header: archetype + radar */}
-        <div className="grid md:grid-cols-[1fr_auto] gap-10 items-center mb-10">
+      <div className="p-4 md:p-12">
+        {/* Header: archetype + radar — always side by side */}
+        <div className="grid grid-cols-[1fr_auto] gap-4 md:gap-10 items-center mb-4 md:mb-10">
           <div>
-            <p className="text-[10px] tracking-[0.2em] uppercase text-[#FFB326]/60 mb-3">Your archetype</p>
-            <h2 className="text-[30px] md:text-[38px] font-normal text-[#FFB326] leading-none mb-3 tracking-tight">
+            <p className="text-[9px] tracking-[0.2em] uppercase text-[#FFB326]/60 mb-1.5 md:mb-3">Your archetype</p>
+            <h2 className="text-lg md:text-[38px] font-normal text-[#FFB326] leading-tight mb-1.5 md:mb-3 tracking-tight">
               {archetype.name}
             </h2>
-            <p className="text-sm text-white/65 mb-7 leading-relaxed">{archetype.tagline}</p>
+            <p className="text-xs md:text-sm text-white/65 mb-3 md:mb-7 leading-relaxed">{archetype.tagline}</p>
 
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5">
               {chips.map((chip) => (
-                <span key={chip} className="text-[10px] tracking-[0.12em] uppercase text-white/60 border border-white/20 px-3 py-1.5">
+                <span key={chip} className="text-[9px] tracking-[0.1em] uppercase text-white/60 border border-white/20 px-2 py-1">
                   {chip}
                 </span>
               ))}
@@ -296,25 +302,27 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
           </div>
 
           {/* Radar + overall score */}
-          <div className="flex flex-col items-center gap-2">
-            <WellnessRadarChart scores={scores} progress={progress} />
+          <div className="flex flex-col items-center gap-1">
+            <div className="w-[130px] h-[130px] md:w-[240px] md:h-[240px]">
+              <WellnessRadarChart scores={scores} progress={progress} size={240} />
+            </div>
             <div className="text-center">
-              <p className="text-[46px] font-light text-white leading-none tabular-nums">
+              <p className="text-3xl md:text-[46px] font-light text-white leading-none tabular-nums">
                 {Math.round(overall * progress)}
               </p>
-              <p className="text-[9px] tracking-[0.24em] uppercase text-white/40 mt-1.5">Overall</p>
+              <p className="text-[8px] tracking-[0.24em] uppercase text-white/40 mt-1">Overall</p>
             </div>
           </div>
         </div>
 
         {/* Score grid — 3 × 2 metric tiles */}
-        <div className="grid grid-cols-3 gap-px bg-white/[0.07] mb-10">
+        <div className="grid grid-cols-3 gap-px bg-white/[0.07] mb-4 md:mb-10">
           {DIMENSIONS.map((dim) => (
-            <div key={dim} className="bg-[#2E1B12] px-5 py-5">
-              <p className="text-[30px] font-light text-white tabular-nums leading-none mb-1.5">
+            <div key={dim} className="bg-[#2E1B12] px-3 py-3 md:px-5 md:py-5">
+              <p className="text-xl md:text-[30px] font-light text-white tabular-nums leading-none mb-1">
                 {Math.round(scores[dim] * progress)}
               </p>
-              <p className="text-[9px] tracking-[0.18em] uppercase text-white/45 mb-3">
+              <p className="text-[8px] md:text-[9px] tracking-[0.18em] uppercase text-white/45 mb-2">
                 {DIM_LABELS[dim]}
               </p>
               <div className="h-[2px] bg-white/10 overflow-hidden rounded-full">
@@ -331,26 +339,27 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
         </div>
 
         {/* Insights */}
-        <div className="border-t border-white/[0.07] pt-8">
-          <p className="text-[9px] tracking-[0.22em] uppercase text-white/35 mb-5">Key signals from your profile</p>
-          <div className="space-y-4">
+        <div className="border-t border-white/[0.07] pt-4 md:pt-8">
+          <p className="text-[9px] tracking-[0.22em] uppercase text-white/35 mb-3 md:mb-5">Key signals</p>
+          <div className="space-y-2 md:space-y-4">
             {insights.map((insight, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <span className="w-1 h-1 rounded-full bg-[#FFB326] flex-shrink-0 mt-[7px]" />
-                <p className="text-sm text-white/65 leading-relaxed">{insight}</p>
+              <div key={i} className="flex items-start gap-2 md:gap-3">
+                <span className="w-1 h-1 rounded-full bg-[#FFB326] flex-shrink-0 mt-[6px]" />
+                <p className="text-xs md:text-sm text-white/65 leading-relaxed">{insight}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Footer */}
-        <div className="mt-8 flex items-center justify-between gap-4 flex-wrap">
+        <div className="mt-4 md:mt-8 flex items-center justify-between gap-4 flex-wrap">
           <p className="text-[10px] tracking-[0.22em] uppercase text-white/25">sproutlab.it</p>
           <button
             onClick={handleShare}
-            className="text-[10px] tracking-[0.16em] uppercase border border-[#FFB326]/40 text-[#FFB326]/70 px-5 py-2.5 hover:border-[#FFB326] hover:text-[#FFB326] transition-colors"
+            disabled={shareState === "generating"}
+            className="text-[10px] tracking-[0.16em] uppercase border border-[#FFB326]/40 text-[#FFB326]/70 px-4 py-2 md:px-5 md:py-2.5 hover:border-[#FFB326] hover:text-[#FFB326] transition-colors disabled:opacity-50"
           >
-            {copied ? "Copied to clipboard ✓" : "Share your profile ↗"}
+            {shareState === "generating" ? "Generating…" : shareState === "done" ? "Saved ✓" : "Share your profile ↗"}
           </button>
         </div>
       </div>
