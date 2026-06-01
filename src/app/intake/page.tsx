@@ -214,9 +214,6 @@ export default function IntakePage() {
         newErrors.push("Please select your diet type");
       }
     } else if (currentStep === 3) {
-      if (formData.digestiveIssues.length === 0) {
-        newErrors.push("Please select at least one option");
-      }
       if (!formData.caffeineIntake) {
         newErrors.push("Please select your caffeine intake level");
       }
@@ -248,10 +245,6 @@ export default function IntakePage() {
     } else if (currentStep === 9) {
       if (!formData.skinType) {
         newErrors.push("Please select your skin type");
-      }
-    } else if (currentStep === 10) {
-      if (formData.medicalConditions.length === 0) {
-        newErrors.push("Please select at least one option");
       }
     }
 
@@ -288,7 +281,7 @@ export default function IntakePage() {
         sleepHours: parseInt(formData.sleepHours),
         sleepQuality: formData.sleepQuality,
         stressLevel: formData.stressLevel,
-        digestiveIssues: formData.digestiveIssues,
+        digestiveIssues: formData.digestiveIssues.length > 0 ? formData.digestiveIssues : ["none"],
         caffeineIntake: formData.caffeineIntake,
         sunExposure: formData.sunExposure,
         skinType: formData.skinType || undefined,
@@ -296,7 +289,7 @@ export default function IntakePage() {
         jobStress: formData.jobStress,
         medications: formData.medications.trim() || "None",
         allergies: formData.allergies,
-        medicalConditions: formData.medicalConditions,
+        medicalConditions: formData.medicalConditions.length > 0 ? formData.medicalConditions : ["none"],
       };
       sessionStorage.setItem("intakeProfile", JSON.stringify(profileData));
       router.push("/results");

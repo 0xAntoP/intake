@@ -60,14 +60,14 @@ export default function Home() {
       </section>
 
       <section className="py-16 px-6 border-t border-[#2E1B12]/10">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-4xl md:text-6xl font-normal text-[#2E1B12] mb-10 uppercase" style={{ letterSpacing: "-0.03em" }}>How it works</h2>
-          <div className="space-y-0 divide-y divide-[#2E1B12]/10">
+          <div className="space-y-0 divide-y divide-[#2E1B12]/10 text-left">
             <StepItem number={1} title="Tell us about yourself" description="Share your age, diet, and health goals." />
             <StepItem number={2} title="Get your personalized plan" description="Our algorithm matches your profile to evidence-based recommendations." />
             <StepItem number={3} title="Follow your schedule" description="See your daily supplement schedule with timing, dosage, and interaction guidance." />
           </div>
-          <div className="mt-10">
+          <div className="mt-10 flex justify-center">
             <Link
               href="/intake"
               className="inline-flex items-center justify-between gap-8 px-8 py-4 bg-[#FFB326] text-[#2E1B12] rounded-full font-medium hover:bg-[#e6a020] transition-colors"

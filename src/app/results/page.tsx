@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ScheduleView, WellnessProfileCard } from "@/components";
 import { generateRecommendations, groupBySchedule } from "@/lib/recommendation-engine";
 import { UserProfile, ScheduleGroup, SupplementRecommendation } from "@/types";
@@ -33,6 +34,7 @@ const SPROUTLAB_PRODUCTS = [
     id: "mycofuel",
     name: "Mycofuel",
     tagline: "Energy, endurance & adaptogens",
+    image: "/mycofuel.jpg",
     url: "https://sproutlab.it/shop/mycofuel/",
     matchSlugs: ["cordyceps", "ashwagandha", "reishi", "maca", "lions-mane", "rhodiola", "magnesium", "vitamin-b6", "zinc", "turmeric"],
     ingredientLabels: {
@@ -52,6 +54,7 @@ const SPROUTLAB_PRODUCTS = [
     id: "mycoderm",
     name: "Mycoderm",
     tagline: "Skin health, cellular protection & glow",
+    image: "/mycoderm.jpg",
     url: "https://sproutlab.it/shop/mycoderm/",
     matchSlugs: ["tremella", "cordyceps", "reishi", "lions-mane", "astaxanthin", "magnesium", "zinc", "vitamin-b6", "turmeric"],
     ingredientLabels: {
@@ -254,8 +257,17 @@ export default function ResultsPage() {
 
             <div className={`grid gap-px ${matchedProducts.length > 1 ? "md:grid-cols-2" : ""}`}>
               {matchedProducts.map((product) => (
-                <div key={product.id} className="bg-[#FCFCF7]/5 p-6 flex flex-col gap-5">
-                  <div className="flex items-start justify-between gap-3">
+                <div key={product.id} className="bg-[#FCFCF7]/5 flex flex-col gap-5">
+                  <div className="relative w-full aspect-[3/2] overflow-hidden">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover object-center"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                  <div className="px-6 pb-0 flex items-start justify-between gap-3">
                     <div>
                       <p className="text-lg font-medium text-[#FCFCF7] leading-snug">{product.name}</p>
                       <p className="text-xs text-[#FCFCF7]/50 mt-0.5">{product.tagline}</p>
@@ -265,7 +277,7 @@ export default function ResultsPage() {
                     </span>
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="px-6 flex flex-wrap gap-2">
                     {product.matched.map((slug) => (
                       <span
                         key={slug}
@@ -276,15 +288,17 @@ export default function ResultsPage() {
                     ))}
                   </div>
 
-                  <a
-                    href={product.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-auto inline-flex items-center justify-between border border-[#FCFCF7]/20 px-5 py-3 text-sm text-[#FCFCF7] hover:border-[#FFB326] hover:text-[#FFB326] transition-colors"
-                  >
-                    <span>Shop {product.name}</span>
-                    <span>→</span>
-                  </a>
+                  <div className="px-6 pb-6 mt-auto">
+                    <a
+                      href={product.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-full items-center justify-between border border-[#FCFCF7]/20 px-5 py-3 text-sm text-[#FCFCF7] hover:border-[#FFB326] hover:text-[#FFB326] transition-colors"
+                    >
+                      <span>Shop {product.name}</span>
+                      <span>→</span>
+                    </a>
+                  </div>
                 </div>
               ))}
             </div>
