@@ -221,6 +221,8 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
   const [bgDataUrl, setBgDataUrl] = useState<string>("/wellness-bg.jpg");
   const cardRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
+  const bgImgRef = useRef<HTMLImageElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   const scores = computeWellnessScores(profile);
   const archetype = getArchetype(profile);
@@ -254,34 +256,64 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
     if (!cardRef.current || shareState === "generating") return;
     setShareState("generating");
     try {
-      // Hide footer (button) so it doesn't appear in the capture
+      // Hide elements that html-to-image struggles with — we'll draw them manually on canvas
       if (footerRef.current) footerRef.current.style.display = "none";
+      if (bgImgRef.current) bgImgRef.current.style.visibility = "hidden";
+      if (overlayRef.current) overlayRef.current.style.visibility = "hidden";
 
-      const cardBlob = await toBlob(cardRef.current, {
-        pixelRatio: 2,
-      });
+      const cardBlob = await toBlob(cardRef.current, { pixelRatio: 2 });
 
       if (footerRef.current) footerRef.current.style.display = "";
+      if (bgImgRef.current) bgImgRef.current.style.visibility = "";
+      if (overlayRef.current) overlayRef.current.style.visibility = "";
       if (!cardBlob) throw new Error("capture failed");
 
-      // Place card on a 1080×1920 (9:16) canvas for Instagram Stories
-      const img = new Image();
+      // Load the card capture
+      const cardImg = new Image();
       const cardUrl = URL.createObjectURL(cardBlob);
-      await new Promise<void>((resolve) => { img.onload = () => resolve(); img.src = cardUrl; });
+      await new Promise<void>((res) => { cardImg.onload = () => res(); cardImg.src = cardUrl; });
+
+      // Load the background image directly (already a base64 data URL)
+      const bgImg = new Image();
+      await new Promise<void>((res, rej) => {
+        bgImg.onload = () => res();
+        bgImg.onerror = rej;
+        bgImg.src = bgDataUrl;
+      });
 
       const W = 1080, H = 1920;
       const canvas = document.createElement("canvas");
       canvas.width = W;
       canvas.height = H;
       const ctx = canvas.getContext("2d")!;
+
+      // Base fill
       ctx.fillStyle = "#14060a";
       ctx.fillRect(0, 0, W, H);
 
+      // Draw background image with cover-crop
+      const bgRatio = bgImg.width / bgImg.height;
+      const canvasRatio = W / H;
+      let sx = 0, sy = 0, sw = bgImg.width, sh = bgImg.height;
+      if (bgRatio > canvasRatio) {
+        sw = bgImg.height * canvasRatio;
+        sx = (bgImg.width - sw) / 2;
+      } else {
+        sh = bgImg.width / canvasRatio;
+        sy = (bgImg.height - sh) / 2;
+      }
+      ctx.drawImage(bgImg, sx, sy, sw, sh, 0, 0, W, H);
+
+      // Dark overlay
+      ctx.fillStyle = "rgba(20,12,6,0.82)";
+      ctx.fillRect(0, 0, W, H);
+
+      // Composite card content centered
       const padding = 60;
-      const scale = (W - padding * 2) / img.width;
-      const dw = img.width * scale;
-      const dh = img.height * scale;
-      ctx.drawImage(img, (W - dw) / 2, (H - dh) / 2, dw, dh);
+      const scale = (W - padding * 2) / cardImg.width;
+      const dw = cardImg.width * scale;
+      const dh = cardImg.height * scale;
+      ctx.drawImage(cardImg, (W - dw) / 2, (H - dh) / 2, dw, dh);
       URL.revokeObjectURL(cardUrl);
 
       const storyBlob = await new Promise<Blob>((resolve, reject) =>
@@ -289,7 +321,6 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
       );
 
       const file = new File([storyBlob], "sprout-wellness-profile.png", { type: "image/png" });
-
       if (typeof navigator !== "undefined" && navigator.canShare?.({ files: [file] })) {
         await navigator.share({ files: [file], title: archetype.name });
       } else {
@@ -304,6 +335,8 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
       setTimeout(() => setShareState("idle"), 2500);
     } catch {
       if (footerRef.current) footerRef.current.style.display = "";
+      if (bgImgRef.current) bgImgRef.current.style.visibility = "";
+      if (overlayRef.current) overlayRef.current.style.visibility = "";
       setShareState("idle");
     }
   };
@@ -321,13 +354,25 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
     <div
       ref={cardRef}
       className="overflow-hidden relative"
-      style={{
-        borderTop: "2px solid #FFB326",
-        backgroundImage: `linear-gradient(rgba(20,12,6,0.82), rgba(20,12,6,0.82)), url('${bgDataUrl}')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      style={{ borderTop: "2px solid #FFB326" }}
     >
+      {/* Background image */}
+      <img
+        ref={bgImgRef}
+        src={bgDataUrl}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
+        style={{ zIndex: 0 }}
+      />
+      {/* Dark overlay */}
+      <div
+        ref={overlayRef}
+        className="absolute inset-0 pointer-events-none"
+        style={{ backgroundColor: "rgba(20,12,6,0.82)", zIndex: 1 }}
+      />
+      {/* Content */}
+      <div style={{ position: "relative", zIndex: 2 }}>
       {/* Top bar */}
       <div className="border-b border-white/[0.08] px-4 md:px-8 py-3 flex items-center justify-between">
         <p className="text-[10px] tracking-[0.22em] uppercase text-[#FFB326]/80">Sprout · Wellness Profile</p>
@@ -390,19 +435,6 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
           ))}
         </div>
 
-        {/* Insights */}
-        <div className="border-t border-white/[0.07] pt-4 md:pt-8">
-          <p className="text-[9px] tracking-[0.22em] uppercase text-white/55 mb-3 md:mb-5">Key signals</p>
-          <div className="space-y-2 md:space-y-4">
-            {insights.map((insight, i) => (
-              <div key={i} className="flex items-start gap-2 md:gap-3">
-                <span className="w-1 h-1 rounded-full bg-[#FFB326] flex-shrink-0 mt-[6px]" />
-                <p className="text-xs md:text-sm text-white/85 leading-relaxed">{insight}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Footer */}
         <div ref={footerRef} className="mt-4 md:mt-8 flex items-center justify-between gap-4 flex-wrap">
           <p className="text-[10px] tracking-[0.22em] uppercase text-white/40">sproutlab.it</p>
@@ -415,6 +447,7 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
           </button>
         </div>
       </div>
+      </div> {/* end content wrapper */}
     </div>
   );
 }

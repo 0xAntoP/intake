@@ -218,26 +218,19 @@ export default function ResultsPage() {
           </div>
         </div>
 
-        {/* Wellness Profile Card */}
-        {profile && (
-          <div className="mt-4">
-            <WellnessProfileCard profile={profile} />
-          </div>
-        )}
+        {/* Daily Schedule */}
+        <div className="bg-white border border-[#2E1B12]/10 p-8 md:p-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#2E1B12] mb-8">Daily Schedule</h2>
+          <ScheduleView schedule={schedule} />
+        </div>
 
         {/* Disclaimer */}
-        <div className="bg-white border border-[#2E1B12]/10 px-6 py-4 mb-4 flex items-start gap-3 mt-4">
+        <div className="bg-white border border-[#2E1B12]/10 px-6 py-4 flex items-start gap-3 mt-4">
           <span className="w-1.5 h-1.5 rounded-full bg-[#FFB326] flex-shrink-0 mt-1.5" />
           <p className="text-xs text-[#9C8B78] leading-relaxed">
             <strong className="text-[#2E1B12] font-medium">For educational purposes only.</strong>{" "}
             This plan does not constitute medical advice. Consult a physician before changing your supplement regimen, especially if you take medications or have health conditions.
           </p>
-        </div>
-
-        {/* Daily Schedule */}
-        <div className="bg-white border border-[#2E1B12]/10 p-8 md:p-12">
-          <p className="text-xs tracking-widest uppercase text-[#9C8B78] mb-8">Daily Schedule</p>
-          <ScheduleView schedule={schedule} />
         </div>
 
         {/* Sprout Lab product recommendations */}
@@ -312,12 +305,8 @@ export default function ResultsPage() {
         {/* Amazon product suggestions */}
         {amazonSuggestions.length > 0 && (
           <div className="bg-white border border-[#2E1B12]/10 p-8 md:p-12 mt-4">
-            <div className="flex items-baseline justify-between gap-4 mb-6">
-              <div>
-                <p className="text-xs tracking-widest uppercase text-[#9C8B78] mb-1">Where to buy</p>
-                <p className="text-xl font-normal text-[#2E1B12]">Other recommended supplements</p>
-              </div>
-              <span className="text-xs text-[#9C8B78] flex-shrink-0">via Amazon</span>
+            <div className="mb-6">
+              <p className="text-2xl md:text-3xl font-normal text-[#2E1B12]">Other supplements brands</p>
             </div>
 
             <div className={`grid gap-px bg-[#2E1B12]/10 ${amazonSuggestions.length === 1 ? "grid-cols-1" : amazonSuggestions.length === 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3"}`}>
@@ -347,6 +336,13 @@ export default function ResultsPage() {
             <p className="text-xs text-[#9C8B78]/50 mt-4">
               Affiliate-free links. We earn nothing from these recommendations.
             </p>
+          </div>
+        )}
+
+        {/* Wellness Profile Card */}
+        {profile && (
+          <div className="mt-4">
+            <WellnessProfileCard profile={profile} />
           </div>
         )}
 
