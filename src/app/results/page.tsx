@@ -150,22 +150,6 @@ export default function ResultsPage() {
             Your Supplement<br />Plan is Ready
           </h1>
 
-          {profile && (
-            <p className="text-sm text-[#9C8B78] mb-5">
-              {profile.age} years old · {profile.diet.charAt(0).toUpperCase() + profile.diet.slice(1)} diet
-              {profile.sex && ` · ${profile.sex.charAt(0).toUpperCase() + profile.sex.slice(1)}`}
-            </p>
-          )}
-
-          {profile && profile.goals.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {profile.goals.map((goal) => (
-                <span key={goal} className="text-xs border border-[#2E1B12]/20 px-3 py-1 text-[#2E1B12]">
-                  {goalLabels[goal]}
-                </span>
-              ))}
-            </div>
-          )}
 
           {/* Email CTA */}
           <div className="mt-8 pt-8 border-t border-[#2E1B12]/10">
@@ -222,15 +206,6 @@ export default function ResultsPage() {
         <div className="bg-white border border-[#2E1B12]/10 p-8 md:p-12">
           <h2 className="text-2xl md:text-3xl font-bold text-[#2E1B12] mb-8">Daily Schedule</h2>
           <ScheduleView schedule={schedule} />
-        </div>
-
-        {/* Disclaimer */}
-        <div className="bg-white border border-[#2E1B12]/10 px-6 py-4 flex items-start gap-3 mt-4">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#FFB326] flex-shrink-0 mt-1.5" />
-          <p className="text-xs text-[#9C8B78] leading-relaxed">
-            <strong className="text-[#2E1B12] font-medium">For educational purposes only.</strong>{" "}
-            This plan does not constitute medical advice. Consult a physician before changing your supplement regimen, especially if you take medications or have health conditions.
-          </p>
         </div>
 
         {/* Sprout Lab product recommendations */}
@@ -304,12 +279,12 @@ export default function ResultsPage() {
 
         {/* Amazon product suggestions */}
         {amazonSuggestions.length > 0 && (
-          <div className="bg-white border border-[#2E1B12]/10 p-8 md:p-12 mt-4">
+          <div className="bg-[#2E1B12] mt-4 p-8 md:p-12">
             <div className="mb-6">
-              <p className="text-2xl md:text-3xl font-normal text-[#2E1B12]">Other supplements brands</p>
+              <p className="text-2xl md:text-3xl font-normal text-[#FCFCF7]">Other supplements brands</p>
             </div>
 
-            <div className={`grid gap-px bg-[#2E1B12]/10 ${amazonSuggestions.length === 1 ? "grid-cols-1" : amazonSuggestions.length === 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3"}`}>
+            <div className={`grid gap-px bg-[#FCFCF7]/10 ${amazonSuggestions.length === 1 ? "grid-cols-1" : amazonSuggestions.length === 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3"}`}>
               {amazonSuggestions.map((rec) => {
                 const product = AMAZON_PRODUCTS[rec.slug];
                 return (
@@ -318,22 +293,22 @@ export default function ResultsPage() {
                     href={product.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-white p-5 flex flex-col gap-2 group hover:bg-[#FCFCF7] transition-colors"
+                    className="bg-[#FCFCF7]/5 p-5 flex flex-col gap-2 group hover:bg-[#FCFCF7]/10 transition-colors"
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <p className="text-sm font-medium text-[#2E1B12] leading-snug group-hover:text-[#FFB326] transition-colors">
+                      <p className="text-sm font-medium text-[#FCFCF7] leading-snug group-hover:text-[#FFB326] transition-colors">
                         {rec.name}
                       </p>
-                      <span className="text-[#9C8B78] text-xs flex-shrink-0 mt-0.5 group-hover:text-[#FFB326] transition-colors">↗</span>
+                      <span className="text-[#FCFCF7]/40 text-xs flex-shrink-0 mt-0.5 group-hover:text-[#FFB326] transition-colors">↗</span>
                     </div>
-                    <p className="text-xs text-[#9C8B78]">{product.brand}</p>
-                    <p className="text-xs text-[#9C8B78]/70 leading-relaxed">{product.shortDesc}</p>
+                    <p className="text-xs text-[#FCFCF7]/60">{product.brand}</p>
+                    <p className="text-xs text-[#FCFCF7]/40 leading-relaxed">{product.shortDesc}</p>
                   </a>
                 );
               })}
             </div>
 
-            <p className="text-xs text-[#9C8B78]/50 mt-4">
+            <p className="text-xs text-[#FCFCF7]/30 mt-4">
               Affiliate-free links. We earn nothing from these recommendations.
             </p>
           </div>

@@ -320,7 +320,7 @@ export default function IntakePage() {
       if (prev.exerciseIntensity.includes(intensity)) {
         return { ...prev, exerciseIntensity: prev.exerciseIntensity.filter((i) => i !== intensity) };
       }
-      if (prev.exerciseIntensity.length >= 2) return prev;
+      if (prev.exerciseIntensity.length >= 3) return prev;
       return { ...prev, exerciseIntensity: [...prev.exerciseIntensity, intensity] };
     });
   };
@@ -633,12 +633,12 @@ export default function IntakePage() {
                   <label className="text-sm font-medium text-[#2E1B12]">
                     What type of training do you typically do?
                   </label>
-                  <span className="text-xs text-[#9C8B78]">{formData.exerciseIntensity.length}/2</span>
+                  <span className="text-xs text-[#9C8B78]">{formData.exerciseIntensity.length}/3</span>
                 </div>
                 <div className="space-y-2">
                   {EXERCISE_INTENSITIES.map((intensity) => {
                     const selected = formData.exerciseIntensity.includes(intensity.value);
-                    const maxed = formData.exerciseIntensity.length >= 2 && !selected;
+                    const maxed = formData.exerciseIntensity.length >= 3 && !selected;
                     return (
                       <button
                         key={intensity.value}

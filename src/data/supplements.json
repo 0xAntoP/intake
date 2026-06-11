@@ -2013,6 +2013,84 @@
           "year": 1987
         }
       ]
+    },
+    {
+      "slug": "potassium",
+      "name": "Potassium",
+      "description": "Essential electrolyte mineral that regulates fluid balance, nerve signals, and muscle contractions. Supports heart rhythm and blood pressure.",
+      "goals": ["energy", "muscle"],
+      "evidenceLevel": "high",
+      "dosageRange": "99–400mg daily (dietary intake preferred)",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": true,
+        "withFat": false
+      },
+      "evidenceSummary": "Well-established role in cardiovascular health and muscle function. High dietary potassium is consistently associated with lower blood pressure and reduced stroke risk.",
+      "cautionNote": "High-dose potassium supplements can be harmful for people with kidney disease or those on ACE inhibitors/ARBs. Consult a clinician before supplementing beyond 99mg.",
+      "pairWith": [
+        {
+          "item": "Magnesium",
+          "reason": "Magnesium helps maintain intracellular potassium levels; co-deficiency is common",
+          "evidenceLevel": "moderate",
+          "citationIds": []
+        }
+      ],
+      "separateFrom": [],
+      "avoidWith": [],
+      "citations": [
+        {
+          "id": "potassium-1",
+          "title": "Potassium intake and cardiovascular risk factors in a healthy population",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/21371638/",
+          "year": 2011
+        },
+        {
+          "id": "potassium-2",
+          "title": "Dietary potassium and risk of incident stroke",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/26039521/",
+          "year": 2015
+        }
+      ]
+    },
+    {
+      "slug": "electrolytes",
+      "name": "Electrolytes",
+      "description": "Blend of minerals — typically sodium, potassium, magnesium, and chloride — that regulate hydration, nerve function, and muscle performance.",
+      "goals": ["energy", "muscle"],
+      "evidenceLevel": "high",
+      "dosageRange": "1 serving daily, or as needed around exercise",
+      "defaultTiming": {
+        "timeOfDay": "morning",
+        "withFood": false,
+        "withFat": false
+      },
+      "evidenceSummary": "Strong evidence for preventing and correcting exercise-induced electrolyte losses. Particularly important for endurance athletes, those in hot climates, or anyone following a low-carb or fasting protocol.",
+      "cautionNote": "Choose low-sugar formulations. Those with kidney disease or hypertension should monitor sodium intake carefully.",
+      "pairWith": [
+        {
+          "item": "Magnesium",
+          "reason": "Magnesium is often under-represented in electrolyte blends; combining ensures complete mineral coverage",
+          "evidenceLevel": "moderate",
+          "citationIds": []
+        }
+      ],
+      "separateFrom": [],
+      "avoidWith": [],
+      "citations": [
+        {
+          "id": "electrolytes-1",
+          "title": "Exercise and fluid replacement: ACSM position stand",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/17277604/",
+          "year": 2007
+        },
+        {
+          "id": "electrolytes-2",
+          "title": "Sodium, potassium, and health",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23633321/",
+          "year": 2013
+        }
+      ]
     }
   ]
 }
