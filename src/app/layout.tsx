@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { Disclaimer, IframeResizer } from "@/components";
+import { headers } from "next/headers";
+import { Disclaimer, IframeResizer, LocaleProvider } from "@/components";
+import type { Locale } from "@/lib/i18n";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,19 +18,22 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headerStore = await headers();
+  const locale = (headerStore.get("x-locale") ?? "en") as Locale;
+
   return (
-    <html lang="en">
-      <body
-        className="antialiased min-h-screen flex flex-col"
-      >
+    <html lang={locale}>
+      <body className="antialiased min-h-screen flex flex-col">
         <IframeResizer />
-        <main className="flex-1">{children}</main>
-        <Disclaimer variant="footer" />
+        <LocaleProvider locale={locale}>
+          <main className="flex-1">{children}</main>
+          <Disclaimer variant="footer" />
+        </LocaleProvider>
       </body>
     </html>
   );

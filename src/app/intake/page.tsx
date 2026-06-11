@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ProgressIndicator } from "@/components";
+import { ProgressIndicator, useLocale } from "@/components";
 import {
   IntakeFormData,
   Sex,
@@ -12,7 +12,6 @@ import {
   ExerciseFrequency,
   ExerciseIntensity,
   SleepQuality,
-  StressLevel,
   DigestiveIssue,
   CaffeineIntake,
   SunExposure,
@@ -22,156 +21,39 @@ import {
   MedicalCondition,
 } from "@/types";
 import { getAllSupplements } from "@/lib/recommendation-engine";
+import { getT } from "@/lib/i18n";
 
-const STEP_LABELS = [
-  "Basics",
-  "Diet",
-  "Digestion & Caffeine",
-  "Goals",
-  "Current Supplements",
-  "Exercise",
-  "Lifestyle",
-  "Sleep & Stress",
-  "Skin",
-  "Health & Safety",
-];
 const TOTAL_STEPS = 10;
 
-const GOALS: { value: Goal; label: string; description: string }[] = [
-  { value: "energy", label: "Energy", description: "Combat fatigue and boost vitality" },
-  { value: "sleep", label: "Sleep", description: "Improve sleep quality and duration" },
-  { value: "focus", label: "Focus", description: "Enhance mental clarity and concentration" },
-  { value: "immunity", label: "Immunity", description: "Support immune system function" },
-  { value: "stress", label: "Stress", description: "Manage stress and promote calm" },
-  { value: "longevity", label: "Longevity", description: "Support healthy aging" },
-  { value: "muscle", label: "Muscle & Recovery", description: "Support muscle growth and recovery" },
-  { value: "skin", label: "Skin & Glow", description: "Support skin health, hair and nails" },
+const GOAL_VALUES: Goal[] = ["energy", "sleep", "focus", "immunity", "stress", "longevity", "muscle", "skin"];
+const DIET_VALUES: Diet[] = ["omnivore", "carnivore", "pescatarian", "vegetarian", "vegan", "keto", "paleo"];
+const SEX_VALUES: Sex[] = ["male", "female", "other"];
+const EXERCISE_FREQUENCY_VALUES: ExerciseFrequency[] = ["sedentary", "light", "moderate", "intense"];
+const EXERCISE_INTENSITY_VALUES: ExerciseIntensity[] = ["cardio", "strength", "mobility"];
+const SLEEP_QUALITY_VALUES: SleepQuality[] = ["poor", "fair", "good", "excellent"];
+const DIGESTIVE_ISSUE_VALUES: DigestiveIssue[] = [
+  "bloating", "constipation", "diarrhea", "nausea", "stomach-cramps",
+  "gerd", "ibs", "ibd", "lactose-intolerance", "gluten-sensitivity", "poor-absorption", "none",
 ];
-
-const DIETS: { value: Diet; label: string; description: string }[] = [
-  { value: "omnivore", label: "Omnivore", description: "Eat both animal and plant-based foods" },
-  { value: "carnivore", label: "Carnivore", description: "Primarily or exclusively animal-based foods" },
-  { value: "pescatarian", label: "Pescatarian", description: "Plant-based with fish and seafood" },
-  { value: "vegetarian", label: "Vegetarian", description: "Plant-based, no meat or fish" },
-  { value: "vegan", label: "Vegan", description: "Entirely plant-based, no animal products" },
-  { value: "keto", label: "Ketogenic", description: "Very low carb, high fat diet" },
-  { value: "paleo", label: "Paleo", description: "Whole foods, no grains or processed foods" },
+const CAFFEINE_INTAKE_VALUES: CaffeineIntake[] = ["low", "moderate", "high"];
+const SUN_EXPOSURE_VALUES: SunExposure[] = ["low", "moderate", "high"];
+const JOB_TYPE_VALUES: JobType[] = ["desk", "physical", "hybrid"];
+const JOB_STRESS_VALUES: JobStress[] = ["low", "moderate", "high"];
+const MEDICAL_CONDITION_VALUES: MedicalCondition[] = [
+  "hypertension", "diabetes", "heart-disease", "thyroid", "autoimmune",
+  "osteoporosis", "anxiety-depression", "anaemia", "pcos", "insomnia",
+  "kidney-disease", "ibd-crohns", "pregnancy", "none",
 ];
-
-const SEXES: { value: Sex; label: string }[] = [
-  { value: "male", label: "Male" },
-  { value: "female", label: "Female" },
-  { value: "other", label: "Other / Prefer not to say" },
-];
-
-const EXERCISE_FREQUENCIES: { value: ExerciseFrequency; label: string }[] = [
-  { value: "sedentary", label: "Sedentary (little to no exercise)" },
-  { value: "light", label: "Light (1-2 times per week)" },
-  { value: "moderate", label: "Moderate (3-4 times per week)" },
-  { value: "intense", label: "Intense (5-6 times per week)" },
-];
-
-const EXERCISE_INTENSITIES: { value: ExerciseIntensity; label: string; description: string }[] = [
-  { value: "cardio", label: "Cardio", description: "Running, cycling, swimming, HIIT and endurance training" },
-  { value: "strength", label: "Weights & Strength Training", description: "Weightlifting, resistance training, CrossFit and bodybuilding" },
-  { value: "mobility", label: "Flow & Mobility", description: "Yoga, Pilates, stretching, martial arts and breathwork" },
-];
-
-const SLEEP_QUALITIES: { value: SleepQuality; label: string }[] = [
-  { value: "poor", label: "Poor (frequent wakeups, not rested)" },
-  { value: "fair", label: "Fair (occasional issues)" },
-  { value: "good", label: "Good (mostly restful)" },
-  { value: "excellent", label: "Excellent (consistently restful)" },
-];
-
-const STRESS_LEVELS: { value: StressLevel; label: string }[] = [
-  { value: "low", label: "Low (generally calm)" },
-  { value: "moderate", label: "Moderate (occasional stress)" },
-  { value: "high", label: "High (frequent or persistent stress)" },
-];
-
-const DIGESTIVE_ISSUES: { value: DigestiveIssue; label: string }[] = [
-  { value: "bloating", label: "Bloating" },
-  { value: "constipation", label: "Constipation" },
-  { value: "diarrhea", label: "Diarrhea" },
-  { value: "nausea", label: "Nausea" },
-  { value: "stomach-cramps", label: "Stomach cramps / pain" },
-  { value: "gerd", label: "GERD (Acid reflux)" },
-  { value: "ibs", label: "IBS (Irritable Bowel Syndrome)" },
-  { value: "ibd", label: "IBD (Crohn's / Colitis)" },
-  { value: "lactose-intolerance", label: "Lactose intolerance" },
-  { value: "gluten-sensitivity", label: "Gluten sensitivity" },
-  { value: "poor-absorption", label: "Poor nutrient absorption" },
-  { value: "none", label: "None of the above" },
-];
-
-const CAFFEINE_INTAKES: { value: CaffeineIntake; label: string }[] = [
-  { value: "low", label: "Low (0-100mg/day, little to no coffee/tea)" },
-  { value: "moderate", label: "Moderate (100-300mg/day, 1-2 cups)" },
-  { value: "high", label: "High (300mg+/day, 3+ cups)" },
-];
-
-const SUN_EXPOSURES: { value: SunExposure; label: string }[] = [
-  { value: "low", label: "Low (mostly indoors or cloudy climate)" },
-  { value: "moderate", label: "Moderate (some outdoor time)" },
-  { value: "high", label: "High (regular outdoor time with sun exposure)" },
-];
-
-const JOB_TYPES: { value: JobType; label: string }[] = [
-  { value: "desk", label: "Desk job (mostly sitting)" },
-  { value: "physical", label: "Physical job (active/on feet)" },
-  { value: "hybrid", label: "Hybrid (mix of sitting and activity)" },
-];
-
-const JOB_STRESSES: { value: JobStress; label: string }[] = [
-  { value: "low", label: "Low (relaxed environment)" },
-  { value: "moderate", label: "Moderate (typical workplace stress)" },
-  { value: "high", label: "High (demanding/high-pressure)" },
-];
-
-const MEDICAL_CONDITIONS: { value: MedicalCondition; label: string }[] = [
-  { value: "hypertension", label: "Hypertension" },
-  { value: "diabetes", label: "Diabetes" },
-  { value: "heart-disease", label: "Heart Disease" },
-  { value: "thyroid", label: "Thyroid Disorder" },
-  { value: "autoimmune", label: "Autoimmune Disorder" },
-  { value: "osteoporosis", label: "Osteoporosis" },
-  { value: "anxiety-depression", label: "Anxiety / Depression" },
-  { value: "anaemia", label: "Anaemia / Iron Deficiency" },
-  { value: "pcos", label: "PCOS" },
-  { value: "insomnia", label: "Insomnia" },
-  { value: "kidney-disease", label: "Kidney Disease" },
-  { value: "ibd-crohns", label: "IBD / Crohn's Disease" },
-  { value: "pregnancy", label: "Pregnant or Planning Pregnancy" },
-  { value: "none", label: "None of the above" },
-];
-
-const SKIN_TYPES: { value: SkinType; label: string; description: string }[] = [
-  { value: "normal", label: "Normal", description: "Balanced — not too dry or oily, few imperfections" },
-  { value: "dry", label: "Dry", description: "Tight, flaky or rough texture, prone to sensitivity" },
-  { value: "oily", label: "Oily", description: "Shiny, enlarged pores, prone to breakouts" },
-  { value: "mixed", label: "Mixed", description: "Oily T-zone, dry or normal on cheeks" },
-  { value: "sensitive", label: "Sensitive", description: "Easily irritated, prone to redness or reactions" },
-  { value: "aged", label: "Aged Skin", description: "Fine lines, loss of firmness and elasticity, dullness" },
-];
-
-const COMMON_ALLERGIES: { value: string; label: string }[] = [
-  { value: "dairy", label: "Dairy" },
-  { value: "gluten", label: "Gluten" },
-  { value: "eggs", label: "Eggs" },
-  { value: "nuts", label: "Tree nuts / Peanuts" },
-  { value: "soy", label: "Soy" },
-  { value: "fish", label: "Fish" },
-  { value: "shellfish", label: "Shellfish" },
-  { value: "sesame", label: "Sesame" },
-  { value: "corn", label: "Corn" },
-  { value: "legumes", label: "Legumes (beans, lentils)" },
-  { value: "sulphites", label: "Sulphites / Sulfites" },
-  { value: "gelatin", label: "Gelatin" },
-];
+const SKIN_TYPE_VALUES: SkinType[] = ["normal", "dry", "oily", "mixed", "sensitive", "aged"];
+const ALLERGY_VALUES = ["dairy", "gluten", "eggs", "nuts", "soy", "fish", "shellfish", "sesame", "corn", "legumes", "sulphites", "gelatin"];
+const SLEEP_HOUR_VALUES = ["4", "6", "7", "9"];
 
 export default function IntakePage() {
   const router = useRouter();
+  const locale = useLocale();
+  const t = getT(locale);
+  const ti = t.intake;
+
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<IntakeFormData>({
     age: "",
@@ -204,47 +86,47 @@ export default function IntakePage() {
     if (currentStep === 1) {
       const age = parseInt(formData.age);
       if (!formData.age || isNaN(age) || age < 18 || age > 120) {
-        newErrors.push("Please enter a valid age between 18 and 120");
+        newErrors.push(ti.errors.age);
       }
       if (!formData.sex) {
-        newErrors.push("Please select your sex");
+        newErrors.push(ti.errors.sex);
       }
     } else if (currentStep === 2) {
       if (!formData.diet) {
-        newErrors.push("Please select your diet type");
+        newErrors.push(ti.errors.diet);
       }
     } else if (currentStep === 3) {
       if (!formData.caffeineIntake) {
-        newErrors.push("Please select your caffeine intake level");
+        newErrors.push(ti.errors.caffeine);
       }
     } else if (currentStep === 4) {
       if (formData.goals.length === 0) {
-        newErrors.push("Please select at least one health goal");
+        newErrors.push(ti.errors.goals);
       }
     } else if (currentStep === 6) {
       if (!formData.exerciseFrequency) {
-        newErrors.push("Please select your exercise frequency");
+        newErrors.push(ti.errors.exerciseFrequency);
       }
       if (formData.exerciseIntensity.length === 0) {
-        newErrors.push("Please select at least one training type");
+        newErrors.push(ti.errors.exerciseIntensity);
       }
     } else if (currentStep === 7) {
       if (!formData.jobType) {
-        newErrors.push("Please select your job type");
+        newErrors.push(ti.errors.jobType);
       }
       if (!formData.jobStress) {
-        newErrors.push("Please select your job stress level");
+        newErrors.push(ti.errors.jobStress);
       }
     } else if (currentStep === 8) {
       if (!formData.sleepHours) {
-        newErrors.push("Please enter your sleep hours");
+        newErrors.push(ti.errors.sleepHours);
       }
       if (!formData.sleepQuality) {
-        newErrors.push("Please select your sleep quality");
+        newErrors.push(ti.errors.sleepQuality);
       }
     } else if (currentStep === 9) {
       if (!formData.skinType) {
-        newErrors.push("Please select your skin type");
+        newErrors.push(ti.errors.skinType);
       }
     }
 
@@ -269,7 +151,6 @@ export default function IntakePage() {
 
   const handleSubmit = () => {
     if (validateCurrentStep()) {
-      // Store form data in sessionStorage for results page
       const profileData = {
         age: parseInt(formData.age),
         sex: formData.sex,
@@ -365,21 +246,21 @@ export default function IntakePage() {
       <div className="max-w-2xl mx-auto">
         <div className="mb-6">
           <Link href="/" className="text-xs tracking-widest uppercase text-[#9C8B78] hover:text-[#2E1B12] transition-colors">
-            ← Back
+            {ti.backHome}
           </Link>
         </div>
 
         <div className="bg-white border border-[#2E1B12]/10 p-8 md:p-12">
-          <p className="text-xs tracking-widest uppercase text-[#9C8B78] mb-3">Sprout — Intake</p>
+          <p className="text-xs tracking-widest uppercase text-[#9C8B78] mb-3">{ti.tagline}</p>
           <h1 className="text-3xl md:text-4xl font-bold text-[#2E1B12] mb-2">
-            Calibrate your plan
+            {ti.title}
           </h1>
-          <p className="text-[#9C8B78] mb-8">Based on your data</p>
+          <p className="text-[#9C8B78] mb-8">{ti.subtitle}</p>
 
           <ProgressIndicator
             currentStep={currentStep}
             totalSteps={TOTAL_STEPS}
-            stepLabels={STEP_LABELS}
+            stepLabels={ti.stepLabels}
           />
 
           {errors.length > 0 && (
@@ -397,7 +278,7 @@ export default function IntakePage() {
             <div className="space-y-6">
               <div>
                 <label htmlFor="age" className="block text-sm font-medium text-[#2E1B12] mb-2">
-                  What is your age?
+                  {ti.steps.basics.ageLabel}
                 </label>
                 <input
                   type="number"
@@ -407,28 +288,28 @@ export default function IntakePage() {
                   value={formData.age}
                   onChange={(e) => setFormData({ ...formData, age: e.target.value })}
                   className="w-full px-4 py-3 border border-[#2E1B12]/20 bg-white text-[#2E1B12] focus:outline-none focus:border-[#2E1B12] text-lg transition-colors"
-                  placeholder="Enter your age"
+                  placeholder={ti.steps.basics.agePlaceholder}
                 />
-                <p className="mt-1 text-sm text-[#9C8B78]">Must be 18 or older</p>
+                <p className="mt-1 text-sm text-[#9C8B78]">{ti.steps.basics.ageHint}</p>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-[#2E1B12] mb-2">
-                  What is your sex?
+                  {ti.steps.basics.sexLabel}
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  {SEXES.map((sex) => (
+                  {SEX_VALUES.map((value) => (
                     <button
-                      key={sex.value}
+                      key={value}
                       type="button"
-                      onClick={() => setFormData({ ...formData, sex: sex.value })}
+                      onClick={() => setFormData({ ...formData, sex: value })}
                       className={`px-4 py-3 border text-center text-sm transition-colors ${
-                        formData.sex === sex.value
+                        formData.sex === value
                           ? "border-[#2E1B12] bg-[#2E1B12] text-white"
                           : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      {sex.label}
+                      {ti.sexes[value]}
                     </button>
                   ))}
                 </div>
@@ -441,23 +322,23 @@ export default function IntakePage() {
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-[#2E1B12] mb-3">
-                  What is your diet type?
+                  {ti.steps.diet.dietLabel}
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {DIETS.map((diet) => (
+                  {DIET_VALUES.map((value) => (
                     <button
-                      key={diet.value}
+                      key={value}
                       type="button"
-                      onClick={() => setFormData({ ...formData, diet: diet.value })}
+                      onClick={() => setFormData({ ...formData, diet: value })}
                       className={`px-3 py-2 border text-left transition-colors ${
-                        formData.diet === diet.value
+                        formData.diet === value
                           ? "border-[#2E1B12] bg-[#2E1B12] text-white"
                           : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium text-sm block">{diet.label}</span>
-                      <span className={`text-xs mt-0.5 block leading-tight ${formData.diet === diet.value ? "text-white/70" : "text-[#9C8B78]"}`}>
-                        {diet.description}
+                      <span className="font-medium text-sm block">{ti.diets[value].label}</span>
+                      <span className={`text-xs mt-0.5 block leading-tight ${formData.diet === value ? "text-white/70" : "text-[#9C8B78]"}`}>
+                        {ti.diets[value].desc}
                       </span>
                     </button>
                   ))}
@@ -466,21 +347,21 @@ export default function IntakePage() {
 
               <div>
                 <label className="block text-sm font-medium text-[#2E1B12] mb-3">
-                  Do you have any food allergies or intolerances? (Optional)
+                  {ti.steps.diet.allergyLabel}
                 </label>
                 <div className="grid grid-cols-2 gap-2">
-                  {COMMON_ALLERGIES.map((allergy) => (
+                  {ALLERGY_VALUES.map((value) => (
                     <button
-                      key={allergy.value}
+                      key={value}
                       type="button"
-                      onClick={() => toggleAllergy(allergy.value)}
+                      onClick={() => toggleAllergy(value)}
                       className={`px-3 py-2 border text-left text-sm transition-colors ${
-                        formData.allergies.includes(allergy.value)
+                        formData.allergies.includes(value)
                           ? "border-[#2E1B12] bg-[#2E1B12] text-white"
                           : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      {allergy.label}
+                      {ti.allergies[value as keyof typeof ti.allergies]}
                     </button>
                   ))}
                 </div>
@@ -493,21 +374,21 @@ export default function IntakePage() {
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-[#2E1B12] mb-3">
-                  Do you experience any digestive issues? (Select all that apply)
+                  {ti.steps.digestion.digestiveLabel}
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {DIGESTIVE_ISSUES.map((issue) => (
+                  {DIGESTIVE_ISSUE_VALUES.map((value) => (
                     <button
-                      key={issue.value}
+                      key={value}
                       type="button"
-                      onClick={() => toggleDigestiveIssue(issue.value)}
+                      onClick={() => toggleDigestiveIssue(value)}
                       className={`px-4 py-3 border text-left transition-colors ${
-                        formData.digestiveIssues.includes(issue.value)
+                        formData.digestiveIssues.includes(value)
                           ? "border-[#2E1B12] bg-[#2E1B12] text-white"
                           : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium text-sm">{issue.label}</span>
+                      <span className="font-medium text-sm">{ti.digestiveIssues[value]}</span>
                     </button>
                   ))}
                 </div>
@@ -515,21 +396,21 @@ export default function IntakePage() {
 
               <div>
                 <label className="block text-sm font-medium text-[#2E1B12] mb-3">
-                  What is your daily caffeine intake?
+                  {ti.steps.digestion.caffeineLabel}
                 </label>
                 <div className="space-y-2">
-                  {CAFFEINE_INTAKES.map((caffeine) => (
+                  {CAFFEINE_INTAKE_VALUES.map((value) => (
                     <button
-                      key={caffeine.value}
+                      key={value}
                       type="button"
-                      onClick={() => setFormData({ ...formData, caffeineIntake: caffeine.value })}
+                      onClick={() => setFormData({ ...formData, caffeineIntake: value })}
                       className={`w-full px-4 py-3 border text-left transition-colors ${
-                        formData.caffeineIntake === caffeine.value
+                        formData.caffeineIntake === value
                           ? "border-[#2E1B12] bg-[#2E1B12] text-white"
                           : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium text-sm">{caffeine.label}</span>
+                      <span className="font-medium text-sm">{ti.caffeineIntakes[value]}</span>
                     </button>
                   ))}
                 </div>
@@ -542,19 +423,19 @@ export default function IntakePage() {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <label className="text-sm font-medium text-[#2E1B12]">
-                  What are your health goals? (Select up to 3)
+                  {ti.steps.goals.label}
                 </label>
                 <span className="text-xs text-[#9C8B78]">{formData.goals.length}/3</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {GOALS.map((goal) => {
-                  const selected = formData.goals.includes(goal.value);
+                {GOAL_VALUES.map((value) => {
+                  const selected = formData.goals.includes(value);
                   const maxed = formData.goals.length >= 3 && !selected;
                   return (
                     <button
-                      key={goal.value}
+                      key={value}
                       type="button"
-                      onClick={() => toggleGoal(goal.value)}
+                      onClick={() => toggleGoal(value)}
                       disabled={maxed}
                       className={`px-4 py-3 border text-left transition-colors ${
                         selected
@@ -564,9 +445,9 @@ export default function IntakePage() {
                           : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium text-sm block">{goal.label}</span>
+                      <span className="font-medium text-sm block">{ti.goals[value].label}</span>
                       <p className={`text-xs mt-0.5 ${selected ? "text-white/70" : "text-[#9C8B78]"}`}>
-                        {goal.description}
+                        {ti.goals[value].desc}
                       </p>
                     </button>
                   );
@@ -579,10 +460,10 @@ export default function IntakePage() {
           {currentStep === 5 && (
             <div>
               <label className="block text-sm font-medium text-[#2E1B12] mb-2">
-                Are you currently taking any supplements? (Optional)
+                {ti.steps.supplements.label}
               </label>
               <p className="text-sm text-[#9C8B78] mb-4">
-                Select any you&apos;re already taking. We&apos;ll note these in your plan.
+                {ti.steps.supplements.hint}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {supplements.map((supplement) => (
@@ -608,21 +489,21 @@ export default function IntakePage() {
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-[#2E1B12] mb-3">
-                  How often do you exercise?
+                  {ti.steps.exercise.frequencyLabel}
                 </label>
                 <div className="space-y-2">
-                  {EXERCISE_FREQUENCIES.map((freq) => (
+                  {EXERCISE_FREQUENCY_VALUES.map((value) => (
                     <button
-                      key={freq.value}
+                      key={value}
                       type="button"
-                      onClick={() => setFormData({ ...formData, exerciseFrequency: freq.value })}
+                      onClick={() => setFormData({ ...formData, exerciseFrequency: value })}
                       className={`w-full px-4 py-3 border text-left transition-colors ${
-                        formData.exerciseFrequency === freq.value
+                        formData.exerciseFrequency === value
                           ? "border-[#2E1B12] bg-[#2E1B12] text-white"
                           : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium text-sm">{freq.label}</span>
+                      <span className="font-medium text-sm">{ti.exerciseFrequencies[value]}</span>
                     </button>
                   ))}
                 </div>
@@ -631,19 +512,18 @@ export default function IntakePage() {
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <label className="text-sm font-medium text-[#2E1B12]">
-                    What type of training do you typically do?
+                    {ti.steps.exercise.typeLabel}
                   </label>
-                  <span className="text-xs text-[#9C8B78]">{formData.exerciseIntensity.length}/3</span>
                 </div>
                 <div className="space-y-2">
-                  {EXERCISE_INTENSITIES.map((intensity) => {
-                    const selected = formData.exerciseIntensity.includes(intensity.value);
+                  {EXERCISE_INTENSITY_VALUES.map((value) => {
+                    const selected = formData.exerciseIntensity.includes(value);
                     const maxed = formData.exerciseIntensity.length >= 3 && !selected;
                     return (
                       <button
-                        key={intensity.value}
+                        key={value}
                         type="button"
-                        onClick={() => toggleExerciseIntensity(intensity.value)}
+                        onClick={() => toggleExerciseIntensity(value)}
                         disabled={maxed}
                         className={`w-full px-4 py-3 border text-left transition-colors ${
                           selected
@@ -653,13 +533,62 @@ export default function IntakePage() {
                             : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                         }`}
                       >
-                        <span className="font-medium text-sm block">{intensity.label}</span>
+                        <span className="font-medium text-sm block">{ti.exerciseTypes[value].label}</span>
                         <span className={`text-xs mt-0.5 block ${selected ? "text-white/70" : "text-[#9C8B78]"}`}>
-                          {intensity.description}
+                          {ti.exerciseTypes[value].desc}
                         </span>
                       </button>
                     );
                   })}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Step 7: Lifestyle */}
+          {currentStep === 7 && (
+            <div className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-[#2E1B12] mb-3">
+                  {ti.steps.lifestyle.jobTypeLabel}
+                </label>
+                <div className="space-y-2">
+                  {JOB_TYPE_VALUES.map((value) => (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, jobType: value })}
+                      className={`w-full px-4 py-3 border text-left transition-colors ${
+                        formData.jobType === value
+                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
+                      }`}
+                    >
+                      <span className="font-medium text-sm">{ti.jobTypes[value]}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[#2E1B12] mb-3">
+                  {ti.steps.lifestyle.jobStressLabel}
+                </label>
+                <div className="space-y-2">
+                  {JOB_STRESS_VALUES.map((value) => (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, jobStress: value })}
+                      className={`w-full px-4 py-3 border text-left transition-colors ${
+                        formData.jobStress === value
+                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
+                      }`}
+                    >
+                      <span className="font-medium text-sm">{ti.jobStresses[value]}</span>
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
@@ -670,26 +599,21 @@ export default function IntakePage() {
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-[#2E1B12] mb-3">
-                  How many hours do you sleep per night?
+                  {ti.steps.sleep.hoursLabel}
                 </label>
                 <div className="space-y-2">
-                  {[
-                    { label: "Less than 5 hours", value: "4" },
-                    { label: "5–6 hours", value: "6" },
-                    { label: "7–8 hours", value: "7" },
-                    { label: "More than 8 hours", value: "9" },
-                  ].map((option) => (
+                  {SLEEP_HOUR_VALUES.map((value) => (
                     <button
-                      key={option.value}
+                      key={value}
                       type="button"
-                      onClick={() => setFormData({ ...formData, sleepHours: option.value })}
+                      onClick={() => setFormData({ ...formData, sleepHours: value })}
                       className={`w-full px-4 py-3 border text-left text-sm transition-colors ${
-                        formData.sleepHours === option.value
+                        formData.sleepHours === value
                           ? "border-[#2E1B12] bg-[#2E1B12] text-white"
                           : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      {option.label}
+                      {ti.sleepHours[value]}
                     </button>
                   ))}
                 </div>
@@ -697,71 +621,21 @@ export default function IntakePage() {
 
               <div>
                 <label className="block text-sm font-medium text-[#2E1B12] mb-3">
-                  How would you rate your sleep quality?
+                  {ti.steps.sleep.qualityLabel}
                 </label>
                 <div className="space-y-2">
-                  {SLEEP_QUALITIES.map((quality) => (
+                  {SLEEP_QUALITY_VALUES.map((value) => (
                     <button
-                      key={quality.value}
+                      key={value}
                       type="button"
-                      onClick={() => setFormData({ ...formData, sleepQuality: quality.value })}
+                      onClick={() => setFormData({ ...formData, sleepQuality: value })}
                       className={`w-full px-4 py-3 border text-left transition-colors ${
-                        formData.sleepQuality === quality.value
+                        formData.sleepQuality === value
                           ? "border-[#2E1B12] bg-[#2E1B12] text-white"
                           : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium text-sm">{quality.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-            </div>
-          )}
-
-          {/* Step 7: Lifestyle */}
-          {currentStep === 7 && (
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-[#2E1B12] mb-3">
-                  What type of work environment do you have?
-                </label>
-                <div className="space-y-2">
-                  {JOB_TYPES.map((job) => (
-                    <button
-                      key={job.value}
-                      type="button"
-                      onClick={() => setFormData({ ...formData, jobType: job.value })}
-                      className={`w-full px-4 py-3 border text-left transition-colors ${
-                        formData.jobType === job.value
-                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
-                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
-                      }`}
-                    >
-                      <span className="font-medium text-sm">{job.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-[#2E1B12] mb-3">
-                  How much work-related stress do you experience?
-                </label>
-                <div className="space-y-2">
-                  {JOB_STRESSES.map((jobStress) => (
-                    <button
-                      key={jobStress.value}
-                      type="button"
-                      onClick={() => setFormData({ ...formData, jobStress: jobStress.value })}
-                      className={`w-full px-4 py-3 border text-left transition-colors ${
-                        formData.jobStress === jobStress.value
-                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
-                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
-                      }`}
-                    >
-                      <span className="font-medium text-sm">{jobStress.label}</span>
+                      <span className="font-medium text-sm">{ti.sleepQualities[value]}</span>
                     </button>
                   ))}
                 </div>
@@ -774,23 +648,23 @@ export default function IntakePage() {
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-[#2E1B12] mb-3">
-                  What is your skin type?
+                  {ti.steps.skin.typeLabel}
                 </label>
                 <div className="space-y-2">
-                  {SKIN_TYPES.map((skin) => (
+                  {SKIN_TYPE_VALUES.map((value) => (
                     <button
-                      key={skin.value}
+                      key={value}
                       type="button"
-                      onClick={() => setFormData({ ...formData, skinType: skin.value })}
+                      onClick={() => setFormData({ ...formData, skinType: value })}
                       className={`w-full px-4 py-3 border text-left transition-colors ${
-                        formData.skinType === skin.value
+                        formData.skinType === value
                           ? "border-[#2E1B12] bg-[#2E1B12] text-white"
                           : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium text-sm block">{skin.label}</span>
-                      <span className={`text-xs mt-0.5 block ${formData.skinType === skin.value ? "text-white/70" : "text-[#9C8B78]"}`}>
-                        {skin.description}
+                      <span className="font-medium text-sm block">{ti.skinTypes[value].label}</span>
+                      <span className={`text-xs mt-0.5 block ${formData.skinType === value ? "text-white/70" : "text-[#9C8B78]"}`}>
+                        {ti.skinTypes[value].desc}
                       </span>
                     </button>
                   ))}
@@ -799,21 +673,21 @@ export default function IntakePage() {
 
               <div>
                 <label className="block text-sm font-medium text-[#2E1B12] mb-3">
-                  How much sun exposure do you get daily?
+                  {ti.steps.skin.sunLabel}
                 </label>
                 <div className="space-y-2">
-                  {SUN_EXPOSURES.map((sun) => (
+                  {SUN_EXPOSURE_VALUES.map((value) => (
                     <button
-                      key={sun.value}
+                      key={value}
                       type="button"
-                      onClick={() => setFormData({ ...formData, sunExposure: sun.value })}
+                      onClick={() => setFormData({ ...formData, sunExposure: value })}
                       className={`w-full px-4 py-3 border text-left transition-colors ${
-                        formData.sunExposure === sun.value
+                        formData.sunExposure === value
                           ? "border-[#2E1B12] bg-[#2E1B12] text-white"
                           : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
                       }`}
                     >
-                      <span className="font-medium text-sm">{sun.label}</span>
+                      <span className="font-medium text-sm">{ti.sunExposures[value]}</span>
                     </button>
                   ))}
                 </div>
@@ -826,38 +700,38 @@ export default function IntakePage() {
             <div className="space-y-6">
               <div>
                 <label htmlFor="medications" className="block text-sm font-medium text-[#2E1B12] mb-2">
-                  What medications are you currently taking? (if any)
+                  {ti.steps.health.medicationsLabel}
                 </label>
                 <textarea
                   id="medications"
                   value={formData.medications}
                   onChange={(e) => setFormData({ ...formData, medications: e.target.value })}
                   className="w-full px-4 py-3 border border-[#2E1B12]/20 bg-white text-[#2E1B12] focus:outline-none focus:border-[#2E1B12] transition-colors"
-                  placeholder="e.g., Metformin, Lisinopril… (leave blank if none)"
+                  placeholder={ti.steps.health.medicationsPlaceholder}
                   rows={3}
                 />
                 <p className="mt-1 text-sm text-[#9C8B78]">
-                  This helps us identify potential interactions.
+                  {ti.steps.health.medicationsHint}
                 </p>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-[#2E1B12] mb-3">
-                  Do you have any medical conditions? (Select all that apply)
+                  {ti.steps.health.conditionsLabel}
                 </label>
                 <div className="grid grid-cols-2 gap-2">
-                  {MEDICAL_CONDITIONS.map((condition) => (
+                  {MEDICAL_CONDITION_VALUES.map((value) => (
                     <button
-                      key={condition.value}
+                      key={value}
                       type="button"
-                      onClick={() => toggleMedicalCondition(condition.value)}
+                      onClick={() => toggleMedicalCondition(value)}
                       className={`px-3 py-2 border text-left text-sm transition-colors ${
-                        formData.medicalConditions.includes(condition.value)
+                        formData.medicalConditions.includes(value)
                           ? "border-[#2E1B12] bg-[#2E1B12] text-white"
                           : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
-                      } ${condition.value === "none" ? "col-span-2" : ""}`}
+                      } ${value === "none" ? "col-span-2" : ""}`}
                     >
-                      {condition.label}
+                      {ti.medicalConditions[value]}
                     </button>
                   ))}
                 </div>
@@ -873,7 +747,7 @@ export default function IntakePage() {
                 onClick={handleNext}
                 className="w-full flex items-center justify-between px-8 py-4 bg-[#FFB326] text-[#2E1B12] rounded-full font-medium hover:bg-[#e6a020] transition-colors"
               >
-                <span>Continue</span>
+                <span>{ti.continue}</span>
                 <span>→</span>
               </button>
             ) : (
@@ -882,7 +756,7 @@ export default function IntakePage() {
                 onClick={handleSubmit}
                 className="w-full flex items-center justify-between px-8 py-4 bg-[#FFB326] text-[#2E1B12] rounded-full font-medium hover:bg-[#e6a020] transition-colors"
               >
-                <span>Get My Plan</span>
+                <span>{ti.getMyPlan}</span>
                 <span>→</span>
               </button>
             )}
@@ -892,7 +766,7 @@ export default function IntakePage() {
                 onClick={handleBack}
                 className="w-full mt-3 py-2 text-sm text-[#9C8B78] hover:text-[#2E1B12] transition-colors text-center"
               >
-                ← Back
+                {ti.back}
               </button>
             )}
           </div>
@@ -901,4 +775,3 @@ export default function IntakePage() {
     </div>
   );
 }
-

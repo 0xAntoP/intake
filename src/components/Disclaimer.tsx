@@ -1,28 +1,30 @@
 "use client";
 
 import Link from "next/link";
+import { useLocale } from "./LocaleProvider";
+import { getT } from "@/lib/i18n";
 
 interface DisclaimerProps {
   variant?: "inline" | "footer" | "results";
 }
 
 export function Disclaimer({ variant = "inline" }: DisclaimerProps) {
+  const locale = useLocale();
+  const t = getT(locale);
+
   if (variant === "footer") {
     return (
       <footer className="mt-auto bg-[#2E1B12] py-8">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <p className="text-sm text-white/60 mb-1">
-            For educational purposes only. Not medical advice.
-          </p>
-          <p className="text-sm text-white/60">
-            Always consult a qualified healthcare provider before starting any supplement regimen.
+            {t.disclaimer.footer.consult}
           </p>
           <div className="mt-4 flex items-center justify-center gap-4 text-sm">
             <Link href="/methodology" className="text-[#FFB326] hover:underline">
-              Methodology
+              {t.disclaimer.footer.methodology}
             </Link>
             <span className="text-white/20">|</span>
-            <span className="text-white/60">Evidence-based recommendations</span>
+            <span className="text-white/60">{t.disclaimer.footer.evidenceBased}</span>
           </div>
         </div>
       </footer>

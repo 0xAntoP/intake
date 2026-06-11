@@ -1,4 +1,5 @@
 export { EvidenceBadge } from "./EvidenceBadge";
+export { LocaleProvider, useLocale } from "./LocaleProvider";
 export { PairingList } from "./PairingList";
 export { SupplementCard } from "./SupplementCard";
 export { ScheduleView } from "./ScheduleView";

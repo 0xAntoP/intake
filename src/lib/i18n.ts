@@ -1,0 +1,824 @@
+export type Locale = "en" | "it";
+
+const en = {
+  home: {
+    tagline: "Sprout — Supplement Planner",
+    hero: {
+      title: ["Your Personal", "Supplement Plan"],
+      subtitle:
+        "Get an evidence-based supplement schedule tailored to your goals. Know what to take, when to take it, and what to avoid.",
+      cta: "Get my supplement plan",
+      meta: "Free · No account required · Takes 3 minutes",
+      privacy:
+        "Your responses help us tailor your supplement plan in real time. Your data is not stored and is used only for this session.",
+    },
+    features: {
+      schedule: {
+        label: "Daily Schedule",
+        desc: "Know exactly when to take each supplement — morning, afternoon, or evening — for optimal absorption.",
+      },
+      pairing: {
+        label: "Pairing Guidance",
+        desc: "Learn which supplements work better together and which ones to separate for best results.",
+      },
+      evidence: {
+        label: "Evidence-Based",
+        desc: "Every recommendation includes evidence ratings and citations to peer-reviewed research.",
+      },
+    },
+    howItWorks: {
+      title: "How it works",
+      steps: [
+        { title: "Tell us about yourself", desc: "Share your age, diet, and health goals." },
+        {
+          title: "Get your personalized plan",
+          desc: "Our algorithm matches your profile to evidence-based recommendations.",
+        },
+        {
+          title: "Follow your schedule",
+          desc: "See your daily supplement schedule with timing, dosage, and interaction guidance.",
+        },
+      ],
+      cta: "Start now",
+    },
+    methodology: {
+      built: "Built on peer-reviewed research from PubMed and trusted sources.",
+      link: "Learn about our methodology →",
+    },
+  },
+
+  intake: {
+    backHome: "← Back",
+    tagline: "Sprout — Intake",
+    title: "Calibrate your plan",
+    subtitle: "Based on your data",
+    stepLabels: [
+      "Basics",
+      "Diet",
+      "Digestion & Caffeine",
+      "Goals",
+      "Current Supplements",
+      "Exercise",
+      "Lifestyle",
+      "Sleep & Stress",
+      "Skin",
+      "Health & Safety",
+    ],
+    continue: "Continue",
+    getMyPlan: "Get My Plan",
+    back: "← Back",
+    errors: {
+      age: "Please enter a valid age between 18 and 120",
+      sex: "Please select your sex",
+      diet: "Please select your diet type",
+      caffeine: "Please select your caffeine intake level",
+      goals: "Please select at least one health goal",
+      exerciseFrequency: "Please select your exercise frequency",
+      exerciseIntensity: "Please select at least one training type",
+      jobType: "Please select your job type",
+      jobStress: "Please select your job stress level",
+      sleepHours: "Please enter your sleep hours",
+      sleepQuality: "Please select your sleep quality",
+      skinType: "Please select your skin type",
+    },
+    steps: {
+      basics: {
+        ageLabel: "What is your age?",
+        agePlaceholder: "Enter your age",
+        ageHint: "Must be 18 or older",
+        sexLabel: "What is your sex?",
+      },
+      diet: {
+        dietLabel: "What is your diet type?",
+        allergyLabel: "Do you have any food allergies or intolerances? (Optional)",
+      },
+      digestion: {
+        digestiveLabel: "Do you experience any digestive issues? (Select all that apply)",
+        caffeineLabel: "What is your daily caffeine intake?",
+      },
+      goals: { label: "What are your health goals? (Select up to 3)" },
+      supplements: {
+        label: "Are you currently taking any supplements? (Optional)",
+        hint: "Select any you're already taking. We'll note these in your plan.",
+      },
+      exercise: {
+        frequencyLabel: "How often do you exercise?",
+        typeLabel: "What type of training do you typically do?",
+      },
+      lifestyle: {
+        jobTypeLabel: "What type of work environment do you have?",
+        jobStressLabel: "How much work-related stress do you experience?",
+      },
+      sleep: {
+        hoursLabel: "How many hours do you sleep per night?",
+        qualityLabel: "How would you rate your sleep quality?",
+      },
+      skin: {
+        typeLabel: "What is your skin type?",
+        sunLabel: "How much sun exposure do you get daily?",
+      },
+      health: {
+        medicationsLabel: "What medications are you currently taking? (if any)",
+        medicationsPlaceholder: "e.g., Metformin, Lisinopril… (leave blank if none)",
+        medicationsHint: "This helps us identify potential interactions.",
+        conditionsLabel: "Do you have any medical conditions? (Select all that apply)",
+      },
+    },
+    sexes: {
+      male: "Male",
+      female: "Female",
+      other: "Other / Prefer not to say",
+    },
+    diets: {
+      omnivore: { label: "Omnivore", desc: "Eat both animal and plant-based foods" },
+      carnivore: { label: "Carnivore", desc: "Primarily or exclusively animal-based foods" },
+      pescatarian: { label: "Pescatarian", desc: "Plant-based with fish and seafood" },
+      vegetarian: { label: "Vegetarian", desc: "Plant-based, no meat or fish" },
+      vegan: { label: "Vegan", desc: "Entirely plant-based, no animal products" },
+      keto: { label: "Ketogenic", desc: "Very low carb, high fat diet" },
+      paleo: { label: "Paleo", desc: "Whole foods, no grains or processed foods" },
+      mediterranean: { label: "Mediterranean", desc: "Plant-forward with fish, olive oil and whole grains" },
+      "gluten-free": { label: "Gluten-Free", desc: "No wheat, barley, rye or gluten-containing foods" },
+    } as Record<string, { label: string; desc: string }>,
+    allergies: {
+      dairy: "Dairy",
+      gluten: "Gluten",
+      eggs: "Eggs",
+      nuts: "Tree nuts / Peanuts",
+      soy: "Soy",
+      fish: "Fish",
+      shellfish: "Shellfish",
+      sesame: "Sesame",
+      corn: "Corn",
+      legumes: "Legumes (beans, lentils)",
+      sulphites: "Sulphites / Sulfites",
+      gelatin: "Gelatin",
+    },
+    digestiveIssues: {
+      bloating: "Bloating",
+      constipation: "Constipation",
+      diarrhea: "Diarrhea",
+      nausea: "Nausea",
+      "stomach-cramps": "Stomach cramps / pain",
+      gerd: "GERD (Acid reflux)",
+      ibs: "IBS (Irritable Bowel Syndrome)",
+      ibd: "IBD (Crohn's / Colitis)",
+      "lactose-intolerance": "Lactose intolerance",
+      "gluten-sensitivity": "Gluten sensitivity",
+      "poor-absorption": "Poor nutrient absorption",
+      none: "None of the above",
+    } as Record<string, string>,
+    caffeineIntakes: {
+      low: "Low (0-100mg/day, little to no coffee/tea)",
+      moderate: "Moderate (100-300mg/day, 1-2 cups)",
+      high: "High (300mg+/day, 3+ cups)",
+    },
+    goals: {
+      energy: { label: "Energy", desc: "Combat fatigue and boost vitality" },
+      sleep: { label: "Sleep", desc: "Improve sleep quality and duration" },
+      focus: { label: "Focus", desc: "Enhance mental clarity and concentration" },
+      immunity: { label: "Immunity", desc: "Support immune system function" },
+      stress: { label: "Stress", desc: "Manage stress and promote calm" },
+      longevity: { label: "Longevity", desc: "Support healthy aging" },
+      muscle: { label: "Muscle & Recovery", desc: "Support muscle growth and recovery" },
+      skin: { label: "Skin & Glow", desc: "Support skin health, hair and nails" },
+    } as Record<string, { label: string; desc: string }>,
+    exerciseFrequencies: {
+      sedentary: "Sedentary (little to no exercise)",
+      light: "Light (1-2 times per week)",
+      moderate: "Moderate (3-4 times per week)",
+      intense: "Intense (5-6 times per week)",
+    },
+    exerciseTypes: {
+      cardio: { label: "Cardio", desc: "Running, cycling, swimming, HIIT and endurance training" },
+      strength: {
+        label: "Weights & Strength Training",
+        desc: "Weightlifting, resistance training, CrossFit and bodybuilding",
+      },
+      mobility: {
+        label: "Flow & Mobility",
+        desc: "Yoga, Pilates, stretching, martial arts and breathwork",
+      },
+    } as Record<string, { label: string; desc: string }>,
+    sleepHours: {
+      "4": "Less than 5 hours",
+      "6": "5–6 hours",
+      "7": "7–8 hours",
+      "9": "More than 8 hours",
+    } as Record<string, string>,
+    sleepQualities: {
+      poor: "Poor (frequent wakeups, not rested)",
+      fair: "Fair (occasional issues)",
+      good: "Good (mostly restful)",
+      excellent: "Excellent (consistently restful)",
+    },
+    jobTypes: {
+      desk: "Desk job (mostly sitting)",
+      physical: "Physical job (active/on feet)",
+      hybrid: "Hybrid (mix of sitting and activity)",
+    },
+    jobStresses: {
+      low: "Low (relaxed environment)",
+      moderate: "Moderate (typical workplace stress)",
+      high: "High (demanding/high-pressure)",
+    },
+    skinTypes: {
+      normal: { label: "Normal", desc: "Balanced — not too dry or oily, few imperfections" },
+      dry: { label: "Dry", desc: "Tight, flaky or rough texture, prone to sensitivity" },
+      oily: { label: "Oily", desc: "Shiny, enlarged pores, prone to breakouts" },
+      mixed: { label: "Mixed", desc: "Oily T-zone, dry or normal on cheeks" },
+      sensitive: { label: "Sensitive", desc: "Easily irritated, prone to redness or reactions" },
+      aged: { label: "Aged Skin", desc: "Fine lines, loss of firmness and elasticity, dullness" },
+    } as Record<string, { label: string; desc: string }>,
+    sunExposures: {
+      low: "Low (mostly indoors or cloudy climate)",
+      moderate: "Moderate (some outdoor time)",
+      high: "High (regular outdoor time with sun exposure)",
+    },
+    medicalConditions: {
+      hypertension: "Hypertension",
+      diabetes: "Diabetes",
+      "heart-disease": "Heart Disease",
+      thyroid: "Thyroid Disorder",
+      autoimmune: "Autoimmune Disorder",
+      osteoporosis: "Osteoporosis",
+      "anxiety-depression": "Anxiety / Depression",
+      anaemia: "Anaemia / Iron Deficiency",
+      pcos: "PCOS",
+      insomnia: "Insomnia",
+      "kidney-disease": "Kidney Disease",
+      "ibd-crohns": "IBD / Crohn's Disease",
+      pregnancy: "Pregnant or Planning Pregnancy",
+      none: "None of the above",
+    } as Record<string, string>,
+  },
+
+  results: {
+    retake: "← Retake questionnaire",
+    tagline: "Sprout — Your Plan",
+    title: ["Your Supplement", "Plan is Ready"],
+    loading: "Generating your plan…",
+    email: {
+      cta: "Receive your plan by email",
+      hint: "We'll send your full supplement schedule so you can reference it anytime.",
+      sentPrefix: "Plan sent to",
+      sentSuffix: "— check your inbox.",
+      send: "Send my plan →",
+      sending: "Sending…",
+    },
+    stats: {
+      supplements: "Supplements",
+      timeSlots: "Time slots",
+      highEvidence: "High evidence",
+    },
+    schedule: { title: "Daily Schedule" },
+    sprout: {
+      subtitle: "Sprout Lab",
+      title: ["Already in your plan.", "Already in a formula."],
+      matchSuffix: (n: number): string => (n > 1 ? "matches" : "match"),
+      includes: (n: number) => `Includes ${n} supplement${n > 1 ? "s" : ""} recommended in your plan`,
+      shop: (name: string) => `Shop ${name}`,
+      disclaimer: "Products sold by Sprout Lab. Contains matched ingredients among others.",
+    },
+    amazon: {
+      title: "Other supplements brands",
+      disclaimer: "Affiliate-free links. We earn nothing from these recommendations.",
+    },
+    footer: {
+      methodology: "Read our methodology →",
+      retake: "Retake questionnaire",
+    },
+    goalLabels: {
+      energy: "Energy",
+      sleep: "Sleep",
+      focus: "Focus",
+      immunity: "Immunity",
+      stress: "Stress",
+      longevity: "Longevity",
+      muscle: "Muscle & Recovery",
+      skin: "Skin & Glow",
+    } as Record<string, string>,
+  },
+
+  disclaimer: {
+    footer: {
+      consult: "Always consult a qualified healthcare provider before starting any supplement regimen.",
+      methodology: "Methodology",
+      evidenceBased: "Evidence-based recommendations",
+    },
+  },
+
+  methodology: {
+    back: "← Back",
+    tagline: "Sprout — Methodology",
+    title: "Our Methodology",
+    subtitle:
+      "Sprout uses a transparent, evidence-based approach to generate personalised supplement recommendations. Here's how it works.",
+    evidenceLevels: {
+      title: "Evidence Levels",
+      intro:
+        "Each supplement in our database is assigned an evidence level based on the quality and quantity of research supporting its use:",
+      high: {
+        label: "High",
+        title: "Strong Research Support",
+        desc: "Multiple RCTs or meta-analyses confirm efficacy. Consistent results across diverse populations.",
+      },
+      moderate: {
+        label: "Moderate",
+        title: "Promising Evidence",
+        desc: "Some RCTs or observational studies support use. Results may vary across populations.",
+      },
+      low: {
+        label: "Low",
+        title: "Early Stage Research",
+        desc: "Limited human studies or conflicting results. Insufficient clinical evidence at this time.",
+      },
+    },
+    dataSources: {
+      title: "Data Sources",
+      intro: "Our supplement database is built from peer-reviewed research, primarily sourced from:",
+      sources: [
+        { name: "PubMed / MEDLINE", desc: "Primary source for clinical studies and systematic reviews" },
+        { name: "Cochrane Reviews", desc: "Gold-standard systematic reviews and meta-analyses" },
+        {
+          name: "NIH Office of Dietary Supplements",
+          desc: "Comprehensive fact sheets on supplement safety and efficacy",
+        },
+        { name: "Examine.com", desc: "Independent supplement research aggregator (for reference)" },
+      ],
+    },
+    engine: {
+      title: "Recommendation Engine",
+      intro: "Our recommendation engine uses a deterministic, rules-based approach:",
+      steps: [
+        {
+          n: "1",
+          title: "Goal Matching",
+          desc: "Each supplement is tagged with the health goals it supports. When you select your goals, we match you with supplements that have evidence for those specific outcomes.",
+        },
+        {
+          n: "2",
+          title: "Diet Adjustments",
+          desc: "Plant-based diets have different nutritional needs. We automatically prioritise B12 and iron for vegetarians and vegans, as these are harder to obtain without animal products.",
+        },
+        {
+          n: "3",
+          title: "Interaction Analysis",
+          desc: "We flag supplements that should be taken together for synergy (e.g. Vitamin D + K2) or separated for optimal absorption (e.g. iron and zinc).",
+        },
+        {
+          n: "4",
+          title: "Timing Optimisation",
+          desc: "Each supplement has an optimal time of day based on pharmacokinetics, whether it needs food, and potential effects on sleep or energy.",
+        },
+      ],
+    },
+    limitations: {
+      title: "Limitations",
+      items: [
+        {
+          title: "Not medical advice",
+          desc: "This tool is educational only. It cannot diagnose conditions or replace professional medical guidance.",
+        },
+        {
+          title: "No drug interactions",
+          desc: "We do not account for supplement–drug interactions. If you take medications, consult your doctor or pharmacist.",
+        },
+        {
+          title: "Individual variation",
+          desc: "Research results are population averages. Your personal response may differ based on genetics, health status, and other factors.",
+        },
+        {
+          title: "Curated dataset",
+          desc: "Our database includes commonly studied supplements but is not exhaustive. Absence from our list doesn't mean a supplement lacks merit.",
+        },
+      ],
+    },
+    safety: {
+      title: "Safety First",
+      header: "Important Safety Information",
+      points: [
+        "Always consult a healthcare provider before starting any supplement regimen, especially if you are pregnant, nursing, have a medical condition, or take medications.",
+        "Do not exceed recommended dosages. More is not always better and can be harmful.",
+        "If you experience adverse effects, discontinue use and seek medical attention.",
+        "Supplements are not evaluated by the FDA for safety and efficacy before marketing.",
+      ],
+    },
+    cta: "Get your personalised plan",
+  },
+};
+
+const it: typeof en = {
+  home: {
+    tagline: "Sprout — Pianificatore di Integratori",
+    hero: {
+      title: ["Il Tuo Piano Personale", "di Integratori"],
+      subtitle:
+        "Ottieni un piano di integrazione basato su evidenze scientifiche, personalizzato per i tuoi obiettivi. Scopri cosa prendere, quando prenderlo e cosa evitare.",
+      cta: "Ottieni il mio piano",
+      meta: "Gratuito · Senza registrazione · Richiede 3 minuti",
+      privacy:
+        "Le tue risposte ci aiutano a personalizzare il tuo piano in tempo reale. I tuoi dati non vengono memorizzati e vengono utilizzati solo per questa sessione.",
+    },
+    features: {
+      schedule: {
+        label: "Piano Giornaliero",
+        desc: "Scopri esattamente quando prendere ogni integratore — mattina, pomeriggio o sera — per un assorbimento ottimale.",
+      },
+      pairing: {
+        label: "Guida alle Combinazioni",
+        desc: "Scopri quali integratori funzionano meglio insieme e quali separare per ottenere i migliori risultati.",
+      },
+      evidence: {
+        label: "Basato su Evidenze",
+        desc: "Ogni raccomandazione include valutazioni delle evidenze e citazioni da ricerche scientifiche.",
+      },
+    },
+    howItWorks: {
+      title: "Come funziona",
+      steps: [
+        { title: "Raccontaci di te", desc: "Condividi età, dieta e obiettivi di salute." },
+        {
+          title: "Ricevi il tuo piano personalizzato",
+          desc: "Il nostro algoritmo abbina il tuo profilo a raccomandazioni basate su evidenze scientifiche.",
+        },
+        {
+          title: "Segui il tuo piano",
+          desc: "Visualizza il piano giornaliero con orari, dosaggi e indicazioni sulle interazioni.",
+        },
+      ],
+      cta: "Inizia ora",
+    },
+    methodology: {
+      built: "Basato su ricerche scientifiche da PubMed e fonti attendibili.",
+      link: "Scopri la nostra metodologia →",
+    },
+  },
+
+  intake: {
+    backHome: "← Indietro",
+    tagline: "Sprout — Questionario",
+    title: "Calibra il tuo piano",
+    subtitle: "Basato sui tuoi dati",
+    stepLabels: [
+      "Dati Base",
+      "Dieta",
+      "Digestione e Caffeina",
+      "Obiettivi",
+      "Integratori Attuali",
+      "Esercizio",
+      "Stile di vita",
+      "Sonno e Stress",
+      "Pelle",
+      "Salute e Sicurezza",
+    ],
+    continue: "Continua",
+    getMyPlan: "Ottieni il mio piano",
+    back: "← Indietro",
+    errors: {
+      age: "Inserisci un'età valida compresa tra 18 e 120 anni",
+      sex: "Seleziona il tuo sesso",
+      diet: "Seleziona il tuo tipo di dieta",
+      caffeine: "Seleziona il tuo livello di assunzione di caffeina",
+      goals: "Seleziona almeno un obiettivo di salute",
+      exerciseFrequency: "Seleziona la tua frequenza di allenamento",
+      exerciseIntensity: "Seleziona almeno un tipo di allenamento",
+      jobType: "Seleziona il tuo tipo di lavoro",
+      jobStress: "Seleziona il tuo livello di stress lavorativo",
+      sleepHours: "Inserisci le ore di sonno",
+      sleepQuality: "Seleziona la qualità del tuo sonno",
+      skinType: "Seleziona il tuo tipo di pelle",
+    },
+    steps: {
+      basics: {
+        ageLabel: "Quanti anni hai?",
+        agePlaceholder: "Inserisci la tua età",
+        ageHint: "Deve avere almeno 18 anni",
+        sexLabel: "Qual è il tuo sesso?",
+      },
+      diet: {
+        dietLabel: "Qual è il tuo tipo di dieta?",
+        allergyLabel: "Hai allergie o intolleranze alimentari? (Facoltativo)",
+      },
+      digestion: {
+        digestiveLabel: "Hai problemi digestivi? (Seleziona tutti quelli applicabili)",
+        caffeineLabel: "Qual è il tuo consumo giornaliero di caffeina?",
+      },
+      goals: { label: "Quali sono i tuoi obiettivi di salute? (Seleziona fino a 3)" },
+      supplements: {
+        label: "Stai assumendo integratori attualmente? (Facoltativo)",
+        hint: "Seleziona quelli che già assumi. Li segnaleremo nel tuo piano.",
+      },
+      exercise: {
+        frequencyLabel: "Con quale frequenza ti alleni?",
+        typeLabel: "Che tipo di allenamento fai di solito?",
+      },
+      lifestyle: {
+        jobTypeLabel: "Che tipo di ambiente di lavoro hai?",
+        jobStressLabel: "Quanto stress lavorativo provi?",
+      },
+      sleep: {
+        hoursLabel: "Quante ore dormi per notte?",
+        qualityLabel: "Come valuteresti la qualità del tuo sonno?",
+      },
+      skin: {
+        typeLabel: "Qual è il tuo tipo di pelle?",
+        sunLabel: "Quanta esposizione al sole hai quotidianamente?",
+      },
+      health: {
+        medicationsLabel: "Quali farmaci stai assumendo attualmente? (se applicabile)",
+        medicationsPlaceholder: "es. Metformina, Lisinopril… (lascia vuoto se nessuno)",
+        medicationsHint: "Ci aiuta a identificare potenziali interazioni.",
+        conditionsLabel: "Hai condizioni mediche? (Seleziona tutte quelle applicabili)",
+      },
+    },
+    sexes: {
+      male: "Maschio",
+      female: "Femmina",
+      other: "Altro / Preferisco non rispondere",
+    },
+    diets: {
+      omnivore: { label: "Onnivoro/a", desc: "Mangia sia alimenti di origine animale che vegetale" },
+      carnivore: { label: "Carnivoro/a", desc: "Principalmente o esclusivamente alimenti di origine animale" },
+      pescatarian: { label: "Pescatariano/a", desc: "A base vegetale con pesce e frutti di mare" },
+      vegetarian: { label: "Vegetariano/a", desc: "A base vegetale, senza carne o pesce" },
+      vegan: { label: "Vegano/a", desc: "Completamente a base vegetale, senza prodotti animali" },
+      keto: { label: "Chetogenica", desc: "Dieta a bassissimo contenuto di carboidrati e ad alto contenuto di grassi" },
+      paleo: { label: "Paleo", desc: "Alimenti integrali, senza cereali o cibi processati" },
+      mediterranean: { label: "Mediterranea", desc: "Ricca di verdure, pesce, olio d'oliva e cereali integrali" },
+      "gluten-free": { label: "Senza Glutine", desc: "Senza grano, orzo, segale o alimenti contenenti glutine" },
+    } as Record<string, { label: string; desc: string }>,
+    allergies: {
+      dairy: "Latticini",
+      gluten: "Glutine",
+      eggs: "Uova",
+      nuts: "Frutta a guscio / Arachidi",
+      soy: "Soia",
+      fish: "Pesce",
+      shellfish: "Crostacei",
+      sesame: "Sesamo",
+      corn: "Mais",
+      legumes: "Legumi (fagioli, lenticchie)",
+      sulphites: "Solfiti",
+      gelatin: "Gelatina",
+    },
+    digestiveIssues: {
+      bloating: "Gonfiore",
+      constipation: "Stitichezza",
+      diarrhea: "Diarrea",
+      nausea: "Nausea",
+      "stomach-cramps": "Crampi / dolori addominali",
+      gerd: "GERD (Reflusso gastroesofageo)",
+      ibs: "IBS (Sindrome dell'intestino irritabile)",
+      ibd: "IBD (Morbo di Crohn / Colite)",
+      "lactose-intolerance": "Intolleranza al lattosio",
+      "gluten-sensitivity": "Sensibilità al glutine",
+      "poor-absorption": "Scarso assorbimento dei nutrienti",
+      none: "Nessuno dei precedenti",
+    } as Record<string, string>,
+    caffeineIntakes: {
+      low: "Basso (0-100mg/giorno, poco o nessun caffè/tè)",
+      moderate: "Moderato (100-300mg/giorno, 1-2 tazze)",
+      high: "Alto (300mg+/giorno, 3+ tazze)",
+    },
+    goals: {
+      energy: { label: "Energia", desc: "Combatti la fatica e aumenta la vitalità" },
+      sleep: { label: "Sonno", desc: "Migliora la qualità e la durata del sonno" },
+      focus: { label: "Focus", desc: "Migliora la chiarezza mentale e la concentrazione" },
+      immunity: { label: "Immunità", desc: "Supporta la funzione del sistema immunitario" },
+      stress: { label: "Stress", desc: "Gestisci lo stress e promuovi la calma" },
+      longevity: { label: "Longevità", desc: "Supporta un invecchiamento sano" },
+      muscle: { label: "Muscoli e Recupero", desc: "Supporta la crescita muscolare e il recupero" },
+      skin: { label: "Pelle e Luminosità", desc: "Supporta la salute della pelle, dei capelli e delle unghie" },
+    } as Record<string, { label: string; desc: string }>,
+    exerciseFrequencies: {
+      sedentary: "Sedentario/a (poco o nessun esercizio)",
+      light: "Leggero (1-2 volte a settimana)",
+      moderate: "Moderato (3-4 volte a settimana)",
+      intense: "Intenso (5-6 volte a settimana)",
+    },
+    exerciseTypes: {
+      cardio: { label: "Cardio", desc: "Corsa, ciclismo, nuoto, HIIT e allenamento di resistenza" },
+      strength: {
+        label: "Pesi e Allenamento della Forza",
+        desc: "Sollevamento pesi, allenamento con resistenze, CrossFit e bodybuilding",
+      },
+      mobility: {
+        label: "Flessibilità e Mobilità",
+        desc: "Yoga, Pilates, stretching, arti marziali e tecniche di respirazione",
+      },
+    } as Record<string, { label: string; desc: string }>,
+    sleepHours: {
+      "4": "Meno di 5 ore",
+      "6": "5–6 ore",
+      "7": "7–8 ore",
+      "9": "Più di 8 ore",
+    } as Record<string, string>,
+    sleepQualities: {
+      poor: "Scarsa (risvegli frequenti, non riposato/a)",
+      fair: "Discreta (problemi occasionali)",
+      good: "Buona (generalmente riposante)",
+      excellent: "Eccellente (costantemente riposante)",
+    },
+    jobTypes: {
+      desk: "Lavoro sedentario (principalmente seduto/a)",
+      physical: "Lavoro fisico (attivo/in piedi)",
+      hybrid: "Ibrido (mix di lavoro seduto e attivo)",
+    },
+    jobStresses: {
+      low: "Basso (ambiente rilassato)",
+      moderate: "Moderato (stress lavorativo tipico)",
+      high: "Alto (ambiente esigente/sotto pressione)",
+    },
+    skinTypes: {
+      normal: { label: "Normale", desc: "Bilanciata — né troppo secca né grassa, poche imperfezioni" },
+      dry: { label: "Secca", desc: "Tesa, squamosa o ruvida, tendente alla sensibilità" },
+      oily: { label: "Grassa", desc: "Lucida, pori dilatati, tendente a imperfezioni" },
+      mixed: { label: "Mista", desc: "Zona T grassa, guance secche o normali" },
+      sensitive: { label: "Sensibile", desc: "Facilmente irritabile, tendente a rossori o reazioni" },
+      aged: { label: "Pelle Matura", desc: "Rughe sottili, perdita di tonicità ed elasticità, incarnato spento" },
+    } as Record<string, { label: string; desc: string }>,
+    sunExposures: {
+      low: "Bassa (principalmente al chiuso o clima nuvoloso)",
+      moderate: "Moderata (qualche tempo all'aperto)",
+      high: "Alta (tempo regolare all'aperto con esposizione al sole)",
+    },
+    medicalConditions: {
+      hypertension: "Ipertensione",
+      diabetes: "Diabete",
+      "heart-disease": "Malattia cardiaca",
+      thyroid: "Disturbo della tiroide",
+      autoimmune: "Disturbo autoimmune",
+      osteoporosis: "Osteoporosi",
+      "anxiety-depression": "Ansia / Depressione",
+      anaemia: "Anemia / Carenza di ferro",
+      pcos: "PCOS",
+      insomnia: "Insonnia",
+      "kidney-disease": "Malattia renale",
+      "ibd-crohns": "IBD / Morbo di Crohn",
+      pregnancy: "Incinta o in procinto di esserlo",
+      none: "Nessuna delle precedenti",
+    } as Record<string, string>,
+  },
+
+  results: {
+    retake: "← Rifai il questionario",
+    tagline: "Sprout — Il Tuo Piano",
+    title: ["Il Tuo Piano di Integratori", "è Pronto"],
+    loading: "Generazione del piano in corso…",
+    email: {
+      cta: "Ricevi il tuo piano via email",
+      hint: "Ti invieremo il piano completo degli integratori così puoi consultarlo in qualsiasi momento.",
+      sentPrefix: "Piano inviato a",
+      sentSuffix: "— controlla la tua casella di posta.",
+      send: "Invia il mio piano →",
+      sending: "Invio in corso…",
+    },
+    stats: {
+      supplements: "Integratori",
+      timeSlots: "Fasce orarie",
+      highEvidence: "Alta evidenza",
+    },
+    schedule: { title: "Piano Giornaliero" },
+    sprout: {
+      subtitle: "Sprout Lab",
+      title: ["Già nel tuo piano.", "Già in una formula."],
+      matchSuffix: (n: number) => (n > 1 ? "corrispondenze" : "corrispondenza"),
+      includes: (n: number) => `Include ${n} integratori raccomandati nel tuo piano`,
+      shop: (name: string) => `Acquista ${name}`,
+      disclaimer: "Prodotti venduti da Sprout Lab. Contiene gli ingredienti corrispondenti tra gli altri.",
+    },
+    amazon: {
+      title: "Altri brand di integratori",
+      disclaimer: "Link senza affiliazione. Non guadagniamo nulla da queste raccomandazioni.",
+    },
+    footer: {
+      methodology: "Leggi la nostra metodologia →",
+      retake: "Rifai il questionario",
+    },
+    goalLabels: {
+      energy: "Energia",
+      sleep: "Sonno",
+      focus: "Focus",
+      immunity: "Immunità",
+      stress: "Stress",
+      longevity: "Longevità",
+      muscle: "Muscoli e Recupero",
+      skin: "Pelle e Luminosità",
+    } as Record<string, string>,
+  },
+
+  disclaimer: {
+    footer: {
+      consult:
+        "Consulta sempre un professionista sanitario qualificato prima di iniziare qualsiasi regime di integrazione.",
+      methodology: "Metodologia",
+      evidenceBased: "Raccomandazioni basate su evidenze",
+    },
+  },
+
+  methodology: {
+    back: "← Indietro",
+    tagline: "Sprout — Metodologia",
+    title: "La Nostra Metodologia",
+    subtitle:
+      "Sprout utilizza un approccio trasparente e basato su evidenze scientifiche per generare raccomandazioni personalizzate sugli integratori. Ecco come funziona.",
+    evidenceLevels: {
+      title: "Livelli di Evidenza",
+      intro:
+        "A ogni integratore nel nostro database viene assegnato un livello di evidenza basato sulla qualità e quantità delle ricerche a supporto del suo utilizzo:",
+      high: {
+        label: "Alto",
+        title: "Forte Supporto Scientifico",
+        desc: "Molteplici RCT o meta-analisi confermano l'efficacia. Risultati coerenti su popolazioni diverse.",
+      },
+      moderate: {
+        label: "Moderato",
+        title: "Evidenza Promettente",
+        desc: "Alcuni RCT o studi osservazionali supportano l'uso. I risultati possono variare tra le popolazioni.",
+      },
+      low: {
+        label: "Basso",
+        title: "Ricerca Iniziale",
+        desc: "Studi umani limitati o risultati contrastanti. Evidenze cliniche insufficienti al momento.",
+      },
+    },
+    dataSources: {
+      title: "Fonti dei Dati",
+      intro: "Il nostro database di integratori è costruito su ricerche scientifiche, principalmente da:",
+      sources: [
+        { name: "PubMed / MEDLINE", desc: "Fonte principale per studi clinici e revisioni sistematiche" },
+        { name: "Cochrane Reviews", desc: "Revisioni sistematiche e meta-analisi di riferimento" },
+        {
+          name: "NIH Office of Dietary Supplements",
+          desc: "Schede informative complete su sicurezza ed efficacia degli integratori",
+        },
+        { name: "Examine.com", desc: "Aggregatore indipendente di ricerche sugli integratori (per riferimento)" },
+      ],
+    },
+    engine: {
+      title: "Motore di Raccomandazione",
+      intro: "Il nostro motore di raccomandazione utilizza un approccio deterministico e basato su regole:",
+      steps: [
+        {
+          n: "1",
+          title: "Abbinamento agli Obiettivi",
+          desc: "Ogni integratore è etichettato con gli obiettivi di salute che supporta. Quando selezioni i tuoi obiettivi, ti abbiniamo agli integratori con evidenze per quei risultati specifici.",
+        },
+        {
+          n: "2",
+          title: "Adattamenti Dietetici",
+          desc: "Le diete a base vegetale hanno esigenze nutrizionali diverse. Diamo priorità automaticamente a B12 e ferro per vegetariani e vegani, poiché questi nutrienti sono più difficili da ottenere senza prodotti animali.",
+        },
+        {
+          n: "3",
+          title: "Analisi delle Interazioni",
+          desc: "Evidenziamo gli integratori da prendere insieme per sinergia (es. Vitamina D + K2) o separati per un assorbimento ottimale (es. ferro e zinco).",
+        },
+        {
+          n: "4",
+          title: "Ottimizzazione dei Tempi",
+          desc: "Ogni integratore ha un orario ottimale basato sulla farmacocinetica, se richiede cibo e i potenziali effetti su sonno o energia.",
+        },
+      ],
+    },
+    limitations: {
+      title: "Limitazioni",
+      items: [
+        {
+          title: "Non è un consiglio medico",
+          desc: "Questo strumento è solo a scopo educativo. Non può diagnosticare condizioni o sostituire la guida medica professionale.",
+        },
+        {
+          title: "Nessuna interazione farmacologica",
+          desc: "Non teniamo conto delle interazioni integratore-farmaco. Se assumi farmaci, consulta il tuo medico o farmacista.",
+        },
+        {
+          title: "Variazione individuale",
+          desc: "I risultati delle ricerche sono medie di popolazione. La tua risposta personale può differire in base alla genetica, allo stato di salute e ad altri fattori.",
+        },
+        {
+          title: "Dataset selezionato",
+          desc: "Il nostro database include gli integratori più studiati ma non è esaustivo. L'assenza dal nostro elenco non significa che un integratore sia privo di meriti.",
+        },
+      ],
+    },
+    safety: {
+      title: "La Sicurezza Prima di Tutto",
+      header: "Informazioni Importanti sulla Sicurezza",
+      points: [
+        "Consulta sempre un operatore sanitario prima di iniziare qualsiasi regime di integrazione, specialmente se sei in gravidanza, allatti, hai una condizione medica o assumi farmaci.",
+        "Non superare i dosaggi raccomandati. Di più non è sempre meglio e può essere dannoso.",
+        "Se si verificano effetti avversi, interrompi l'uso e consulta un medico.",
+        "Gli integratori non sono valutati dall'FDA per sicurezza ed efficacia prima della commercializzazione.",
+      ],
+    },
+    cta: "Ottieni il tuo piano personalizzato",
+  },
+};
+
+const translations: Record<Locale, typeof en> = { en, it };
+
+export function getT(locale: Locale | string) {
+  return translations[(locale as Locale) in translations ? (locale as Locale) : "en"];
+}

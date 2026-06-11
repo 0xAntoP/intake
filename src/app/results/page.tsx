@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ScheduleView, WellnessProfileCard } from "@/components";
+import { ScheduleView, WellnessProfileCard, useLocale } from "@/components";
 import { generateRecommendations, groupBySchedule } from "@/lib/recommendation-engine";
 import { UserProfile, ScheduleGroup, SupplementRecommendation } from "@/types";
+import { getT } from "@/lib/i18n";
 
 const AMAZON_PRODUCTS: Record<string, { brand: string; shortDesc: string; url: string }> = {
   "omega-3":    { brand: "Nordic Naturals",    shortDesc: "Ultimate Omega · 1280mg EPA/DHA",             url: "https://www.amazon.com/dp/B002CQU564" },
@@ -73,6 +74,10 @@ const SPROUTLAB_PRODUCTS = [
 
 export default function ResultsPage() {
   const router = useRouter();
+  const locale = useLocale();
+  const t = getT(locale);
+  const tr = t.results;
+
   const [schedule, setSchedule] = useState<ScheduleGroup[]>([]);
   const [recommendations, setRecommendations] = useState<SupplementRecommendation[]>([]);
   const [profile, setProfile] = useState<UserProfile | null>(null);
@@ -100,16 +105,11 @@ export default function ResultsPage() {
       <div className="min-h-screen bg-[#FCFCF7] flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block w-6 h-6 border-2 border-[#FFB326] border-t-transparent rounded-full animate-spin mb-4" />
-          <p className="text-sm text-[#9C8B78] tracking-wide">Generating your plan…</p>
+          <p className="text-sm text-[#9C8B78] tracking-wide">{tr.loading}</p>
         </div>
       </div>
     );
   }
-
-  const goalLabels: Record<string, string> = {
-    energy: "Energy", sleep: "Sleep", focus: "Focus", immunity: "Immunity",
-    stress: "Stress", longevity: "Longevity", muscle: "Muscle & Recovery", skin: "Skin & Glow",
-  };
 
   const highEvidence = recommendations.filter((r) => r.evidenceLevel === "high").length;
 
@@ -117,7 +117,6 @@ export default function ResultsPage() {
     e.preventDefault();
     if (!email || emailState !== "idle") return;
     setEmailState("sending");
-    // TODO: wire up to your email service (Resend, Mailchimp, etc.)
     await new Promise((r) => setTimeout(r, 800));
     setEmailState("sent");
   };
@@ -139,17 +138,16 @@ export default function ResultsPage() {
 
         <div className="mb-8">
           <Link href="/intake" className="text-xs tracking-widest uppercase text-[#9C8B78] hover:text-[#2E1B12] transition-colors">
-            ← Retake questionnaire
+            {tr.retake}
           </Link>
         </div>
 
         {/* Hero header */}
         <div className="bg-white border border-[#2E1B12]/10 p-8 md:p-12 mb-px">
-          <p className="text-xs tracking-widest uppercase text-[#9C8B78] mb-3">Sprout — Your Plan</p>
+          <p className="text-xs tracking-widest uppercase text-[#9C8B78] mb-3">{tr.tagline}</p>
           <h1 className="text-3xl md:text-5xl font-normal text-[#2E1B12] mb-4 leading-tight">
-            Your Supplement<br />Plan is Ready
+            {tr.title[0]}<br />{tr.title[1]}
           </h1>
-
 
           {/* Email CTA */}
           <div className="mt-8 pt-8 border-t border-[#2E1B12]/10">
@@ -157,13 +155,13 @@ export default function ResultsPage() {
               <div className="flex items-center gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#FFB326] flex-shrink-0" />
                 <p className="text-sm text-[#2E1B12]">
-                  Plan sent to <span className="font-medium">{email}</span> — check your inbox.
+                  {tr.email.sentPrefix} <span className="font-medium">{email}</span> {tr.email.sentSuffix}
                 </p>
               </div>
             ) : (
               <>
-                <p className="text-sm text-[#2E1B12] mb-1">Receive your plan by email</p>
-                <p className="text-xs text-[#9C8B78] mb-4">We'll send your full supplement schedule so you can reference it anytime.</p>
+                <p className="text-sm text-[#2E1B12] mb-1">{tr.email.cta}</p>
+                <p className="text-xs text-[#9C8B78] mb-4">{tr.email.hint}</p>
                 <form onSubmit={handleEmailSubmit} className="flex gap-2 flex-wrap">
                   <input
                     type="email"
@@ -178,7 +176,7 @@ export default function ResultsPage() {
                     disabled={emailState === "sending"}
                     className="px-6 py-2.5 bg-[#FFB326] text-[#2E1B12] text-sm font-medium hover:bg-[#e6a020] transition-colors disabled:opacity-60 whitespace-nowrap"
                   >
-                    {emailState === "sending" ? "Sending…" : "Send my plan →"}
+                    {emailState === "sending" ? tr.email.sending : tr.email.send}
                   </button>
                 </form>
               </>
@@ -190,21 +188,21 @@ export default function ResultsPage() {
         <div className="bg-white border border-[#2E1B12]/10 border-t-0 grid grid-cols-3 divide-x divide-[#2E1B12]/10 mb-4">
           <div className="p-6 text-center">
             <div className="text-3xl font-normal text-[#FFB326] mb-1">{recommendations.length}</div>
-            <div className="text-xs tracking-widest uppercase text-[#9C8B78]">Supplements</div>
+            <div className="text-xs tracking-widest uppercase text-[#9C8B78]">{tr.stats.supplements}</div>
           </div>
           <div className="p-6 text-center">
             <div className="text-3xl font-normal text-[#FFB326] mb-1">{schedule.length}</div>
-            <div className="text-xs tracking-widest uppercase text-[#9C8B78]">Time slots</div>
+            <div className="text-xs tracking-widest uppercase text-[#9C8B78]">{tr.stats.timeSlots}</div>
           </div>
           <div className="p-6 text-center">
             <div className="text-3xl font-normal text-[#FFB326] mb-1">{highEvidence}</div>
-            <div className="text-xs tracking-widest uppercase text-[#9C8B78]">High evidence</div>
+            <div className="text-xs tracking-widest uppercase text-[#9C8B78]">{tr.stats.highEvidence}</div>
           </div>
         </div>
 
         {/* Daily Schedule */}
         <div className="bg-white border border-[#2E1B12]/10 p-8 md:p-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#2E1B12] mb-8">Daily Schedule</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#2E1B12] mb-8">{tr.schedule.title}</h2>
           <ScheduleView schedule={schedule} />
         </div>
 
@@ -213,13 +211,13 @@ export default function ResultsPage() {
           <div className="bg-[#2E1B12] mt-4 p-8 md:p-12">
             <div className="flex items-start justify-between gap-4 mb-8">
               <div>
-                <p className="text-xs tracking-widest uppercase text-[#FFB326] mb-2">Sprout Lab</p>
+                <p className="text-xs tracking-widest uppercase text-[#FFB326] mb-2">{tr.sprout.subtitle}</p>
                 <p className="text-2xl md:text-3xl font-normal text-[#FCFCF7] leading-tight">
-                  Already in your plan.<br />Already in a formula.
+                  {tr.sprout.title[0]}<br />{tr.sprout.title[1]}
                 </p>
               </div>
               <span className="hidden md:block text-xs tracking-widest uppercase text-[#FCFCF7]/30 mt-1">
-                {matchedProducts.length} match{matchedProducts.length > 1 ? "es" : ""}
+                {matchedProducts.length} {tr.sprout.matchSuffix(matchedProducts.length)}
               </span>
             </div>
 
@@ -235,14 +233,12 @@ export default function ResultsPage() {
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>
-                  <div className="px-6 pb-0 flex items-start justify-between gap-3">
-                    <div>
-                      <p className="text-lg font-medium text-[#FCFCF7] leading-snug">{product.name}</p>
-                      <p className="text-xs text-[#FCFCF7]/50 mt-0.5">{product.tagline}</p>
-                    </div>
-                    <span className="text-xs text-[#FFB326] flex-shrink-0 mt-1">
-                      {product.matched.length} / {product.matchSlugs.length} ingredients
-                    </span>
+                  <div className="px-6 pb-0">
+                    <p className="text-lg font-medium text-[#FCFCF7] leading-snug">{product.name}</p>
+                    <p className="text-xs text-[#FCFCF7]/50 mt-0.5">{product.tagline}</p>
+                    <p className="text-xs text-[#FFB326] mt-2">
+                      {tr.sprout.includes(product.matched.length)}
+                    </p>
                   </div>
 
                   <div className="px-6 flex flex-wrap gap-2">
@@ -263,7 +259,7 @@ export default function ResultsPage() {
                       rel="noopener noreferrer"
                       className="inline-flex w-full items-center justify-between border border-[#FCFCF7]/20 px-5 py-3 text-sm text-[#FCFCF7] hover:border-[#FFB326] hover:text-[#FFB326] transition-colors"
                     >
-                      <span>Shop {product.name}</span>
+                      <span>{tr.sprout.shop(product.name)}</span>
                       <span>→</span>
                     </a>
                   </div>
@@ -272,7 +268,7 @@ export default function ResultsPage() {
             </div>
 
             <p className="text-xs text-[#FCFCF7]/25 mt-6">
-              Products sold by Sprout Lab. Contains matched ingredients among others.
+              {tr.sprout.disclaimer}
             </p>
           </div>
         )}
@@ -281,7 +277,7 @@ export default function ResultsPage() {
         {amazonSuggestions.length > 0 && (
           <div className="bg-[#2E1B12] mt-4 p-8 md:p-12">
             <div className="mb-6">
-              <p className="text-2xl md:text-3xl font-normal text-[#FCFCF7]">Other supplements brands</p>
+              <p className="text-2xl md:text-3xl font-normal text-[#FCFCF7]">{tr.amazon.title}</p>
             </div>
 
             <div className={`grid gap-px bg-[#FCFCF7]/10 ${amazonSuggestions.length === 1 ? "grid-cols-1" : amazonSuggestions.length === 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3"}`}>
@@ -309,7 +305,7 @@ export default function ResultsPage() {
             </div>
 
             <p className="text-xs text-[#FCFCF7]/30 mt-4">
-              Affiliate-free links. We earn nothing from these recommendations.
+              {tr.amazon.disclaimer}
             </p>
           </div>
         )}
@@ -324,13 +320,13 @@ export default function ResultsPage() {
         {/* Footer */}
         <div className="mt-10 flex items-center justify-between">
           <Link href="/methodology" className="text-xs tracking-widest uppercase text-[#9C8B78] hover:text-[#2E1B12] transition-colors">
-            Read our methodology →
+            {tr.footer.methodology}
           </Link>
           <Link
             href="/intake"
             className="inline-flex items-center gap-4 px-6 py-3 border border-[#2E1B12]/20 text-sm text-[#2E1B12] hover:border-[#2E1B12] transition-colors"
           >
-            Retake questionnaire
+            {tr.footer.retake}
           </Link>
         </div>
 
