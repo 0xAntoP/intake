@@ -221,51 +221,83 @@ export default function ResultsPage() {
               </span>
             </div>
 
-            <div className={`grid gap-px ${matchedProducts.length > 1 ? "md:grid-cols-2" : ""}`}>
-              {matchedProducts.map((product) => (
-                <div key={product.id} className="bg-[#FCFCF7]/5 flex flex-col gap-5">
-                  <div className="relative w-full aspect-[3/2] overflow-hidden">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover object-center"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                  </div>
-                  <div className="px-6 pb-0">
-                    <p className="text-lg font-medium text-[#FCFCF7] leading-snug">{product.name}</p>
-                    <p className="text-xs text-[#FCFCF7]/50 mt-0.5">{product.tagline}</p>
-                    <p className="text-xs text-[#FFB326] mt-2">
-                      {tr.sprout.includes(product.matched.length)}
-                    </p>
-                  </div>
-
-                  <div className="px-6 flex flex-wrap gap-2">
-                    {product.matched.map((slug) => (
-                      <span
-                        key={slug}
-                        className="text-xs border border-[#FFB326]/30 text-[#FFB326] px-2.5 py-1"
-                      >
-                        {product.ingredientLabels[slug]}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="px-6 pb-6 mt-auto">
-                    <a
-                      href={product.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex w-full items-center justify-between border border-[#FCFCF7]/20 px-5 py-3 text-sm text-[#FCFCF7] hover:border-[#FFB326] hover:text-[#FFB326] transition-colors"
-                    >
-                      <span>{tr.sprout.shop(product.name)}</span>
-                      <span>→</span>
-                    </a>
-                  </div>
+            {matchedProducts.length === 1 ? (
+              <div className="bg-[#FCFCF7]/5 flex flex-col sm:flex-row overflow-hidden">
+                <div className="relative aspect-[4/3] sm:aspect-auto sm:w-5/12 flex-shrink-0 overflow-hidden">
+                  <Image
+                    src={matchedProducts[0].image}
+                    alt={matchedProducts[0].name}
+                    fill
+                    className="object-cover object-center"
+                    sizes="(max-width: 640px) 100vw, 42vw"
+                  />
                 </div>
-              ))}
-            </div>
+                <div className="flex flex-col justify-between flex-1 p-8 gap-8">
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-lg font-medium text-[#FCFCF7] leading-snug">{matchedProducts[0].name}</p>
+                      <p className="text-xs text-[#FCFCF7]/50 mt-0.5">{matchedProducts[0].tagline}</p>
+                      <p className="text-xs text-[#FFB326] mt-3">{tr.sprout.includes(matchedProducts[0].matched.length)}</p>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {matchedProducts[0].matched.map((slug) => (
+                        <span key={slug} className="text-xs border border-[#FFB326]/30 text-[#FFB326] px-2.5 py-1">
+                          {matchedProducts[0].ingredientLabels[slug]}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <a
+                    href={matchedProducts[0].url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex w-full items-center justify-between border border-[#FCFCF7]/20 px-5 py-3 text-sm text-[#FCFCF7] hover:border-[#FFB326] hover:text-[#FFB326] transition-colors"
+                  >
+                    <span>{tr.sprout.shop(matchedProducts[0].name)}</span>
+                    <span>→</span>
+                  </a>
+                </div>
+              </div>
+            ) : (
+              <div className="grid gap-px md:grid-cols-2">
+                {matchedProducts.map((product) => (
+                  <div key={product.id} className="bg-[#FCFCF7]/5 flex flex-col gap-5">
+                    <div className="relative w-full aspect-[3/2] overflow-hidden">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="object-cover object-center"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    </div>
+                    <div className="px-6 pb-0">
+                      <p className="text-lg font-medium text-[#FCFCF7] leading-snug">{product.name}</p>
+                      <p className="text-xs text-[#FCFCF7]/50 mt-0.5">{product.tagline}</p>
+                      <p className="text-xs text-[#FFB326] mt-2">{tr.sprout.includes(product.matched.length)}</p>
+                    </div>
+                    <div className="px-6 flex flex-wrap gap-2">
+                      {product.matched.map((slug) => (
+                        <span key={slug} className="text-xs border border-[#FFB326]/30 text-[#FFB326] px-2.5 py-1">
+                          {product.ingredientLabels[slug]}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="px-6 pb-6 mt-auto">
+                      <a
+                        href={product.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex w-full items-center justify-between border border-[#FCFCF7]/20 px-5 py-3 text-sm text-[#FCFCF7] hover:border-[#FFB326] hover:text-[#FFB326] transition-colors"
+                      >
+                        <span>{tr.sprout.shop(product.name)}</span>
+                        <span>→</span>
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
 
             <p className="text-xs text-[#FCFCF7]/25 mt-6">
               {tr.sprout.disclaimer}
