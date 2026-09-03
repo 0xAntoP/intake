@@ -10,7 +10,11 @@ export function IframeResizer() {
     if (window.self === window.top) return;
 
     const send = () => {
-      const height = document.documentElement.scrollHeight;
+      const height = Math.max(
+        document.documentElement.scrollHeight,
+        document.body?.scrollHeight ?? 0,
+        document.documentElement.offsetHeight,
+      );
       window.parent.postMessage({ type: "intake-resize", height }, "*");
     };
 
@@ -18,8 +22,19 @@ export function IframeResizer() {
 
     const observer = new ResizeObserver(send);
     observer.observe(document.documentElement);
+    if (document.body) observer.observe(document.body);
 
-    return () => observer.disconnect();
+    // Re-send after fonts, images and entrance animations settle, since the
+    // initial measurement can land before late layout (e.g. the wellness card).
+    const timers = [100, 400, 900, 1600].map((t) => window.setTimeout(send, t));
+    window.addEventListener("load", send);
+    document.fonts?.ready.then(send).catch(() => {});
+
+    return () => {
+      observer.disconnect();
+      timers.forEach(window.clearTimeout);
+      window.removeEventListener("load", send);
+    };
   }, [pathname]);
 
   return null;

@@ -379,7 +379,7 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
         <p className="text-[10px] tracking-widest text-white/40">2026</p>
       </div>
 
-      <div className="px-4 md:px-12 pt-4 md:pt-6 pb-8 md:pb-16">
+      <div className="px-4 md:px-12 pt-4 md:pt-6 pb-12 md:pb-24">
         {/* Archetype — left aligned, sits near the top */}
         <div className="mb-6 md:mb-10">
           <p className="text-[9px] tracking-[0.2em] uppercase text-[#FFB326]/90 mb-1.5 md:mb-3">Your archetype</p>
@@ -398,7 +398,7 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
         </div>
 
         {/* Radar + overall score — centered */}
-        <div className="flex flex-col items-center gap-1 mb-4 md:mb-10">
+        <div className="flex flex-col items-center gap-1 mb-4 md:mb-6">
           <div className="w-[200px] h-[200px] md:w-[280px] md:h-[280px]">
             <WellnessRadarChart scores={scores} progress={progress} size={240} />
           </div>
@@ -411,7 +411,7 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
         </div>
 
         {/* Footer */}
-        <div ref={footerRef} className="mt-6 md:mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div ref={footerRef} className="mt-5 md:mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="order-2 sm:order-1 text-[10px] tracking-[0.22em] uppercase text-white/40">sproutlab.it</p>
           <button
             onClick={handleShare}
