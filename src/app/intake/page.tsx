@@ -27,7 +27,7 @@ const TOTAL_STEPS = 10;
 
 const GOAL_VALUES: Goal[] = ["energy", "sleep", "focus", "immunity", "stress", "longevity", "muscle", "skin"];
 const DIET_VALUES: Diet[] = ["omnivore", "carnivore", "pescatarian", "vegetarian", "vegan", "keto", "paleo"];
-const SEX_VALUES: Sex[] = ["male", "female", "other"];
+const SEX_VALUES: Sex[] = ["male", "female"];
 const EXERCISE_FREQUENCY_VALUES: ExerciseFrequency[] = ["sedentary", "light", "moderate", "intense"];
 const EXERCISE_INTENSITY_VALUES: ExerciseIntensity[] = ["cardio", "strength", "mobility"];
 const SLEEP_QUALITY_VALUES: SleepQuality[] = ["poor", "fair", "good", "excellent"];
@@ -345,7 +345,7 @@ export default function IntakePage() {
                 <label className="block text-sm font-medium text-[#2E1B12] mb-2">
                   {ti.steps.basics.sexLabel}
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {SEX_VALUES.map((value) => (
                     <button
                       key={value}
