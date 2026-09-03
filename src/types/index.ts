@@ -90,6 +90,8 @@ export type MedicalCondition = "hypertension" | "diabetes" | "pregnancy" | "thyr
 export type UserProfile = {
   age: number;
   sex: Sex;
+  heightCm?: number;
+  weightKg?: number;
   diet: Diet;
   goals: Goal[];
   currentSupplements: string[];
@@ -113,6 +115,8 @@ export type UserProfile = {
 export type IntakeFormData = {
   age: string;
   sex: Sex | "";
+  height: string;
+  weight: string;
   diet: Diet | "";
   goals: Goal[];
   currentSupplements: string[];

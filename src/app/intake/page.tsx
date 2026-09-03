@@ -58,6 +58,8 @@ export default function IntakePage() {
   const [formData, setFormData] = useState<IntakeFormData>({
     age: "",
     sex: "",
+    height: "",
+    weight: "",
     diet: "",
     goals: [],
     currentSupplements: [],
@@ -90,6 +92,14 @@ export default function IntakePage() {
       }
       if (!formData.sex) {
         newErrors.push(ti.errors.sex);
+      }
+      const height = parseInt(formData.height);
+      if (!formData.height || isNaN(height) || height < 120 || height > 250) {
+        newErrors.push(ti.errors.height);
+      }
+      const weight = parseInt(formData.weight);
+      if (!formData.weight || isNaN(weight) || weight < 30 || weight > 300) {
+        newErrors.push(ti.errors.weight);
       }
     } else if (currentStep === 2) {
       if (!formData.diet) {
@@ -154,6 +164,8 @@ export default function IntakePage() {
       const profileData = {
         age: parseInt(formData.age),
         sex: formData.sex,
+        heightCm: parseInt(formData.height),
+        weightKg: parseInt(formData.weight),
         diet: formData.diet,
         goals: formData.goals,
         currentSupplements: formData.currentSupplements,
@@ -291,6 +303,42 @@ export default function IntakePage() {
                   placeholder={ti.steps.basics.agePlaceholder}
                 />
                 <p className="mt-1 text-sm text-[#9C8B78]">{ti.steps.basics.ageHint}</p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="height" className="block text-sm font-medium text-[#2E1B12] mb-2">
+                    {ti.steps.basics.heightLabel}
+                  </label>
+                  <input
+                    type="number"
+                    id="height"
+                    min="120"
+                    max="250"
+                    value={formData.height}
+                    onChange={(e) => setFormData({ ...formData, height: e.target.value })}
+                    className="w-full px-4 py-3 border border-[#2E1B12]/20 bg-white text-[#2E1B12] focus:outline-none focus:border-[#2E1B12] text-lg transition-colors"
+                    placeholder={ti.steps.basics.heightPlaceholder}
+                  />
+                  <p className="mt-1 text-sm text-[#9C8B78]">{ti.steps.basics.heightHint}</p>
+                </div>
+
+                <div>
+                  <label htmlFor="weight" className="block text-sm font-medium text-[#2E1B12] mb-2">
+                    {ti.steps.basics.weightLabel}
+                  </label>
+                  <input
+                    type="number"
+                    id="weight"
+                    min="30"
+                    max="300"
+                    value={formData.weight}
+                    onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
+                    className="w-full px-4 py-3 border border-[#2E1B12]/20 bg-white text-[#2E1B12] focus:outline-none focus:border-[#2E1B12] text-lg transition-colors"
+                    placeholder={ti.steps.basics.weightPlaceholder}
+                  />
+                  <p className="mt-1 text-sm text-[#9C8B78]">{ti.steps.basics.weightHint}</p>
+                </div>
               </div>
 
               <div>

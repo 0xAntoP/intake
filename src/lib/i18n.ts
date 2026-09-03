@@ -70,6 +70,8 @@ const en = {
     errors: {
       age: "Please enter a valid age between 18 and 120",
       sex: "Please select your sex",
+      height: "Please enter a valid height between 120 and 250 cm",
+      weight: "Please enter a valid weight between 30 and 300 kg",
       diet: "Please select your diet type",
       caffeine: "Please select your caffeine intake level",
       goals: "Please select at least one health goal",
@@ -87,6 +89,12 @@ const en = {
         agePlaceholder: "Enter your age",
         ageHint: "Must be 18 or older",
         sexLabel: "What is your sex?",
+        heightLabel: "What is your height?",
+        heightPlaceholder: "Enter your height in cm",
+        heightHint: "In centimetres",
+        weightLabel: "What is your weight?",
+        weightPlaceholder: "Enter your weight in kg",
+        weightHint: "In kilograms",
       },
       diet: {
         dietLabel: "What is your diet type?",
@@ -478,6 +486,8 @@ const it: typeof en = {
     errors: {
       age: "Inserisci un'età valida compresa tra 18 e 120 anni",
       sex: "Seleziona il tuo sesso",
+      height: "Inserisci un'altezza valida compresa tra 120 e 250 cm",
+      weight: "Inserisci un peso valido compreso tra 30 e 300 kg",
       diet: "Seleziona il tuo tipo di dieta",
       caffeine: "Seleziona il tuo livello di assunzione di caffeina",
       goals: "Seleziona almeno un obiettivo di salute",
@@ -495,6 +505,12 @@ const it: typeof en = {
         agePlaceholder: "Inserisci la tua età",
         ageHint: "Deve avere almeno 18 anni",
         sexLabel: "Qual è il tuo sesso?",
+        heightLabel: "Quanto sei alto/a?",
+        heightPlaceholder: "Inserisci la tua altezza in cm",
+        heightHint: "In centimetri",
+        weightLabel: "Quanto pesi?",
+        weightPlaceholder: "Inserisci il tuo peso in kg",
+        weightHint: "In chilogrammi",
       },
       diet: {
         dietLabel: "Qual è il tuo tipo di dieta?",
