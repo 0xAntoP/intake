@@ -379,7 +379,7 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
         <p className="text-[10px] tracking-widest text-white/40">2026</p>
       </div>
 
-      <div className="px-4 md:px-12 pt-4 md:pt-6 pb-4 md:pb-12">
+      <div className="px-4 md:px-12 pt-4 md:pt-6 pb-8 md:pb-16">
         {/* Archetype — left aligned, sits near the top */}
         <div className="mb-6 md:mb-10">
           <p className="text-[9px] tracking-[0.2em] uppercase text-[#FFB326]/90 mb-1.5 md:mb-3">Your archetype</p>
@@ -411,12 +411,12 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
         </div>
 
         {/* Footer */}
-        <div ref={footerRef} className="mt-4 md:mt-8 flex items-center justify-between gap-4 flex-wrap">
-          <p className="text-[10px] tracking-[0.22em] uppercase text-white/40">sproutlab.it</p>
+        <div ref={footerRef} className="mt-6 md:mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="order-2 sm:order-1 text-[10px] tracking-[0.22em] uppercase text-white/40">sproutlab.it</p>
           <button
             onClick={handleShare}
             disabled={shareState === "generating"}
-            className="text-[10px] tracking-[0.16em] uppercase border border-[#FFB326]/40 text-[#FFB326]/70 px-4 py-2 md:px-5 md:py-2.5 hover:border-[#FFB326] hover:text-[#FFB326] transition-colors disabled:opacity-50"
+            className="order-1 sm:order-2 w-full sm:w-auto text-xs md:text-sm font-medium tracking-[0.16em] uppercase bg-[#FFB326] text-[#2E1B12] rounded-full px-6 py-3.5 md:px-9 md:py-4 shadow-lg shadow-[#FFB326]/25 hover:bg-[#e6a020] transition-colors disabled:opacity-50"
           >
             {shareState === "generating" ? "Generating…" : shareState === "done" ? "Saved ✓" : "Share your profile ↗"}
           </button>
