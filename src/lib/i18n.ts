@@ -268,7 +268,7 @@ const en = {
   results: {
     retake: "← Retake questionnaire",
     tagline: "Sprout — Your Plan",
-    title: ["Your Supplement", "Plan is Ready"],
+    title: ["Your Personalized Supplement", "Plan is Ready"],
     loading: "Generating your plan…",
     email: {
       cta: "Receive your plan by email",
@@ -688,7 +688,7 @@ const it: typeof en = {
   results: {
     retake: "← Rifai il questionario",
     tagline: "Sprout — Il Tuo Piano",
-    title: ["Il Tuo Piano di Integratori", "è Pronto"],
+    title: ["Il Tuo Piano di Integratori Personalizzato", "è Pronto"],
     loading: "Generazione del piano in corso…",
     email: {
       cta: "Ricevi il tuo piano via email",
