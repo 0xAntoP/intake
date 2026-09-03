@@ -379,60 +379,35 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
         <p className="text-[10px] tracking-widest text-white/40">2026</p>
       </div>
 
-      <div className="p-4 md:p-12">
-        {/* Header: archetype + radar — always side by side */}
-        <div className="grid grid-cols-[1fr_auto] gap-4 md:gap-10 items-center mb-4 md:mb-10">
-          <div>
-            <p className="text-[9px] tracking-[0.2em] uppercase text-[#FFB326]/90 mb-1.5 md:mb-3">Your archetype</p>
-            <h2 className="text-lg md:text-[38px] font-normal text-[#FFB326] leading-tight mb-1.5 md:mb-3 tracking-tight">
-              {archetype.name}
-            </h2>
-            <p className="text-xs md:text-sm text-white/85 mb-3 md:mb-7 leading-relaxed">{archetype.tagline}</p>
+      <div className="px-4 md:px-12 pt-4 md:pt-6 pb-4 md:pb-12">
+        {/* Archetype — left aligned, sits near the top */}
+        <div className="mb-6 md:mb-10">
+          <p className="text-[9px] tracking-[0.2em] uppercase text-[#FFB326]/90 mb-1.5 md:mb-3">Your archetype</p>
+          <h2 className="text-lg md:text-[38px] font-normal text-[#FFB326] leading-tight mb-1.5 md:mb-3 tracking-tight">
+            {archetype.name}
+          </h2>
+          <p className="text-xs md:text-sm text-white/85 mb-3 md:mb-5 leading-relaxed">{archetype.tagline}</p>
 
-            <div className="flex flex-wrap gap-1.5">
-              {chips.map((chip) => (
-                <span key={chip} className="text-[9px] tracking-[0.1em] uppercase text-white/80 border border-white/30 px-2 py-1">
-                  {chip}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Radar + overall score */}
-          <div className="flex flex-col items-center gap-1">
-            <div className="w-[130px] h-[130px] md:w-[240px] md:h-[240px]">
-              <WellnessRadarChart scores={scores} progress={progress} size={240} />
-            </div>
-            <div className="text-center">
-              <p className="text-3xl md:text-[46px] font-light text-white leading-none tabular-nums">
-                {Math.round(overall * progress)}
-              </p>
-              <p className="text-[8px] tracking-[0.24em] uppercase text-white/40 mt-1">Overall</p>
-            </div>
+          <div className="flex flex-wrap gap-1.5">
+            {chips.map((chip) => (
+              <span key={chip} className="text-[9px] tracking-[0.1em] uppercase text-white/80 border border-white/30 px-2 py-1">
+                {chip}
+              </span>
+            ))}
           </div>
         </div>
 
-        {/* Score grid — 3 × 2 metric tiles */}
-        <div className="grid grid-cols-3 gap-px bg-white/[0.1] mb-4 md:mb-10">
-          {DIMENSIONS.map((dim) => (
-            <div key={dim} className="px-3 py-3 md:px-5 md:py-5" style={{ backgroundColor: "rgba(20,12,6,0.55)" }}>
-              <p className="text-xl md:text-[30px] font-light text-white tabular-nums leading-none mb-1">
-                {Math.round(scores[dim] * progress)}
-              </p>
-              <p className="text-[8px] md:text-[9px] tracking-[0.18em] uppercase text-white/60 mb-2">
-                {DIM_LABELS[dim]}
-              </p>
-              <div className="h-[2px] bg-white/10 overflow-hidden rounded-full">
-                <div
-                  className="h-full bg-[#FFB326] rounded-full"
-                  style={{
-                    width: `${scores[dim] * progress}%`,
-                    transition: "width 1s cubic-bezier(0.16, 1, 0.3, 1)",
-                  }}
-                />
-              </div>
-            </div>
-          ))}
+        {/* Radar + overall score — centered */}
+        <div className="flex flex-col items-center gap-1 mb-4 md:mb-10">
+          <div className="w-[200px] h-[200px] md:w-[280px] md:h-[280px]">
+            <WellnessRadarChart scores={scores} progress={progress} size={240} />
+          </div>
+          <div className="text-center">
+            <p className="text-3xl md:text-[46px] font-light text-white leading-none tabular-nums">
+              {Math.round(overall * progress)}
+            </p>
+            <p className="text-[8px] tracking-[0.24em] uppercase text-white/40 mt-1">Overall</p>
+          </div>
         </div>
 
         {/* Footer */}
