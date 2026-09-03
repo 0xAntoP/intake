@@ -293,7 +293,7 @@ const en = {
       disclaimer: "Products sold by Sprout Lab. Contains matched ingredients among others.",
     },
     amazon: {
-      title: "Other supplements brands",
+      title: "Other supplements in your plan",
       disclaimer: "Affiliate-free links. We earn nothing from these recommendations.",
     },
     footer: {
@@ -713,7 +713,7 @@ const it: typeof en = {
       disclaimer: "Prodotti venduti da Sprout Lab. Contiene gli ingredienti corrispondenti tra gli altri.",
     },
     amazon: {
-      title: "Altri brand di integratori",
+      title: "Altri integratori nel tuo piano",
       disclaimer: "Link senza affiliazione. Non guadagniamo nulla da queste raccomandazioni.",
     },
     footer: {
