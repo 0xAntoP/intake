@@ -104,6 +104,7 @@ export type UserProfile = {
   caffeineIntake?: CaffeineIntake;
   sunExposure?: SunExposure;
   skinType?: SkinType;
+  smokes?: boolean;
   jobType?: JobType;
   jobStress?: JobStress;
   medications?: string;
@@ -129,6 +130,7 @@ export type IntakeFormData = {
   caffeineIntake: CaffeineIntake | "";
   sunExposure: SunExposure | "";
   skinType: SkinType | "";
+  smokes: "yes" | "no" | "";
   jobType: JobType | "";
   jobStress: JobStress | "";
   medications: string;

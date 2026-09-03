@@ -72,6 +72,7 @@ export default function IntakePage() {
     caffeineIntake: "",
     sunExposure: "",
     skinType: "",
+    smokes: "",
     jobType: "",
     jobStress: "",
     medications: "",
@@ -138,6 +139,9 @@ export default function IntakePage() {
       if (!formData.skinType) {
         newErrors.push(ti.errors.skinType);
       }
+      if (!formData.smokes) {
+        newErrors.push(ti.errors.smoking);
+      }
     }
 
     setErrors(newErrors);
@@ -178,6 +182,7 @@ export default function IntakePage() {
         caffeineIntake: formData.caffeineIntake,
         sunExposure: formData.sunExposure,
         skinType: formData.skinType || undefined,
+        smokes: formData.smokes === "yes",
         jobType: formData.jobType,
         jobStress: formData.jobStress,
         medications: formData.medications.trim() || "None",
@@ -736,6 +741,28 @@ export default function IntakePage() {
                       }`}
                     >
                       <span className="font-medium text-sm">{ti.sunExposures[value]}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[#2E1B12] mb-3">
+                  {ti.steps.skin.smokeLabel}
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {(["yes", "no"] as const).map((value) => (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, smokes: value })}
+                      className={`px-4 py-3 border text-center text-sm transition-colors ${
+                        formData.smokes === value
+                          ? "border-[#2E1B12] bg-[#2E1B12] text-white"
+                          : "border-[#2E1B12]/20 bg-white text-[#2E1B12] hover:border-[#2E1B12]"
+                      }`}
+                    >
+                      {value === "yes" ? ti.steps.skin.smokeYes : ti.steps.skin.smokeNo}
                     </button>
                   ))}
                 </div>

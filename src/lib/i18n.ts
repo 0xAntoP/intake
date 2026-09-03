@@ -82,6 +82,7 @@ const en = {
       sleepHours: "Please enter your sleep hours",
       sleepQuality: "Please select your sleep quality",
       skinType: "Please select your skin type",
+      smoking: "Please tell us whether you smoke",
     },
     steps: {
       basics: {
@@ -124,6 +125,9 @@ const en = {
       skin: {
         typeLabel: "What is your skin type?",
         sunLabel: "How much sun exposure do you get daily?",
+        smokeLabel: "Do you smoke?",
+        smokeYes: "Yes",
+        smokeNo: "No",
       },
       health: {
         medicationsLabel: "What medications are you currently taking? (if any)",
@@ -498,6 +502,7 @@ const it: typeof en = {
       sleepHours: "Inserisci le ore di sonno",
       sleepQuality: "Seleziona la qualità del tuo sonno",
       skinType: "Seleziona il tuo tipo di pelle",
+      smoking: "Indica se fumi",
     },
     steps: {
       basics: {
@@ -540,6 +545,9 @@ const it: typeof en = {
       skin: {
         typeLabel: "Qual è il tuo tipo di pelle?",
         sunLabel: "Quanta esposizione al sole hai quotidianamente?",
+        smokeLabel: "Fumi?",
+        smokeYes: "Sì",
+        smokeNo: "No",
       },
       health: {
         medicationsLabel: "Quali farmaci stai assumendo attualmente? (se applicabile)",
