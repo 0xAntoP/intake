@@ -91,28 +91,28 @@ function computeWellnessScores(profile: UserProfile): WellnessScores {
   };
 }
 
-function getArchetype(profile: UserProfile): { name: string; tagline: string } {
+function getArchetype(profile: UserProfile): { name: string; tagline: string; image: string } {
   const goals = new Set(profile.goals);
   const isHighStress = profile.stressLevel === "high" || profile.jobStress === "high";
   const isAthlete = profile.exerciseFrequency === "intense" || profile.exerciseIntensity?.includes("strength");
 
   if (goals.has("muscle") && isAthlete)
-    return { name: "THE IRON PROTOCOL", tagline: "Built for performance. Engineered to recover." };
+    return { name: "THE IRON PROTOCOL", tagline: "Built for performance. Engineered to recover.", image: "/archetypes/iron-protocol.jpg" };
   if (goals.has("focus") && profile.caffeineIntake === "high")
-    return { name: "THE WIRED OPTIMIZER", tagline: "Caffeine runs the engine. Now let's tune it." };
+    return { name: "THE WIRED OPTIMIZER", tagline: "Caffeine runs the engine. Now let's tune it.", image: "/archetypes/wired-optimizer.jpg" };
   if (goals.has("sleep") && (profile.sleepQuality === "poor" || (profile.sleepHours !== undefined && profile.sleepHours < 6)))
-    return { name: "THE SLEEP DEBT PROJECT", tagline: "Recovery is where the real gains happen." };
+    return { name: "THE SLEEP DEBT PROJECT", tagline: "Recovery is where the real gains happen.", image: "/archetypes/sleep-debt-project.jpg" };
   if (goals.has("longevity") && !isHighStress)
-    return { name: "THE LONGEVITY PLAY", tagline: "Not just living longer — living better." };
+    return { name: "THE LONGEVITY PLAY", tagline: "Not just living longer — living better.", image: "/archetypes/longevity-play.jpg" };
   if (isHighStress || goals.has("stress"))
-    return { name: "THE BURNOUT ANTIDOTE", tagline: "High pressure meets high resilience." };
+    return { name: "THE BURNOUT ANTIDOTE", tagline: "High pressure meets high resilience.", image: "/archetypes/burnout-antidote.jpg" };
   if (goals.has("skin"))
-    return { name: "THE GLOW PROTOCOL", tagline: "Inside-out radiance. Evidence-backed." };
+    return { name: "THE GLOW PROTOCOL", tagline: "Inside-out radiance. Evidence-backed.", image: "/archetypes/glow-protocol.jpg" };
   if (goals.has("immunity"))
-    return { name: "THE DEFENSE SYSTEM", tagline: "Your body's first line of defense, optimized." };
+    return { name: "THE DEFENSE SYSTEM", tagline: "Your body's first line of defense, optimized.", image: "/archetypes/defense-system.jpg" };
   if (goals.has("energy"))
-    return { name: "THE ENERGY BLUEPRINT", tagline: "Sustainable fuel. No crash required." };
-  return { name: "THE COMPLETE PROTOCOL", tagline: "Whole-system optimization. Nothing left behind." };
+    return { name: "THE ENERGY BLUEPRINT", tagline: "Sustainable fuel. No crash required.", image: "/archetypes/energy-blueprint.jpg" };
+  return { name: "THE COMPLETE PROTOCOL", tagline: "Whole-system optimization. Nothing left behind.", image: "/archetypes/complete-protocol.jpg" };
 }
 
 function generateInsights(profile: UserProfile, scores: WellnessScores): string[] {
@@ -218,7 +218,6 @@ interface WellnessProfileCardProps {
 export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
   const [progress, setProgress] = useState(0);
   const [shareState, setShareState] = useState<"idle" | "generating" | "done">("idle");
-  const [bgDataUrl, setBgDataUrl] = useState<string>("/wellness-bg.jpg");
   const cardRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
   const bgImgRef = useRef<HTMLImageElement>(null);
@@ -228,6 +227,8 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
   const archetype = getArchetype(profile);
   const insights = generateInsights(profile, scores);
   const overall = Math.round(Object.values(scores).reduce((a, b) => a + b, 0) / DIMENSIONS.length);
+
+  const [bgDataUrl, setBgDataUrl] = useState<string>(archetype.image);
 
   useEffect(() => {
     let start: number | null = null;
@@ -240,9 +241,10 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
     return () => cancelAnimationFrame(raf);
   }, []);
 
-  // Pre-load background as base64 so html-to-image can embed it in the capture
+  // Pre-load the archetype background as base64 so html-to-image can embed it in the capture
   useEffect(() => {
-    fetch("/wellness-bg.jpg")
+    setBgDataUrl(archetype.image);
+    fetch(archetype.image)
       .then((r) => r.blob())
       .then((blob) => {
         const reader = new FileReader();
@@ -250,7 +252,7 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
         reader.readAsDataURL(blob);
       })
       .catch(() => {});
-  }, []);
+  }, [archetype.image]);
 
   const handleShare = async () => {
     if (!cardRef.current || shareState === "generating") return;
