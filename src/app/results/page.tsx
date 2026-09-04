@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ScheduleView, WellnessProfileCard, useLocale } from "@/components";
-import { generateRecommendations, groupBySchedule } from "@/lib/recommendation-engine";
+import { generateRecommendations, groupBySchedule, SPROUT_PRODUCT_MATCH_SLUGS } from "@/lib/recommendation-engine";
 import { UserProfile, ScheduleGroup, SupplementRecommendation } from "@/types";
 import { getT } from "@/lib/i18n";
 
@@ -45,7 +45,7 @@ const SPROUTLAB_PRODUCTS = [
     imageWidth: 897,
     imageHeight: 739,
     url: "https://sproutlab.it/shop/mycofuel/",
-    matchSlugs: ["cordyceps", "ashwagandha", "reishi", "maca", "lions-mane", "rhodiola", "magnesium", "vitamin-b6", "zinc", "turmeric"],
+    matchSlugs: SPROUT_PRODUCT_MATCH_SLUGS.mycofuel,
     ingredientLabels: {
       cordyceps: "Cordyceps",
       ashwagandha: "Ashwagandha",
@@ -67,7 +67,7 @@ const SPROUTLAB_PRODUCTS = [
     imageWidth: 897,
     imageHeight: 739,
     url: "https://sproutlab.it/shop/mycoderm/",
-    matchSlugs: ["tremella", "cordyceps", "reishi", "lions-mane", "astaxanthin", "magnesium", "zinc", "vitamin-b6", "turmeric"],
+    matchSlugs: SPROUT_PRODUCT_MATCH_SLUGS.mycoderm,
     ingredientLabels: {
       tremella: "Tremella",
       cordyceps: "Cordyceps",

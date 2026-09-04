@@ -32,6 +32,22 @@ const dietSupplementPriority: Record<Diet, string[]> = {
   "gluten-free": [],
 };
 
+// Single source of truth for which ingredients count toward a Sprout Lab
+// product "match" — shared with the results page so the guarantee below
+// (generateRecommendations always keeps at least one product eligible)
+// stays in sync with what the UI actually checks.
+export const SPROUT_PRODUCT_MATCH_SLUGS: Record<string, string[]> = {
+  mycofuel: ["cordyceps", "ashwagandha", "reishi", "maca", "lions-mane", "rhodiola", "magnesium", "vitamin-b6", "zinc", "turmeric"],
+  mycoderm: ["tremella", "cordyceps", "reishi", "lions-mane", "astaxanthin", "magnesium", "zinc", "vitamin-b6", "turmeric"],
+};
+
+// A Sprout product card only shows once this many of its ingredients are
+// in the plan — keep in step with the ".filter" in results/page.tsx.
+const SPROUT_MIN_MATCH = 2;
+
+// Cap the final plan so it never feels overwhelming.
+export const MAX_RECOMMENDATIONS = 6;
+
 function getSupplements(): SupplementData[] {
   return supplementsData.supplements as SupplementData[];
 }
@@ -64,7 +80,9 @@ function generateRationale(
   const goalPhrases = matchedGoals.map((g) => goalDescriptions[g]);
   let rationale = "";
 
-  if (goalPhrases.length === 1) {
+  if (goalPhrases.length === 0) {
+    rationale = "Included based on your profile.";
+  } else if (goalPhrases.length === 1) {
     rationale = `Recommended to support ${goalPhrases[0]}.`;
   } else if (goalPhrases.length === 2) {
     rationale = `Recommended to support ${goalPhrases[0]} and ${goalPhrases[1]}.`;
@@ -204,13 +222,65 @@ export function generateRecommendations(profile: UserProfile): SupplementRecomme
     }
   }
 
+  // Guarantee at least one Sprout Lab product will always match the plan:
+  // find the product with the most natural overlap, then top it up (if
+  // needed) to SPROUT_MIN_MATCH and protect those slugs from the cap below.
+  const dietOrLifestyleSlugs = new Set([...dietPriority, ...additionalSupplements]);
+  const protectedSproutSlugs = new Set<string>();
+  {
+    const entries = Object.entries(SPROUT_PRODUCT_MATCH_SLUGS);
+    let bestId = entries[0][0];
+    let bestCount = -1;
+    for (const [id, slugs] of entries) {
+      const count = slugs.filter((s) => recommendedSlugs.has(s)).length;
+      // Favor Mycoderm for skin-focused profiles when it's at least as good a fit.
+      const preferSkin = id === "mycoderm" && profile.goals.includes("skin");
+      if (count > bestCount || (preferSkin && count === bestCount)) {
+        bestCount = count;
+        bestId = id;
+      }
+    }
+
+    const targetSlugs = SPROUT_PRODUCT_MATCH_SLUGS[bestId];
+    for (const slug of targetSlugs) {
+      if (recommendedSlugs.has(slug)) protectedSproutSlugs.add(slug);
+      if (protectedSproutSlugs.size >= SPROUT_MIN_MATCH) break;
+    }
+    if (protectedSproutSlugs.size < SPROUT_MIN_MATCH) {
+      for (const slug of targetSlugs) {
+        if (protectedSproutSlugs.has(slug)) continue;
+        recommendedSlugs.add(slug);
+        protectedSproutSlugs.add(slug);
+        if (protectedSproutSlugs.size >= SPROUT_MIN_MATCH) break;
+      }
+    }
+  }
+
+  // Rank candidates and cap the plan at MAX_RECOMMENDATIONS, so a broad set
+  // of goals never produces an overwhelming stack. Protected Sprout slugs
+  // always survive the cut; everything else is ranked by goal relevance,
+  // lifestyle boosts, diet/safety priority, and evidence strength.
+  const evidenceScore: Record<string, number> = { high: 2, moderate: 1, low: 0 };
+  const ranked = Array.from(recommendedSlugs)
+    .map((slug) => {
+      const supplement = supplements.find((s) => s.slug === slug);
+      const matchedGoals = slugToGoals.get(slug) || [];
+      let score = matchedGoals.length * 3 + (priorityBoosts.get(slug) || 0);
+      if (dietOrLifestyleSlugs.has(slug)) score += 2;
+      if (supplement) score += evidenceScore[supplement.evidenceLevel] ?? 0;
+      if (protectedSproutSlugs.has(slug)) score += 100;
+      return { slug, supplement, matchedGoals, score };
+    })
+    .filter((c) => c.supplement)
+    .sort((a, b) => b.score - a.score || a.slug.localeCompare(b.slug));
+
+  const finalCandidates = ranked.slice(0, MAX_RECOMMENDATIONS);
+
   const recommendations: SupplementRecommendation[] = [];
 
-  for (const slug of recommendedSlugs) {
-    const supplement = supplements.find((s) => s.slug === slug);
+  for (const { slug, supplement, matchedGoals } of finalCandidates) {
     if (!supplement) continue;
 
-    const matchedGoals = slugToGoals.get(slug) || [];
     const alreadyTaking = profile.currentSupplements.includes(slug);
     const notes = lifestyleNotes.get(slug) || [];
 
