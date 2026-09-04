@@ -42,6 +42,8 @@ const SPROUTLAB_PRODUCTS = [
     name: "Mycofuel",
     tagline: "Energy, endurance & adaptogens",
     image: "/mycofuel.jpg",
+    imageWidth: 897,
+    imageHeight: 739,
     url: "https://sproutlab.it/shop/mycofuel/",
     matchSlugs: ["cordyceps", "ashwagandha", "reishi", "maca", "lions-mane", "rhodiola", "magnesium", "vitamin-b6", "zinc", "turmeric"],
     ingredientLabels: {
@@ -62,6 +64,8 @@ const SPROUTLAB_PRODUCTS = [
     name: "Mycoderm",
     tagline: "Skin health, cellular protection & glow",
     image: "/mycoderm.jpg",
+    imageWidth: 911,
+    imageHeight: 739,
     url: "https://sproutlab.it/shop/mycoderm/",
     matchSlugs: ["tremella", "cordyceps", "reishi", "lions-mane", "astaxanthin", "magnesium", "zinc", "vitamin-b6", "turmeric"],
     ingredientLabels: {
@@ -268,12 +272,13 @@ export default function ResultsPage() {
               <div className="grid gap-px md:grid-cols-2">
                 {matchedProducts.map((product) => (
                   <div key={product.id} className="bg-[#FCFCF7]/5 flex flex-col gap-5">
-                    <div className="relative w-full aspect-[3/2] overflow-hidden">
+                    <div className="w-full overflow-hidden">
                       <Image
                         src={product.image}
                         alt={product.name}
-                        fill
-                        className="object-cover object-center"
+                        width={product.imageWidth}
+                        height={product.imageHeight}
+                        className="w-full h-auto"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     </div>
