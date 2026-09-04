@@ -217,6 +217,7 @@ interface WellnessProfileCardProps {
 
 export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
   const [progress, setProgress] = useState(0);
+  const [hasEnteredView, setHasEnteredView] = useState(false);
   const [shareState, setShareState] = useState<"idle" | "generating" | "done">("idle");
   const cardRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
@@ -230,7 +231,31 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
 
   const [bgDataUrl, setBgDataUrl] = useState<string>(archetype.image);
 
+  // Wait until the card scrolls into view before running the reveal animation,
+  // so the radar/scores animate in when the user actually reaches this screen.
   useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      // Very old browsers: skip the scroll-reveal gate rather than getting stuck at 0.
+      setHasEnteredView(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasEnteredView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!hasEnteredView) return;
     let start: number | null = null;
     const raf = requestAnimationFrame(function step(ts) {
       if (!start) start = ts;
@@ -239,7 +264,7 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
       if (p < 1) requestAnimationFrame(step);
     });
     return () => cancelAnimationFrame(raf);
-  }, []);
+  }, [hasEnteredView]);
 
   // Pre-load the archetype background as base64 so html-to-image can embed it in the capture
   useEffect(() => {
@@ -401,7 +426,7 @@ export function WellnessProfileCard({ profile }: WellnessProfileCardProps) {
 
         {/* Radar + overall score — centered */}
         <div className="flex flex-col items-center gap-1 mb-4 md:mb-6">
-          <div className="w-[200px] h-[200px] md:w-[280px] md:h-[280px]">
+          <div className="w-[230px] h-[230px] md:w-[320px] md:h-[320px]">
             <WellnessRadarChart scores={scores} progress={progress} size={240} />
           </div>
           <div className="text-center">
