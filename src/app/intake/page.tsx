@@ -199,7 +199,7 @@ export default function IntakePage() {
       if (prev.goals.includes(goal)) {
         return { ...prev, goals: prev.goals.filter((g) => g !== goal) };
       }
-      if (prev.goals.length >= 3) return prev;
+      if (prev.goals.length >= 2) return prev;
       return { ...prev, goals: [...prev.goals, goal] };
     });
   };
@@ -478,12 +478,12 @@ export default function IntakePage() {
                 <label className="text-sm font-medium text-[#2E1B12]">
                   {ti.steps.goals.label}
                 </label>
-                <span className="text-xs text-[#9C8B78]">{formData.goals.length}/3</span>
+                <span className="text-xs text-[#9C8B78]">{formData.goals.length}/2</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {GOAL_VALUES.map((value) => {
                   const selected = formData.goals.includes(value);
-                  const maxed = formData.goals.length >= 3 && !selected;
+                  const maxed = formData.goals.length >= 2 && !selected;
                   return (
                     <button
                       key={value}

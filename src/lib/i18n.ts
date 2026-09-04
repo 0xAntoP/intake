@@ -105,7 +105,7 @@ const en = {
         digestiveLabel: "Do you experience any digestive issues? (Select all that apply)",
         caffeineLabel: "What is your daily caffeine intake?",
       },
-      goals: { label: "What are your health goals? (Select up to 3)" },
+      goals: { label: "What are your health goals? (Select up to 2)" },
       supplements: {
         label: "Are you currently taking any supplements? (Optional)",
         hint: "Select any you're already taking. We'll note these in your plan.",
@@ -525,7 +525,7 @@ const it: typeof en = {
         digestiveLabel: "Hai problemi digestivi? (Seleziona tutti quelli applicabili)",
         caffeineLabel: "Qual è il tuo consumo giornaliero di caffeina?",
       },
-      goals: { label: "Quali sono i tuoi obiettivi di salute? (Seleziona fino a 3)" },
+      goals: { label: "Quali sono i tuoi obiettivi di salute? (Seleziona fino a 2)" },
       supplements: {
         label: "Stai assumendo integratori attualmente? (Facoltativo)",
         hint: "Seleziona quelli che già assumi. Li segnaleremo nel tuo piano.",
