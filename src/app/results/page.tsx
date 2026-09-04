@@ -64,7 +64,7 @@ const SPROUTLAB_PRODUCTS = [
     name: "Mycoderm",
     tagline: "Skin health, cellular protection & glow",
     image: "/mycoderm.jpg",
-    imageWidth: 911,
+    imageWidth: 897,
     imageHeight: 739,
     url: "https://sproutlab.it/shop/mycoderm/",
     matchSlugs: ["tremella", "cordyceps", "reishi", "lions-mane", "astaxanthin", "magnesium", "zinc", "vitamin-b6", "turmeric"],
