@@ -201,7 +201,7 @@ function WellnessRadarChart({ scores, progress, size = 240 }: { scores: Wellness
         return (
           <text key={dim} x={lp.x.toFixed(2)} y={lp.y.toFixed(2)}
             textAnchor={textAnchor(i)} dominantBaseline={dominantBaseline(i)}
-            fontSize={8} letterSpacing="0.1em" fill="rgba(252,252,247,0.55)"
+            fontSize={8} letterSpacing="0.1em" fill="rgba(252,252,247,0.92)"
             fontFamily="ABCMonumentGrotesk, Arial, sans-serif">
             {DIM_LABELS[dim].toUpperCase()}
           </text>
