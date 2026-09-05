@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = "nodejs";
+
 function detectLocale(acceptLanguage: string): "en" | "it" {
   if (!acceptLanguage) return "en";
   const langs = acceptLanguage
