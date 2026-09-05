@@ -11,16 +11,20 @@ export default async function Home() {
 
   return (
     <div className="min-h-[calc(100vh-200px)] flex flex-col">
-      <section
-        className="flex-1 flex items-center justify-center px-6 py-32 relative min-h-[560px]"
-        style={{
-          backgroundImage: "url('/hero-bg.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/50" />
+      <section className="flex-1 flex items-center justify-center px-6 py-32 relative min-h-[560px] overflow-hidden">
+        {/* Background photo, blurred and scaled up slightly so the blur never reveals an edge */}
+        <div
+          className="absolute inset-0 scale-110"
+          style={{
+            backgroundImage: "url('/hero-bg.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            filter: "blur(8px)",
+          }}
+        />
+        {/* Dark brand-brown veil (not plain black) so white text stays reliably legible over the photo */}
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(46,27,18,0.72)" }} />
         <div className="max-w-2xl mx-auto text-center relative z-10">
           <p className="text-xs tracking-widest uppercase text-white/70 mb-6">
             {h.tagline}
