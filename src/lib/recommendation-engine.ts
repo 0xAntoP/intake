@@ -222,37 +222,61 @@ export function generateRecommendations(profile: UserProfile): SupplementRecomme
     }
   }
 
-  // Guarantee at least one Sprout Lab product will always match the plan:
-  // find the product with the most natural overlap, then top it up (if
-  // needed) to SPROUT_MIN_MATCH and protect those slugs from the cap below.
+  // Which Sprout Lab product(s) must always match, per business rules:
+  // - energy / focus / muscle           -> Mycofuel
+  // - sleep / skin                      -> Mycoderm
+  // - stress                            -> Mycofuel for men, Mycoderm for women
+  // - immunity / longevity on their own -> don't decide anything by themselves;
+  //   the goal they're paired with decides, and if neither goal picked is
+  //   decisive (e.g. immunity + longevity together, or alone), guarantee both.
   const dietOrLifestyleSlugs = new Set([...dietPriority, ...additionalSupplements]);
-  const protectedSproutSlugs = new Set<string>();
-  {
-    const entries = Object.entries(SPROUT_PRODUCT_MATCH_SLUGS);
-    let bestId = entries[0][0];
-    let bestCount = -1;
-    for (const [id, slugs] of entries) {
-      const count = slugs.filter((s) => recommendedSlugs.has(s)).length;
-      // Favor Mycoderm for skin-focused profiles when it's at least as good a fit.
-      const preferSkin = id === "mycoderm" && profile.goals.includes("skin");
-      if (count > bestCount || (preferSkin && count === bestCount)) {
-        bestCount = count;
-        bestId = id;
-      }
-    }
+  const FUEL_GOALS = new Set<Goal>(["energy", "focus", "muscle"]);
+  const DERM_GOALS = new Set<Goal>(["sleep", "skin"]);
 
-    const targetSlugs = SPROUT_PRODUCT_MATCH_SLUGS[bestId];
-    for (const slug of targetSlugs) {
-      if (recommendedSlugs.has(slug)) protectedSproutSlugs.add(slug);
-      if (protectedSproutSlugs.size >= SPROUT_MIN_MATCH) break;
+  let wantsMycofuel = false;
+  let wantsMycoderm = false;
+  for (const goal of profile.goals) {
+    if (FUEL_GOALS.has(goal)) wantsMycofuel = true;
+    else if (DERM_GOALS.has(goal)) wantsMycoderm = true;
+    else if (goal === "stress") {
+      if (profile.sex === "male") wantsMycofuel = true;
+      else if (profile.sex === "female") wantsMycoderm = true;
     }
-    if (protectedSproutSlugs.size < SPROUT_MIN_MATCH) {
-      for (const slug of targetSlugs) {
-        if (protectedSproutSlugs.has(slug)) continue;
-        recommendedSlugs.add(slug);
+    // immunity / longevity fall through without deciding anything here
+  }
+  if (!wantsMycofuel && !wantsMycoderm) {
+    // No decisive goal selected (only immunity/longevity, alone or together) - guarantee both.
+    wantsMycofuel = true;
+    wantsMycoderm = true;
+  }
+
+  const requiredProductIds = [
+    ...(wantsMycofuel ? ["mycofuel"] : []),
+    ...(wantsMycoderm ? ["mycoderm"] : []),
+  ];
+
+  // For each required product, protect (or top up to) SPROUT_MIN_MATCH of its
+  // ingredients so it survives the cap below. Mycofuel/Mycoderm share most of
+  // their ingredient list, so guaranteeing both usually costs very few extra slugs.
+  const protectedSproutSlugs = new Set<string>();
+  for (const productId of requiredProductIds) {
+    const targetSlugs = SPROUT_PRODUCT_MATCH_SLUGS[productId];
+    let protectedForThisProduct = targetSlugs.filter((s) => protectedSproutSlugs.has(s)).length;
+
+    for (const slug of targetSlugs) {
+      if (protectedForThisProduct >= SPROUT_MIN_MATCH) break;
+      if (protectedSproutSlugs.has(slug)) continue;
+      if (recommendedSlugs.has(slug)) {
         protectedSproutSlugs.add(slug);
-        if (protectedSproutSlugs.size >= SPROUT_MIN_MATCH) break;
+        protectedForThisProduct++;
       }
+    }
+    for (const slug of targetSlugs) {
+      if (protectedForThisProduct >= SPROUT_MIN_MATCH) break;
+      if (protectedSproutSlugs.has(slug)) continue;
+      recommendedSlugs.add(slug);
+      protectedSproutSlugs.add(slug);
+      protectedForThisProduct++;
     }
   }
 
